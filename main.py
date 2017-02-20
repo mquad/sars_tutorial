@@ -10,3 +10,4 @@ logging.basicConfig(
 available_recommenders = OrderedDict([
     ('freq_seqs', FreqSeqMining)
 ])
+
