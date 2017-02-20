@@ -2,13 +2,198 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3074b82f-776d-4cfb-9c69-fc456a2c52fd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RuleGrowth.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/util/dbToSPMF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SPMFinterface.py" afterPath="$PROJECT_DIR$/SPMFinterface.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/RuleGrowth.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/SPMFinterface.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/CHECK_SPMF_WEBPAGE_FOR_DOCUMENTATION.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/ContextMDSequence.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/ContextMDSequenceNoTime.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_FOSHU.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_NegativeUtility.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_Utility.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_UtilityIncremental1.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_UtilityIncremental2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_UtilityPerHUIs.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_UtilityUPGrowth.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_Utility_d2hup.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_Utility_vertical.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_Utility_vertical2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DB_Utility_vertical3.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/DataBase_HUSRM.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/LICENSE_AGREEMENT.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/MIS.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/SkyMineItemUtilities.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/SkyMineTransaction.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/chess.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/clustersDBScan.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/configKmeans.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextCFPGrowth.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextCPT.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextCSV.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextClaSP.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextCloSpan.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextHUIM.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextIGB.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextIncorrect.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextIndirect.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextInverse.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextItemsetTree.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextPFPM.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextPasquier99.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextPrefixSpan.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextPrefixSpanStrings.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextRelim.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextSAX.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextSequencesTimeExtended.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextSequencesTimeExtended_ValuedItems.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextSpade.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextTransactionDB_strings.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextUncertain.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextVME.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/contextZart.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/example2.text" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/example_contextZart.arff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/inputDBScan.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/inputDBScan2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/inputOptics.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/input_text_clustering.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/jmlr_goKrimp.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/jmlr_goKrimp.lab" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/output.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/sar.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/tennis.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/test.arff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/test_goKrimp.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/test_goKrimp.lab" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/103135" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/103136" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/103137" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/103138" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/103139" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/104409" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/104410" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/104411" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/104412" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/104413" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/16355" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/16356" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/16357" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/16358" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/16359" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/51156" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/51157" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/51158" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/51159" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/51160" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/60177" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/60178" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/60179" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/60180" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Test/60181" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53349" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53350" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53351" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53352" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53353" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53354" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53355" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53356" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53357" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53358" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53359" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53360" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53361" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53362" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53363" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53364" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53365" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53366" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53367" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Athesim/53368" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104653" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104654" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104655" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104656" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104657" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104658" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104659" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104660" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104661" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104662" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104663" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104664" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104665" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104666" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104667" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104668" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104669" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104670" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104671" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Baseball/104672" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16143" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16144" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16145" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16146" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16147" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16148" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16149" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16150" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16151" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16152" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16165" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16279" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16344" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16345" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16347" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16348" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16351" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16352" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16353" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Crypt/16354" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104649" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104650" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104651" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104652" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104653" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104654" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104655" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104656" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104657" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104658" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104659" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104660" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104661" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104662" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104663" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104664" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104665" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104666" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104667" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Motorcycle/104668" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60157" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60158" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60159" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60160" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60161" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60162" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60163" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60164" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60165" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60166" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60167" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60168" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60169" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60170" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60171" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60172" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60173" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60174" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60175" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/Train/Space/60176" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spmf/text_classification_set/output.tsv" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spmf/output.txt" afterPath="$PROJECT_DIR$/spmf/output.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/recommenders/FreqSeqMining.py" afterPath="$PROJECT_DIR$/recommenders/FreqSeqMining.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/createSeqDb.py" afterPath="$PROJECT_DIR$/util/createSeqDb.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/dbToSPMF.py" afterPath="$PROJECT_DIR$/util/dbToSPMF.py" />
     </list>
     <ignored path="seq_rec_evaluation.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,33 +219,9 @@
         <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RuleGrowth.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RuleGrowth.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41527656">
-              <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SPMFinterface.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SPMFinterface.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#17#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,9 +231,19 @@
         <entry file="file://$PROJECT_DIR$/util/dbToSPMF.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SPMFinterface.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/SPMFinterface.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="54" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#0#17#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,7 +253,17 @@
         <entry file="file://$PROJECT_DIR$/util/createSeqDb.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="35" />
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="seqmining.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda2/envs/srs/Lib/site-packages/pymining/seqmining.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -98,11 +279,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9078242">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -125,13 +306,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/recommenders/FreqSeqMining.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/util/createSeqDb.py" />
         <option value="$PROJECT_DIR$/util/seqDbToSPMF.py" />
-        <option value="$PROJECT_DIR$/util/dbToSPMF.py" />
         <option value="$PROJECT_DIR$/SPMFinterface.py" />
         <option value="$PROJECT_DIR$/RuleGrowth.py" />
+        <option value="$PROJECT_DIR$/recommenders/FreqSeqMining.py" />
+        <option value="$PROJECT_DIR$/util/dbToSPMF.py" />
+        <option value="$PROJECT_DIR$/util/createSeqDb.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -171,7 +352,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -207,6 +387,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,6 +468,11 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -420,14 +606,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
+    <frame x="-16" y="-16" width="3872" height="2092" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24893048" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25213903" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34034312" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4543442" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -462,40 +648,26 @@
     <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
+    <entry file="file://$PROJECT_DIR$/util/dbToSPMF.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
+    <entry file="file://$PROJECT_DIR$/util/createSeqDb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -517,20 +689,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Anaconda2/envs/srs/Lib/site-packages/pymining/assocrules.py">
+    <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="45" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../recsysPub/here/scripts/cv_eval.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33246416">
-          <caret line="103" column="18" selection-start-line="103" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#15#0" expanded="false" />
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -538,17 +702,69 @@
     <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SPMFinterface.py">
+    <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda2/envs/srs/Lib/site-packages/pymining/assocrules.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="45" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../recsysPub/here/scripts/cv_eval.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33246416">
+          <caret line="103" column="18" selection-start-line="103" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recommenders/ISeqRecommender.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recommenders/FreqSeqMining.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/SPMFinterface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="54" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
@@ -558,27 +774,33 @@
     <entry file="file://$PROJECT_DIR$/util/dbToSPMF.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda2/envs/srs/Lib/site-packages/pymining/seqmining.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/util/createSeqDb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="35" />
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RuleGrowth.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41527656">
-          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.9078242">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>

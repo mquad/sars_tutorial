@@ -1,5 +1,0 @@
-@ATTRIBUTEDEF=X
-@ATTRIBUTEDEF=Y
-[Instance2 1.0 0.0][Instance0 1.0 1.0][Instance1 0.0 1.0]
-[Instance3 10.0 10.0][Instance4 10.0 13.0][Instance5 13.0 13.0]
-[Instance6 54.0 54.0][Instance9 57.0 55.0][Instance7 55.0 55.0]

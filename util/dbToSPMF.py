@@ -1,6 +1,5 @@
 import pandas as pd
-import csv
-from SPMFinterface import callSPMF
+
 filePath = 'C:/Users/Umberto/Dropbox/datasets/music/sessions.csv'
 file = pd.read_csv(filePath)
 

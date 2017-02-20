@@ -1,3 +1,0 @@
-Check the SPMF webpage for the documentation.
-
-http://www.philippe-fournier-viger.com/spmf/
