@@ -1,0 +1,29 @@
+ogni seqeunza su una riga
+numeri separati da spazi in ogni sequenza, terminatore -2
+se una sequenza ha tuple i.e. (1,2), (3,4), 5, le tuple sono separate da -1
+e.g. 1 2 -1 3 4 -1 5 -2
+
+-----
+Input file format
+
+The input file format is defined as follows. It is a text file where each line represents a sequence from a sequence database. Each item from a sequence is a postive integer and items from the same itemset within a sequence are separated by single spaces. Note that it is assumed that items within a same itemset are sorted according to a total order and that no item can appear twice in the same itemset. The value "-1" indicates the end of an itemset. The value "-2" indicates the end of a sequence (it appears at the end of each line). For example, the sample input file "contextPrefixSpan.txt" contains the following four lines (four sequences).
+
+1 -1 1 2 3 -1 1 3 -1 4 -1 3 6 -1 -2
+1 4 -1 3 -1 2 3 -1 1 5 -1 -2
+5 6 -1 1 2 -1 4 6 -1 3 -1 2 -1 -2
+5 -1 7 -1 1 6 -1 3 -1 2 -1 3 -1 -2
+
+The first line represents a sequence where the itemset {1} is followed by the itemset {1, 2, 3}, followed by the itemset {1, 3}, followed by the itemset {4}, followed by the itemset {3, 6}. The next lines follow the same format.
+
+Note that it is also possible to use a text file containing a text (several sentences) if the text file has the ".text" extension, as an alternative to the default input format. If the algorithm is applied on a text file from the graphical interface or command line interface, the text file will be automatically converted to the SPMF format, by dividing the text into sentences separated by ".", "?" and "!", where each word is considered as an item. Note that when a text file is used as input of a data mining algorithm, the performance will be slightly less than if the native SPMF file format is used because a conversion of the input file will be automatically performed before launching the algorithm and the result will also have to be converted. This cost however should be small.
+
+Output file format
+
+The output file format is defined as follows. It is a text file. Each line is a sequential rule. Each item from a sequential rule is a postive integer. On each line, the items from the rule antecedent are first listed, separated by single spaces. Then the keyword "==>" appears, followed by the items from the rule consequent, separated by single spaces. Then, the keyword "#SUP:" appears followed by an integer indicating the support of the rule as a number of sequences. Then, the keyword "#CONF:" appears followed by a double values in the [0, 1] interval indicating the confidence of the rule. For example, a few lines from the output file from the previous example is shown below:
+
+1,6 ==> 2,3 #SUP: 2 #CONF: 1.0
+1,5,6 ==> 2 #SUP: 2 #CONF: 1.0
+5 ==> 1,2,6 #SUP: 2 #CONF:0.66
+1,5,6 ==> 3 #SUP: 2 #CONF: 1.0
+5 ==> 1,3,6 #SUP: 2 #CONF:0.66
+Consider the first line. It indicates that the rule {1, 6} ==> {2, 3} has a support of 2 sequences and a confidence of 100 %. The next lines follow the same format.

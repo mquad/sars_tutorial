@@ -19,3 +19,8 @@ result.to_csv('C:/Users/Umberto/Dropbox/datasets/music/sequenceDb.csv',index=Fal
 
 #songs as strings
 #agg=file.groupby('session_id')['song_id'].apply(lambda x: "%s" % ', '.join(x))
+
+##spmf format is space separated es
+#1 2 3 4
+#3 4 5
+#6 7

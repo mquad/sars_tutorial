@@ -1,0 +1,12 @@
+@relation test
+@attribute  1 { true,false}
+@attribute  2 { true,false }
+@attribute  3 { true,false}
+@attribute  4 { true,false }      
+@attribute  5 { true,false }                                                                                      
+@data
+true,true,?,true,true
+true,false,true,?,false
+true,true,true,?,true
+?,true,true,?,true
+true,true,true,?,true

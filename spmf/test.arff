@@ -1,0 +1,19 @@
+@RELATION emp_proj
+
+@ATTRIBUTE ssn STRING
+@ATTRIBUTE pNumber STRING
+@ATTRIBUTE hours STRING
+@ATTRIBUTE eName STRING
+@ATTRIBUTE pName STRING
+@ATTRIBUTE pLocation STRING
+
+@DATA
+'ssn:333445555','pNumber:2' ,'hours:10.0','eName:Franklin Wong' ,'pName:ProductY','pLocation:Sugarland'
+'ssn:333445555','pNumber:3' ,'hours:10.0','eName:Franklin Wong' ,'pName:ProductZ','pLocation:Houston'
+'ssn:333445555','pNumber:10','hours:10.0','eName:Franklin Wong' ,'pName:ProductX','pLocation:Stafford'
+'ssn:333445555','pNumber:20','hours:10.0','eName:Franklin Wong' ,'pName:Reorganization','pLocation:Houston'
+'ssn:123456789','pNumber:1' ,'hours:32.5','eName:Ramesh Narayan','pName:ProductX','pLocation:Bellaire'
+'ssn:123456789','pNumber:2' ,'hours:7.5' ,'eName:Ramesh Narayan','pName:ProductY','pLocation:Sugarland'
+'ssn:666884444','pNumber:3' ,'hours:40.0','eName:Ramesh Narayan','pName:ProductZ','pLocation:Houston'
+'ssn:453453453','pNumber:1' ,'hours:20.0','eName:Joyce English' ,'pName:ProductX','pLocation:Bellaire'
+'ssn:453453453','pNumber:2' ,'hours:20.0','eName:Joyce English' ,'pName:ProductY','pLocation:Sugarland'

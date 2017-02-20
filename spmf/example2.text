@@ -1,0 +1,4 @@
+The SPMF software is a data mining platform that can be used to discover patterns in data. It has
+been downloaded by many data mining researchers. SPMF can be used to discover patterns such as itemsets and sequential rules in data.
+This file contains text data, and it is used to show how SPMF can be utilized to  find pattern in text documents.
+The text document will be automatically transformed into the SPMF format, which can then be analyzed by SPMF to find interesting patterns

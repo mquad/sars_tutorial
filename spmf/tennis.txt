@@ -1,0 +1,15 @@
+play outlook temp humid wind
+no sunny hot high weak
+no sunny hot high strong
+yes overcast hot high weak
+yes rain mild high weak
+yes rain cool normal weak
+no rain cool normal strong
+yes overcast mild high strong
+no sunny mild high weak
+yes sunny cool normal weak
+yes rain mild normal weak
+yes sunny mild normal strong
+yes overcast hot normal weak
+yes overcast cool normal strong
+no rain mild high strong
