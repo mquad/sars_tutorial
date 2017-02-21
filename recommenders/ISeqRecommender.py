@@ -1,4 +1,3 @@
-import numpy as np
 
 class ISeqRecommender(object):
     """Abstract Recommender"""
