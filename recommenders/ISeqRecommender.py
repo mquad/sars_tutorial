@@ -5,7 +5,6 @@ class ISeqRecommender(object):
 
     def __init__(self):
         super(ISeqRecommender, self).__init__()
-        self.dataset = None
 
     def fit(self, X):
         pass
