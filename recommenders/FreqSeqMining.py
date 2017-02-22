@@ -35,11 +35,51 @@ class FreqSeqMiningRecommender(ISeqRecommender):
                 self.tree.create_node(tuple[0][0],parent=self.rootNode,data={"support":tuple[1]})
             elif len(tuple[0]) > 1:
                 #add entire path starting from root
-                self.tree.add_path((self.rootNode,) + tuple[0],tuple[1],self.rootNode)
+                self.tree.add_path(self.rootNode,tuple[0],tuple[1])
             else:
                 raise NameError('Frequent sequence of length 0')
         logging.debug('Tree completed')
 
+    def recommend(self,current_session,max_win_size,min_context=1,recommendation_length=1):
+        n = len(current_session)
+        c = min(n,max_win_size)
+        match = []
+        i = 0
+        while not match and i < c - min_context:
+            q = current_session[i:c]
+            match = self._find_match(q,recommendation_length)
+            i += 1
+        return match
+
+    def _find_match(self,context,recommendation_length):
+        logging.debug('Searching match '+str(context))
+
+        #search context
+        lastNode = self.tree.find_path(self.rootNode,context)
+
+        if lastNode == -1:
+            logging.debug('Context match not found')
+            return []
+        else: #context matched
+            context_support = self.tree[lastNode].data['support']
+
+            if recommendation_length == 1:
+                children = self.tree[lastNode].fpointer
+                return self._filter_confidence(context_support,children)
+
+            #TODO recommendation_length >1
+
+    def _filter_confidence(self,context_support,childrenIds):
+        goodChildren = []
+        for c in childrenIds:
+            confidence = self.tree[c].data['support'] / float(context_support)
+            if confidence >= self.minconf:
+                goodChildren.append((self.tree[c].tag,confidence))
+        return goodChildren
+
+    def _set_tree_debug_only(self,tree):
+        self.tree = tree
+        self.rootNode = tree.get_root()
 
     def get_freq_seqs(self):
         return self.freq_seqs

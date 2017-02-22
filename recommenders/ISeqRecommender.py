@@ -9,12 +9,8 @@ class ISeqRecommender(object):
         pass
 
 
-    def recommendSet(self, user_id,l=None, n=None):
-        """Recommend a set of items for user_id, using l historic information from the user profile and returning a list
-        of n recommendation."""
+    def recommendSet(self, sequence):
         pass
 
-    def recommendSequence(self, user_id,l=None, n=None):
-        """Recommend a sequence of items for user_id, using l historic information from the user profile and returning a list
-        of n (ordered) recommendation."""
+    def recommendSequence(self,sequence):
         pass

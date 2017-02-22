@@ -50,12 +50,12 @@ class SmartTree(treelib.Tree):
             return res
 
 
-    def add_path(self,path,support,origin):
+    def add_path(self,origin,path,support):
         """add a path, starting from origin"""
         sub = self.longest_subpath(origin,path)
         if(sub[1] == 0):
             #path aready exists, updating support
-            self[sub[0]].data = {'support':support}
+            self[sub[0]].data = {'support': support}
 
         else:
             # add what's missing
@@ -64,7 +64,7 @@ class SmartTree(treelib.Tree):
             par = sub[0]
             for item in missingPath:
                 itemId = uuid.uuid4()
-                self.create_node(item,itemId,parent=par)
+                self.create_node(item,itemId,parent=par,data={'support':support})
                 par = itemId
 
 
@@ -75,7 +75,10 @@ class SmartTree(treelib.Tree):
         super(SmartTree, self).create_node(tag,id,parent,data)
 
 
-    def set_root(self,rootTag=0,rootId=0):
+    def set_root(self,rootTag=None,rootId=None):
+        id = uuid.uuid4()
+        rootId = rootId if rootId != None else id
+        rootTag = rootTag if rootTag != None else 'root'
         self.create_node(rootTag,rootId)
         self.root = rootId
         return rootId
