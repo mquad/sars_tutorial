@@ -15,7 +15,9 @@ class FreqSeqMiningRecommender(ISeqRecommender):
         """minsup is interpreted as percetage if [0-1] or as count if > 1 """
 
         super(FreqSeqMiningRecommender, self).__init__()
-        logging.basicConfig(level=logging.DEBUG) if verbose else logging.basicConfig(level=logging.WARNING)
+        self.logger = logging.getLogger()
+        self.logger.setLevel(logging.DEBUG if verbose else logging.INFO)
+        self.logger.debug("Debug logger enabled")
         self.minsup = minsup
         self.minconf = minconf
 
@@ -24,11 +26,11 @@ class FreqSeqMiningRecommender(ISeqRecommender):
 
         msup = self.minsup * len(seqs) if 0 <= self.minsup <=1 else self.minsup
 
-        logging.debug('Mining frequent sequences')
+        self.logger.info('Mining frequent sequences')
         self.freq_seqs = seqmining.freq_seq_enum(seqs, msup)
-        logging.debug('{} frequent sequences found'.format(len(self.freq_seqs)))
+        self.logger.info('{} frequent sequences found'.format(len(self.freq_seqs)))
 
-        logging.debug('Building frequent sequence tree')
+        self.logger.info('Building frequent sequence tree')
         self.tree = SmartTree()
         self.rootNode = self.tree.set_root()
         for tuple in self.freq_seqs:
@@ -40,27 +42,27 @@ class FreqSeqMiningRecommender(ISeqRecommender):
                 self.tree.add_path(self.rootNode,tuple[0],tuple[1])
             else:
                 raise NameError('Frequent sequence of length 0')
-        logging.debug('Tree completed')
+        self.logger.info('Tree completed')
 
-    def recommend(self,current_session,max_win_size,min_context=1,recommendation_length=1):
+    def recommend(self, current_session, max_context, min_context=1, recommendation_length=1):
         n = len(current_session)
-        c = min(n,max_win_size)
+        c = min(n, max_context)
         match = []
         i = 0
-        while not match and i < c - min_context:
+        while not match and i <= c - min_context:
             q = current_session[i:c]
             match = self._find_match(q,recommendation_length)
             i += 1
         return match
 
     def _find_match(self,context,recommendation_length):
-        logging.debug('Searching match '+str(context))
+        self.logger.debug('Searching match '+str(context))
 
         #search context
         lastNode = self.tree.find_path(self.rootNode,context)
 
         if lastNode == -1:
-            logging.debug('Context match not found')
+            self.logger.debug('Context match not found')
             return []
         else: #context matched
             context_support = self.tree[lastNode].data['support']

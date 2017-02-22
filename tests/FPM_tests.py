@@ -1,10 +1,9 @@
 import ast
-
 import pandas as pd
-
 from recommenders.FreqSeqMining import FreqSeqMiningRecommender
 from util.tree.Tree import SmartTree
-
+from util import evaluation
+import numpy as np
 
 def buildSmartTree():
     t = SmartTree()
@@ -113,10 +112,26 @@ def testRecommendation():
     assert  rec.get_recommendation_list(recommendation) == [[4, 9], [4, 2]]
     assert sorted(rec.get_confidence_list(recommendation)) == sorted([3/8,3/8])
 
-    recommendation = rec.recommend([9,0,1,3,1,6,9,5,1,2], 5, 1, 4)
+    recommendation = rec.recommend([9,0,1,3,1,6,9,5,1,2], 5, 2, 4)
     assert  rec.get_recommendation_list(recommendation) == []
     assert sorted(rec.get_confidence_list(recommendation)) == sorted([])
 
+
+
+def testEvaluation():
+
+    t = buildSmartTree()
+
+    rec = FreqSeqMiningRecommender(0.9,0.2,True)
+    rec._set_tree_debug_only(t)
+    evaluation_functions=[evaluation.precision,evaluation.recall]
+
+    score = evaluation.set_evaluation(rec,[[7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8],
+                                           [1, 3, 1, 0, 6, 4],
+                                           [11,11,11,4,11,6,1, 3, 1, 0, 6, 4],
+                                           [1, 2, 11, 3, 11, 8, 7, 6, 4, 4, 3, 9, 1]],9,1,1,evaluation_functions)
+
+    assert np.array_equal(np.array([1/3,0.5]),score)
 
 def test_n_length_paths():
 
@@ -184,3 +199,4 @@ def test_n_length_paths():
 testFit()
 test_n_length_paths()
 testRecommendation()
+testEvaluation()
