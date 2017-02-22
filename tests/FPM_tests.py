@@ -1,7 +1,9 @@
-import pandas as pd
 import ast
+
+import pandas as pd
+
 from recommenders.FreqSeqMining import FreqSeqMiningRecommender
-from tree.Tree import SmartTree
+from util.tree.Tree import SmartTree
 
 
 def buildSmartTree():

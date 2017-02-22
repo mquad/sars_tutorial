@@ -1,7 +1,9 @@
-from recommenders.ISeqRecommender import ISeqRecommender
-from pymining import seqmining
-from tree.Tree import SmartTree
 import logging
+
+from pymining import seqmining
+
+from recommenders.ISeqRecommender import ISeqRecommender
+from util.tree.Tree import SmartTree
 
 
 class FreqSeqMiningRecommender(ISeqRecommender):
