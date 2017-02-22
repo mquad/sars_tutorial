@@ -44,15 +44,14 @@ class FreqSeqMiningRecommender(ISeqRecommender):
                 raise NameError('Frequent sequence of length 0')
         self.logger.info('Tree completed')
 
-    def recommend(self, current_session, max_context, min_context=1, recommendation_length=1):
-        n = len(current_session)
+    def recommend(self, user_profile, max_context, min_context=1, recommendation_length=1):
+        n = len(user_profile)
         c = min(n, max_context)
         match = []
-        i = 0
-        while not match and i <= c - min_context:
-            q = current_session[i:c]
+        while not match and c >= min_context:
+            q = user_profile[n-c:n]
             match = self._find_match(q,recommendation_length)
-            i += 1
+            c -= 1
         return match
 
     def _find_match(self,context,recommendation_length):
