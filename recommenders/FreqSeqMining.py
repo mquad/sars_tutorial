@@ -62,20 +62,21 @@ class FreqSeqMiningRecommender(ISeqRecommender):
             return []
         else: #context matched
             context_support = self.tree[lastNode].data['support']
+            children = self.tree[lastNode].fpointer
 
-            if recommendation_length == 1:
-                children = self.tree[lastNode].fpointer
-                return self._filter_confidence(context_support,children)
+            if not children: return []
 
-            #TODO recommendation_length >1
+            #find all path of length recommendation_length from match
+            paths = self.tree.find_n_legth_paths(lastNode,recommendation_length)
+            return self._filter_confidence(context_support,paths)
 
-    def _filter_confidence(self,context_support,childrenIds):
-        goodChildren = []
-        for c in childrenIds:
-            confidence = self.tree[c].data['support'] / float(context_support)
+    def _filter_confidence(self,context_support,pathsList):
+        goodPaths = []
+        for p in pathsList:
+            confidence = self.tree[p[len(p)-1]].data['support'] / float(context_support)
             if confidence >= self.minconf:
-                goodChildren.append((self.tree[c].tag,confidence))
-        return goodChildren
+                goodPaths.append((self.tree.get_nodes_tag(p),confidence))
+        return goodPaths
 
     def _set_tree_debug_only(self,tree):
         self.tree = tree
@@ -89,3 +90,9 @@ class FreqSeqMiningRecommender(ISeqRecommender):
 
     def show_tree(self):
         self.tree.show()
+
+    def get_recommendation_list(self,recommendation):
+        return list(map(lambda x:x[0],recommendation))
+
+    def get_confidence_list(self,recommendation):
+        return list(map(lambda x:x[1],recommendation))

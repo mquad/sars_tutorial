@@ -88,3 +88,25 @@ class SmartTree(treelib.Tree):
             return self.root
         except AttributeError:
             return None
+
+    def find_n_legth_paths(self,origin,length,excludeOrigin = True):
+
+        if length == 0:
+            return [[]] if excludeOrigin else [[origin]]
+
+        else:
+            children = self[origin].fpointer
+            paths = []
+            for c in children:
+                childrenPaths = self.find_n_legth_paths(c,length-1,False)
+                # this line is magic, if there are no children the all path gets lost, that's how i get paths of exactly length wanted
+                l = list(map(lambda x:[]+x,childrenPaths)) if excludeOrigin else list(map(lambda x:[origin]+x,childrenPaths))
+                for el in l:
+                    paths.append(el)
+            return paths
+
+    def get_paths_tag(self,listOfPaths):
+        return list(map(lambda x: self.get_nodes_tag(x),listOfPaths))
+
+    def get_nodes_tag(self,listOfNids):
+        return list(map(lambda y: self[y].tag,listOfNids))
