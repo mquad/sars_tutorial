@@ -1,7 +1,7 @@
 from recommenders.FreqSeqMining import FreqSeqMiningRecommender
 import pandas as pd
 from util.split import random_holdout
-from util import evaluation
+from util import evaluation,metrics
 
 ##laod data
 import ast
@@ -13,4 +13,4 @@ train_seq,test_seq = random_holdout(seqs, 0.8)
 rec = FreqSeqMiningRecommender(0.005,0.1,False)
 rec.fit(train_seq)
 
-evaluation.set_evaluation(rec, test_seq, 1, 'total', [evaluation.precision,evaluation.recall], 10,1)
+evaluation.set_evaluation(rec, test_seq, 1, 'total', [metrics.precision,metrics.recall], 10,1)

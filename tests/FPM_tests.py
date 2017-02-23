@@ -6,231 +6,229 @@ from util import evaluation,metrics
 import numpy as np
 import unittest
 
-def build_smart_tree():
-    t = SmartTree()
-    rootNode = t.set_root()
-    defaultSupport = 1
-    t.add_path(rootNode,[1,2],defaultSupport)
-    t.add_path(rootNode,[1,3,1],8)
-    t.add_path(rootNode,[1,3,1,0],8)
-    t.add_path(rootNode,[1,3,1,6],1)
-    t.add_path(rootNode,[1,3,1,4],6)
-    t.add_path(rootNode,[1,3,1,4,9],3)
-    t.add_path(rootNode,[1,3,1,4,2],3)
-    t.add_path(rootNode,[1,3,6],defaultSupport)
-    t.add_path(rootNode,[1,3,2],defaultSupport)
-    t.add_path(rootNode,[2,3],defaultSupport)
-    t.add_path(rootNode,[2,1],defaultSupport)
-    t.add_path(rootNode,[3,4,2,1,5,1],defaultSupport)
-    t.add_path(rootNode,[3,4,2,6],defaultSupport)
-    t.add_path(rootNode,[3,4,1,6],defaultSupport)
-    t.add_path(rootNode,[3,4,1,5,5],defaultSupport)
-    t.add_path(rootNode,[3,4,1,5,4],defaultSupport)
-    t.add_path(rootNode,[3,5],defaultSupport)
-    t.add_path(rootNode,[9],defaultSupport)
-    t.add_path(rootNode,[4,2,1,5,1,3],1)
-    t.add_path(rootNode,[4,2,1,5,1],8)
-    t.add_path(rootNode,[4,2,1,5,1,2],7)
-    t.add_path(rootNode,[4,2,1,5,1,6],8)
-    t.add_path(rootNode,[4,2,1,5,1,6,9],4)
-    t.add_path(rootNode,[4,2,1,5,1,6,9,3],1)
-    t.add_path(rootNode,[4,2,1,5,1,6,9,0],3)
-    t.add_path(rootNode,[4,2,1,5,1,6,4],4)
+class FPM_recommender_tests(unittest.TestCase):
 
-    return t
+    def build_smart_tree(self):
+        t = SmartTree()
+        rootNode = t.set_root()
+        defaultSupport = 1
+        t.add_path(rootNode,[1,2],defaultSupport)
+        t.add_path(rootNode,[1,3,1],8)
+        t.add_path(rootNode,[1,3,1,0],8)
+        t.add_path(rootNode,[1,3,1,6],1)
+        t.add_path(rootNode,[1,3,1,4],6)
+        t.add_path(rootNode,[1,3,1,4,9],3)
+        t.add_path(rootNode,[1,3,1,4,2],3)
+        t.add_path(rootNode,[1,3,6],defaultSupport)
+        t.add_path(rootNode,[1,3,2],defaultSupport)
+        t.add_path(rootNode,[2,3],defaultSupport)
+        t.add_path(rootNode,[2,1],defaultSupport)
+        t.add_path(rootNode,[3,4,2,1,5,1],defaultSupport)
+        t.add_path(rootNode,[3,4,2,6],defaultSupport)
+        t.add_path(rootNode,[3,4,1,6],defaultSupport)
+        t.add_path(rootNode,[3,4,1,5,5],defaultSupport)
+        t.add_path(rootNode,[3,4,1,5,4],defaultSupport)
+        t.add_path(rootNode,[3,5],defaultSupport)
+        t.add_path(rootNode,[9],defaultSupport)
+        t.add_path(rootNode,[4,2,1,5,1,3],1)
+        t.add_path(rootNode,[4,2,1,5,1],8)
+        t.add_path(rootNode,[4,2,1,5,1,2],7)
+        t.add_path(rootNode,[4,2,1,5,1,6],8)
+        t.add_path(rootNode,[4,2,1,5,1,6,9],4)
+        t.add_path(rootNode,[4,2,1,5,1,6,9,3],1)
+        t.add_path(rootNode,[4,2,1,5,1,6,9,0],3)
+        t.add_path(rootNode,[4,2,1,5,1,6,4],4)
 
-def test_fit():
+        return t
 
-    db=pd.read_csv('datasets/test_data/simple.txt',converters={'songs':ast.literal_eval})
-    seqs = db['songs'].tolist()
+    def test_fit(self):
 
-    rec = FreqSeqMiningRecommender(0.9,0.1,True)
-    rec.fit(seqs)
+        db=pd.read_csv('datasets/test_data/simple.txt',converters={'songs':ast.literal_eval})
+        seqs = db['songs'].tolist()
 
-    ## test that the right frequences are found
-    seq_ground_truth={((1,),4),((1,2),4),((1,2,3),4),((1,3),4),((2,),4),((2,3),4),((3,),4)}
-    assert rec.get_freq_seqs()==seq_ground_truth
+        rec = FreqSeqMiningRecommender(0.9,0.1,True)
+        rec.fit(seqs)
 
-    ## test right tree build by checking the existence and support
-    ## of all paths. NB actually there could be more paths than does needed
-    tree = rec.get_sequence_tree()
+        ## test that the right frequences are found
+        seq_ground_truth={((1,),4),((1,2),4),((1,2,3),4),((1,3),4),((2,),4),((2,3),4),((3,),4)}
+        self.assertEqual(rec.get_freq_seqs(),seq_ground_truth)
 
-    assert tree.find_path(tree.get_root(),[1]) != -1
-    assert tree.get_node(tree.find_path(tree.get_root(),[1])).data['support'] == 4
+        ## test right tree build by checking the existence and support
+        ## of all paths. NB actually there could be more paths than does needed
+        tree = rec.get_sequence_tree()
 
-    assert tree.find_path(tree.get_root(),[1,2]) != -1
-    assert tree.get_node(tree.find_path(tree.get_root(),[1,2])).data['support'] == 4
+        self.assertNotEqual(tree.find_path(tree.get_root(),[1]), -1)
+        self.assertEqual(tree.get_node(tree.find_path(tree.get_root(),[1])).data['support'], 4)
 
-    assert tree.find_path(tree.get_root(),[1,2,3]) != -1
-    assert tree.get_node(tree.find_path(tree.get_root(),[1,2,3])).data['support'] == 4
+        self.assertNotEqual(tree.find_path(tree.get_root(),[1,2]), -1)
+        self.assertEqual(tree.get_node(tree.find_path(tree.get_root(),[1,2])).data['support'],4)
 
-    assert tree.find_path(tree.get_root(),[1,3]) != -1
-    assert tree.get_node(tree.find_path(tree.get_root(),[1,3])).data['support'] == 4
+        self.assertNotEqual(tree.find_path(tree.get_root(),[1,2,3]) , -1)
+        self.assertEqual(tree.get_node(tree.find_path(tree.get_root(),[1,2,3])).data['support'] ,4)
 
-    assert tree.find_path(tree.get_root(),[2]) != -1
-    assert tree.get_node(tree.find_path(tree.get_root(),[2])).data['support'] == 4
+        self.assertNotEqual(tree.find_path(tree.get_root(),[1,3]) , -1)
+        self.assertEqual(tree.get_node(tree.find_path(tree.get_root(),[1,3])).data['support'],4)
 
-    assert tree.find_path(tree.get_root(),[2,3]) != -1
-    assert tree.get_node(tree.find_path(tree.get_root(),[2,3])).data['support'] == 4
+        self.assertNotEqual(tree.find_path(tree.get_root(),[2]) , -1)
+        self.assertEqual(tree.get_node(tree.find_path(tree.get_root(),[2])).data['support'],4)
 
-    assert tree.find_path(tree.get_root(),[3]) != -1
-    assert tree.get_node(tree.find_path(tree.get_root(),[3])).data['support'] == 4
+        self.assertNotEqual(tree.find_path(tree.get_root(),[2,3]), -1)
+        self.assertEqual(tree.get_node(tree.find_path(tree.get_root(),[2,3])).data['support'] ,4)
 
-def test_recommendation():
+        self.assertNotEqual(tree.find_path(tree.get_root(),[3]),-1)
+        self.assertEqual(tree.get_node(tree.find_path(tree.get_root(),[3])).data['support'] ,4)
 
-    t = build_smart_tree()
+    def test_recommendation(self):
 
-    rec = FreqSeqMiningRecommender(0.9,0.2,True)
-    rec._set_tree_debug_only(t)
+        t = self.build_smart_tree()
 
-    s1 = [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8]
-    s2 = [1, 3, 1, 0, 6, 4]
-    s3 = [8, 7, 6, 5, 4, 3, 2, 1]
+        rec = FreqSeqMiningRecommender(0.9,0.2,True)
+        rec._set_tree_debug_only(t)
 
-    # if user profile empty then no recommendation
-    recommendation = rec.recommend([], 9, 1, 1)
-    assert rec.get_recommendation_list(recommendation) == []
+        s1 = [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8]
+        s2 = [1, 3, 1, 0, 6, 4]
+        s3 = [8, 7, 6, 5, 4, 3, 2, 1]
 
-    recommendation = rec.recommend(s1[:9], 9, 1, 1)
-    assert rec.get_recommendation_list(recommendation) == [[2], [6]]
-    assert sorted(rec.get_confidence_list(recommendation)) == sorted([7 / 8, 1])
+        # if user profile empty then no recommendation
+        recommendation = rec.recommend([], 9, 1, 1)
+        assert rec.get_recommendation_list(recommendation) == []
 
-    recommendation = rec.recommend(s1[:9], 9, 6, 1)
-    assert rec.get_recommendation_list(recommendation)== []
-    assert  sorted(rec.get_confidence_list(recommendation)) == []
+        recommendation = rec.recommend(s1[:9], 9, 1, 1)
+        assert rec.get_recommendation_list(recommendation) == [[2], [6]]
+        assert sorted(rec.get_confidence_list(recommendation)) == sorted([7 / 8, 1])
 
-    recommendation = rec.recommend(s2[:3], 3, 1, 1)
-    assert rec.get_recommendation_list(recommendation) == [[0], [4]]
-    assert sorted(rec.get_confidence_list(recommendation)) == sorted([1, 6 / 8])
+        recommendation = rec.recommend(s1[:9], 9, 6, 1)
+        assert rec.get_recommendation_list(recommendation)== []
+        assert  sorted(rec.get_confidence_list(recommendation)) == []
 
-    recommendation =rec.recommend(s3[:4], 4, 1, 1)
-    assert  rec.get_recommendation_list(recommendation) == []
-    assert sorted(rec.get_confidence_list(recommendation)) == sorted([])
+        recommendation = rec.recommend(s2[:3], 3, 1, 1)
+        assert rec.get_recommendation_list(recommendation) == [[0], [4]]
+        assert sorted(rec.get_confidence_list(recommendation)) == sorted([1, 6 / 8])
 
-
-    ##find recommendation length n
-    s4 = [9,0,1,3,1,6,9,5,1,2]
-    recommendation = rec.recommend(s1[:9], 9, 1, 2)
-    assert  rec.get_recommendation_list(recommendation) == [[6, 9], [6, 4]]
-    assert sorted(rec.get_confidence_list(recommendation)) == sorted([0.5,0.5])
-
-    recommendation = rec.recommend(s1[:9], 9, 1, 3)
-    assert  rec.get_recommendation_list(recommendation) == [[6, 9, 0]]
-    assert sorted(rec.get_confidence_list(recommendation)) == sorted([3/8])
-
-    recommendation = rec.recommend(s4[:5], 5, 1, 2)
-    assert  rec.get_recommendation_list(recommendation) == [[4, 9], [4, 2]]
-    assert sorted(rec.get_confidence_list(recommendation)) == sorted([3/8,3/8])
-
-    recommendation = rec.recommend(s4[:5], 5, 2, 4)
-    assert  rec.get_recommendation_list(recommendation) == []
-    assert sorted(rec.get_confidence_list(recommendation)) == sorted([])
+        recommendation =rec.recommend(s3[:4], 4, 1, 1)
+        assert  rec.get_recommendation_list(recommendation) == []
+        assert sorted(rec.get_confidence_list(recommendation)) == sorted([])
 
 
+        ##find recommendation length n
+        s4 = [9,0,1,3,1,6,9,5,1,2]
+        recommendation = rec.recommend(s1[:9], 9, 1, 2)
+        assert  rec.get_recommendation_list(recommendation) == [[6, 9], [6, 4]]
+        assert sorted(rec.get_confidence_list(recommendation)) == sorted([0.5,0.5])
 
-def test_evaluation():
+        recommendation = rec.recommend(s1[:9], 9, 1, 3)
+        assert  rec.get_recommendation_list(recommendation) == [[6, 9, 0]]
+        assert sorted(rec.get_confidence_list(recommendation)) == sorted([3/8])
 
-    t = build_smart_tree()
+        recommendation = rec.recommend(s4[:5], 5, 1, 2)
+        assert  rec.get_recommendation_list(recommendation) == [[4, 9], [4, 2]]
+        assert sorted(rec.get_confidence_list(recommendation)) == sorted([3/8,3/8])
 
-    rec = FreqSeqMiningRecommender(0.9,0.2,True)
-    rec._set_tree_debug_only(t)
-    evaluation_functions=[metrics.precision,metrics.recall]
+        recommendation = rec.recommend(s4[:5], 5, 2, 4)
+        assert  rec.get_recommendation_list(recommendation) == []
+        assert sorted(rec.get_confidence_list(recommendation)) == sorted([])
 
-    test_seq = [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8]
 
-    #look-ahead =1: seqeunce
-    assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 1, evaluation_functions, 10, 6),np.zeros(len(evaluation_functions)))
-    assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 1, evaluation_functions, 10, 1),np.array([0.5,1]))
 
-    #look ahead = 4 = set evaluation, ground truth less than 4
-    assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 4, evaluation_functions, 10, 1),np.array([0.5,1/3]))
-    assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 'total', evaluation_functions, 10, 1),np.array([0.5,1/3]))
+    def test_evaluation(self):
 
-    assert np.array_equal(evaluation.evaluate_sequence(rec, [3,4,2,4,1,1], 3, 'total', evaluation_functions, 10, 1),np.array([0.5,0.5]))
+        t = self.build_smart_tree()
 
-    db = [[7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8],
-          [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 2],
-          [3,4,2,4,1,1]]
+        rec = FreqSeqMiningRecommender(0.9,0.2,True)
+        rec._set_tree_debug_only(t)
+        evaluation_functions=[metrics.precision,metrics.recall]
 
-    ##set evaluation all dataset
-    assert np.array_equal(evaluation.set_evaluation(rec, db, 3, 'total', evaluation_functions, 10, 2), np.array([2/3,1/2]))
+        test_seq = [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8]
 
-    ##single sequential evaluation
-    assert np.array_equal(evaluation.sequence_sequential_evaluation(rec, [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8], 3, evaluation_functions, 10, 1), np.array([1 / 6, 1 / 3]))
-    assert np.array_equal(evaluation.sequence_sequential_evaluation(rec, [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 4, 8], 3, evaluation_functions, 10, 1), np.array([1 / 3, 2 / 3]))
+        #look-ahead =1: seqeunce
+        assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 1, evaluation_functions, 10, 6),np.zeros(len(evaluation_functions)))
+        assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 1, evaluation_functions, 10, 1),np.array([0.5,1]))
 
-    #sequential evaluation of db
-    db=[[7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8],
-        [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 4, 8]]
+        #look ahead = 4 = set evaluation, ground truth less than 4
+        assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 4, evaluation_functions, 10, 1),np.array([0.5,1/3]))
+        assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 'total', evaluation_functions, 10, 1),np.array([0.5,1/3]))
 
-    assert np.array_equal(evaluation.sequential_evaluation(rec, db, 3, 'total', evaluation_functions, 10, 1),np.array([3/12,0.5]))
+        assert np.array_equal(evaluation.evaluate_sequence(rec, [3,4,2,4,1,1], 3, 'total', evaluation_functions, 10, 1),np.array([0.5,0.5]))
 
-def test_n_length_paths():
+        db = [[7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8],
+              [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 2],
+              [3,4,2,4,1,1]]
 
-    t = build_smart_tree()
-    ###test find_n_length_path
-    excludeOrigin = False
-    p0 = t.find_n_legth_paths(t.get_root(),0,excludeOrigin)
-    p1 = t.find_n_legth_paths(t.get_root(),1,excludeOrigin)
-    p2 = t.find_n_legth_paths(t.get_root(),2,excludeOrigin)
-    p3 = t.find_n_legth_paths(t.get_root(),3,excludeOrigin)
+        ##set evaluation all dataset
+        assert np.array_equal(evaluation.set_evaluation(rec, db, 3, 'total', evaluation_functions, 10, 2), np.array([2/3,1/2]))
 
-    assert sorted(t.get_paths_tag(p0)) == sorted([['root']])
-    assert sorted(t.get_paths_tag(p1)) == sorted([['root', 1], ['root', 2], ['root', 3], ['root', 4], ['root', 9]])
-    assert sorted(t.get_paths_tag(p2)) == sorted([['root', 1, 2], ['root', 1, 3], ['root', 2, 3], ['root', 2, 1], ['root', 3, 4], ['root', 3, 5], ['root', 4, 2]])
-    assert sorted(t.get_paths_tag(p3)) == sorted([['root', 1, 3, 1], ['root', 1, 3 ,6], ['root', 1, 3, 2], ['root', 3, 4, 2], ['root', 3, 4, 1], ['root', 4, 2, 1]])
+        ##single sequential evaluation
+        assert np.array_equal(evaluation.sequence_sequential_evaluation(rec, [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8], 3, evaluation_functions, 10, 1), np.array([1 / 6, 1 / 3]))
+        assert np.array_equal(evaluation.sequence_sequential_evaluation(rec, [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 4, 8], 3, evaluation_functions, 10, 1), np.array([1 / 3, 2 / 3]))
 
-    node1 = t.find_path(t.get_root(),[1])
-    node3 = t.find_path(t.get_root(),[2,3])
-    node4 = t.find_path(t.get_root(),[3,4])
+        #sequential evaluation of db
+        db=[[7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8],
+            [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 4, 8]]
 
-    p0_bis1 = t.find_n_legth_paths(node4,0,excludeOrigin)
-    p1_bis1 = t.find_n_legth_paths(node1,1,excludeOrigin)
-    p1_bis2 = t.find_n_legth_paths(node3,1,excludeOrigin)
-    p2_bis1 = t.find_n_legth_paths(node4,2,excludeOrigin)
-    p3_bis1 = t.find_n_legth_paths(node3,3,excludeOrigin)
-    p3_bis2 = t.find_n_legth_paths(node4,3,excludeOrigin)
+        assert np.array_equal(evaluation.sequential_evaluation(rec, db, 3, 'total', evaluation_functions, 10, 1),np.array([3/12,0.5]))
 
-    assert sorted(t.get_paths_tag(p0_bis1)) == sorted([[4]])
-    assert sorted(t.get_paths_tag(p1_bis1)) == sorted([[1,2], [1, 3]])
-    assert sorted(t.get_paths_tag(p1_bis2)) == sorted([])
-    assert sorted(t.get_paths_tag(p3_bis1)) == sorted([])
-    assert sorted(t.get_paths_tag(p2_bis1)) == sorted([[4,2,1], [4,2,6],[4,1,6],[4,1,5]])
-    assert sorted(t.get_paths_tag(p3_bis2)) == sorted([[4,2,1,5], [4,1,5,5],[4,1,5,4]])
+    def test_n_length_paths(self):
 
-    ########################################################################################
-    excludeOrigin = True
-    p0 = t.find_n_legth_paths(t.get_root(),0,excludeOrigin)
-    p1 = t.find_n_legth_paths(t.get_root(),1,excludeOrigin)
-    p2 = t.find_n_legth_paths(t.get_root(),2,excludeOrigin)
-    p3 = t.find_n_legth_paths(t.get_root(),3,excludeOrigin)
+        t = self.build_smart_tree()
+        ###test find_n_length_path
+        excludeOrigin = False
+        p0 = t.find_n_legth_paths(t.get_root(),0,excludeOrigin)
+        p1 = t.find_n_legth_paths(t.get_root(),1,excludeOrigin)
+        p2 = t.find_n_legth_paths(t.get_root(),2,excludeOrigin)
+        p3 = t.find_n_legth_paths(t.get_root(),3,excludeOrigin)
 
-    assert sorted(t.get_paths_tag(p0)) == sorted([[]])
-    assert sorted(t.get_paths_tag(p1)) == sorted([[1], [2], [3], [4], [9]])
-    assert sorted(t.get_paths_tag(p2)) == sorted([[1, 2], [1, 3], [2, 3], [2, 1], [3, 4], [3, 5], [4, 2]])
-    assert sorted(t.get_paths_tag(p3)) == sorted([[1, 3, 1], [1, 3 ,6], [1, 3, 2], [ 3, 4, 2], [3, 4, 1], [4, 2, 1]])
+        assert sorted(t.get_paths_tag(p0)) == sorted([['root']])
+        assert sorted(t.get_paths_tag(p1)) == sorted([['root', 1], ['root', 2], ['root', 3], ['root', 4], ['root', 9]])
+        assert sorted(t.get_paths_tag(p2)) == sorted([['root', 1, 2], ['root', 1, 3], ['root', 2, 3], ['root', 2, 1], ['root', 3, 4], ['root', 3, 5], ['root', 4, 2]])
+        assert sorted(t.get_paths_tag(p3)) == sorted([['root', 1, 3, 1], ['root', 1, 3 ,6], ['root', 1, 3, 2], ['root', 3, 4, 2], ['root', 3, 4, 1], ['root', 4, 2, 1]])
 
-    node1 = t.find_path(t.get_root(),[1])
-    node3 = t.find_path(t.get_root(),[2,3])
-    node4 = t.find_path(t.get_root(),[3,4])
+        node1 = t.find_path(t.get_root(),[1])
+        node3 = t.find_path(t.get_root(),[2,3])
+        node4 = t.find_path(t.get_root(),[3,4])
 
-    p0_bis1 = t.find_n_legth_paths(node4,0,excludeOrigin)
-    p1_bis1 = t.find_n_legth_paths(node1,1,excludeOrigin)
-    p1_bis2 = t.find_n_legth_paths(node3,1,excludeOrigin)
-    p2_bis1 = t.find_n_legth_paths(node4,2,excludeOrigin)
-    p3_bis1 = t.find_n_legth_paths(node3,3,excludeOrigin)
-    p3_bis2 = t.find_n_legth_paths(node4,3,excludeOrigin)
+        p0_bis1 = t.find_n_legth_paths(node4,0,excludeOrigin)
+        p1_bis1 = t.find_n_legth_paths(node1,1,excludeOrigin)
+        p1_bis2 = t.find_n_legth_paths(node3,1,excludeOrigin)
+        p2_bis1 = t.find_n_legth_paths(node4,2,excludeOrigin)
+        p3_bis1 = t.find_n_legth_paths(node3,3,excludeOrigin)
+        p3_bis2 = t.find_n_legth_paths(node4,3,excludeOrigin)
 
-    assert sorted(t.get_paths_tag(p0_bis1)) == sorted([[]])
-    assert sorted(t.get_paths_tag(p1_bis1)) == sorted([[2], [3]])
-    assert sorted(t.get_paths_tag(p1_bis2)) == sorted([])
-    assert sorted(t.get_paths_tag(p3_bis1)) == sorted([])
-    assert sorted(t.get_paths_tag(p2_bis1)) == sorted([[2,1], [2,6],[1,6],[1,5]])
-    assert sorted(t.get_paths_tag(p3_bis2)) == sorted([[2,1,5], [1,5,5],[1,5,4]])
+        assert sorted(t.get_paths_tag(p0_bis1)) == sorted([[4]])
+        assert sorted(t.get_paths_tag(p1_bis1)) == sorted([[1,2], [1, 3]])
+        assert sorted(t.get_paths_tag(p1_bis2)) == sorted([])
+        assert sorted(t.get_paths_tag(p3_bis1)) == sorted([])
+        assert sorted(t.get_paths_tag(p2_bis1)) == sorted([[4,2,1], [4,2,6],[4,1,6],[4,1,5]])
+        assert sorted(t.get_paths_tag(p3_bis2)) == sorted([[4,2,1,5], [4,1,5,5],[4,1,5,4]])
 
-def test():
-    test_fit()
-    test_n_length_paths()
-    test_recommendation()
-    test_evaluation()
-    print('ALL TESTS SUCCESSFUL')
+        ########################################################################################
+        excludeOrigin = True
+        p0 = t.find_n_legth_paths(t.get_root(),0,excludeOrigin)
+        p1 = t.find_n_legth_paths(t.get_root(),1,excludeOrigin)
+        p2 = t.find_n_legth_paths(t.get_root(),2,excludeOrigin)
+        p3 = t.find_n_legth_paths(t.get_root(),3,excludeOrigin)
+
+        assert sorted(t.get_paths_tag(p0)) == sorted([[]])
+        assert sorted(t.get_paths_tag(p1)) == sorted([[1], [2], [3], [4], [9]])
+        assert sorted(t.get_paths_tag(p2)) == sorted([[1, 2], [1, 3], [2, 3], [2, 1], [3, 4], [3, 5], [4, 2]])
+        assert sorted(t.get_paths_tag(p3)) == sorted([[1, 3, 1], [1, 3 ,6], [1, 3, 2], [ 3, 4, 2], [3, 4, 1], [4, 2, 1]])
+
+        node1 = t.find_path(t.get_root(),[1])
+        node3 = t.find_path(t.get_root(),[2,3])
+        node4 = t.find_path(t.get_root(),[3,4])
+
+        p0_bis1 = t.find_n_legth_paths(node4,0,excludeOrigin)
+        p1_bis1 = t.find_n_legth_paths(node1,1,excludeOrigin)
+        p1_bis2 = t.find_n_legth_paths(node3,1,excludeOrigin)
+        p2_bis1 = t.find_n_legth_paths(node4,2,excludeOrigin)
+        p3_bis1 = t.find_n_legth_paths(node3,3,excludeOrigin)
+        p3_bis2 = t.find_n_legth_paths(node4,3,excludeOrigin)
+
+        assert sorted(t.get_paths_tag(p0_bis1)) == sorted([[]])
+        assert sorted(t.get_paths_tag(p1_bis1)) == sorted([[2], [3]])
+        assert sorted(t.get_paths_tag(p1_bis2)) == sorted([])
+        assert sorted(t.get_paths_tag(p3_bis1)) == sorted([])
+        assert sorted(t.get_paths_tag(p2_bis1)) == sorted([[2,1], [2,6],[1,6],[1,5]])
+        assert sorted(t.get_paths_tag(p3_bis2)) == sorted([[2,1,5], [1,5,5],[1,5,4]])
+
+if __name__ == '__main__':
+    unittest.main()
