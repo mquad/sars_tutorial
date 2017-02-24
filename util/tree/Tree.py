@@ -4,15 +4,17 @@ import uuid
 
 class SmartTree(treelib.Tree):
 
+    _PATH_NOT_FOUND = -1
+
     def find_path(self,origin, path):
         """Takes the nodeId where to start the path search and the path to look for,
         :returns -1 if path not found, nodeId of the last node if path found"""
 
-        if path == []:
+        if not path:
             #path found
             return origin
 
-        res = -1
+        res = self._PATH_NOT_FOUND
 
         for nodeId in self[origin].fpointer:
             node = self[nodeId]
@@ -22,7 +24,7 @@ class SmartTree(treelib.Tree):
 
         if res == None:
             #path not found
-            return -1
+            return self._PATH_NOT_FOUND
         else:
             return res
 
@@ -37,7 +39,7 @@ class SmartTree(treelib.Tree):
 
         res = ()
 
-        for nodeId in self[origin].fpointer:
+        for nodeId in self[origin].fpointer: #se ci sono molti nodi figli qui diventa lento
             node = self[nodeId]
             if (node.tag == path[0]):
                 res = self.longest_subpath(nodeId, path[1:])
@@ -50,7 +52,7 @@ class SmartTree(treelib.Tree):
             return res
 
 
-    def add_path(self,origin,path,support):
+    def add_path(self,origin,path,support=None):
         """add a path, starting from origin"""
         sub = self.longest_subpath(origin,path)
         if(sub[1] == 0):
@@ -67,11 +69,14 @@ class SmartTree(treelib.Tree):
                 self.create_node(item,itemId,parent=par,data={'support':support})
                 par = itemId
 
-
+    def path_is_valid(self,path):
+        return path != self._PATH_NOT_FOUND
 
     def create_node(self, tag=None, identifier=None, parent=None, data=None):
         """override to get a random id if none provided"""
         id = uuid.uuid4() if identifier == None else identifier
+        if id == self._PATH_NOT_FOUND:
+            raise NameError("Cannot create a node with special id "+str(self._PATH_NOT_FOUND))
         super(SmartTree, self).create_node(tag,id,parent,data)
 
 
