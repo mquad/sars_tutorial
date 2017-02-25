@@ -77,3 +77,57 @@ for n in G.nodes_iter():
     for e in edges:
         G[e[0]][e[1]]['count'] =  G[e[0]][e[1]]['count']/float(countSum) if countSum else 0
 
+##clustering
+def sequence_similarity(s,t):
+    sum = 0
+    for i in range(min(len(s),len(t))):
+         sum += 0 if s[i] != t[i] else (i+2)
+    return sum
+
+similarity_dict = {}
+#for each state in the graph, calculate similarity
+
+for node in G.nodes_iter():
+    for deno in G.nodes_iter():
+        if node==deno or (node,deno) in similarity_dict: continue #skip if same or already done
+        else:
+            sim = sequence_similarity(node,deno)
+            if sim: #save only if different from zero
+                similarity_dict[node,deno] = similarity_dict[deno,node] = sim
+
+similarity_count_dict ={}
+##similarity count
+for edge in G.edges_iter():
+    previous = edge[0]
+    next = edge[1]
+    sum = 0
+    for e in G.in_edges_iter(next):
+        if e == edge: continue # skip same edge
+        else: sum += similarity_dict.get((previous,e[0]),0) * G[e[0]][next]['count']
+    if sum: #save only if different from 0
+        similarity_count_dict [edge] = sum
+
+def compute_normalization_similarity_count(G,node):
+    normalization_sum = 0
+    for other_state in G.nodes_iter():
+        #skip similarity with myself is 0 because of how similarity_dict is calculated
+        normalization_sum += similarity_count_dict.get((node, other_state),0)
+    return normalization_sum
+
+##update transition probability
+sums_of_similarity_count={}
+for edge in G.edges_iter():
+    old = G[edge[0]][edge[1]]['count']
+
+    if edge[0] not in sums_of_similarity_count:
+        normalization_sum = compute_normalization_similarity_count(G,edge[0])
+        sums_of_similarity_count[edge[0]] = normalization_sum
+    else:
+         normalization_sum = sums_of_similarity_count[edge[0]]
+
+    if normalization_sum:
+        new_transition_prob = 0.5 * old + 0.5 * similarity_count_dict.get((edge[0],edge[1]),0) / normalization_sum
+    else:
+        new_transition_prob = 0.5 * old
+
+

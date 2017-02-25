@@ -1,7 +1,7 @@
 import logging
 
 from pymining import seqmining
-
+from util.SPMFinterface import callSPMF
 from recommenders.ISeqRecommender import ISeqRecommender
 from util.tree.Tree import SmartTree
 
@@ -9,27 +9,52 @@ from util.tree.Tree import SmartTree
 class FreqSeqMiningRecommender(ISeqRecommender):
     """Frequent sequence mining recommender"""
 
+    outputPath = "tmp_output.txt"
+
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-    def __init__(self,minsup,minconf,verbose=False):
-        """minsup is interpreted as percetage if [0-1] or as count if > 1 """
+    def __init__(self,minsup,minconf,max_context, min_context=1,spmfPath=None,dbPath=None):
+        """minsup is interpreted as percetage if [0-1] or as count if > 1.
+        spmfPath is the path where the spmf jar is while dbPath is the path of the sequence db
+        in spmf format. Both have to be valid in order to use spfm for sequence mining"""
 
         super(FreqSeqMiningRecommender, self).__init__()
         self.logger = logging.getLogger()
-        self.logger.setLevel(logging.DEBUG if verbose else logging.INFO)
-        self.logger.debug("Debug logger enabled")
+        self.logger.setLevel(logging.INFO)
         self.minsup = minsup
         self.minconf = minconf
+        self.max_context = max_context
+        self.min_context = min_context
+        self.recommendation_length = 1
+        self.spmfPath = spmfPath
+        self.dbPath = dbPath
 
     def fit(self,seqs):
         """Takes a list of list of seqeunces ."""
 
-        msup = self.minsup * len(seqs) if 0 <= self.minsup <=1 else self.minsup
+        if self.spmfPath and self.dbPath:
+            logging.info("Using SPMF")
+            #parse minsup
+            if 0 <= self.minsup <=1:
+                percentage_min_sup = self.minsup * 100
+            else: raise NameError("SPMF only accepts 0<=minsup<=1")
 
-        self.logger.info('Mining frequent sequences')
-        self.freq_seqs = seqmining.freq_seq_enum(seqs, msup)
+            #call spmf
+            algorithm = "PrefixSpan"
+            command = ' '.join([algorithm,self.dbPath,self.outputPath,str(percentage_min_sup)+'%'])
+            callSPMF(self.spmfPath,command)
+
+            #parse back output from text file
+            self._parse_SPMF_output()
+        elif seqs:
+            msup = self.minsup * len(seqs) if 0 <= self.minsup <=1 else self.minsup
+
+            self.logger.info('Mining frequent sequences')
+            self.freq_seqs = seqmining.freq_seq_enum(seqs, msup)
+        else:
+            logging.error("No sequence dabase path nor sequence list provided.")
+
         self.logger.info('{} frequent sequences found'.format(len(self.freq_seqs)))
-
         self.logger.info('Building frequent sequence tree')
         self.tree = SmartTree()
         self.rootNode = self.tree.set_root()
@@ -44,13 +69,13 @@ class FreqSeqMiningRecommender(ISeqRecommender):
                 raise NameError('Frequent sequence of length 0')
         self.logger.info('Tree completed')
 
-    def recommend(self, user_profile, max_context, min_context=1, recommendation_length=1):
+    def recommend(self, user_profile):
         n = len(user_profile)
-        c = min(n, max_context)
+        c = min(n, self.max_context)
         match = []
-        while not match and c >= min_context:
+        while not match and c >= self.min_context:
             q = user_profile[n-c:n]
-            match = self._find_match(q,recommendation_length)
+            match = self._find_match(q,self.recommendation_length)
             c -= 1
         return match
 
@@ -99,3 +124,20 @@ class FreqSeqMiningRecommender(ISeqRecommender):
 
     def get_confidence_list(self,recommendation):
         return list(map(lambda x:x[1],recommendation))
+
+    def activate_debug_print(self):
+        self.logger.setLevel(logging.DEBUG)
+
+    def deactivate_debug_print(self):
+        self.logger.setLevel(logging.INFO)
+
+    def _parse_SPMF_output(self):
+        with open(self.outputPath,'r') as fin:
+            self.freq_seqs = []
+            for line in fin:
+                pieces = line.split('#SUP: ')
+                support = pieces[1].strip()
+                items = pieces[0].split(' ')
+                seq = tuple(x for x in items if x!='' and x!='-1')
+                seq_and_support = ((seq,int(support)))
+                self.freq_seqs.append(seq_and_support)

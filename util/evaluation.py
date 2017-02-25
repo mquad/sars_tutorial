@@ -1,25 +1,25 @@
 import numpy as np
 
-def sequential_evaluation(recommender, test_sequences, last_k, look_ahead, evaluation_functions, max_context, min_context, recommendation_length=1):
+def sequential_evaluation(recommender, test_sequences, last_k, look_ahead, evaluation_functions):
     if last_k <= 0:
         raise NameError('Please choose a k>0')
 
     metrics = np.zeros(len(evaluation_functions))
     for s in test_sequences:
-        metrics += sequence_sequential_evaluation(recommender, s, last_k, evaluation_functions, max_context, min_context, recommendation_length)
+        metrics += sequence_sequential_evaluation(recommender, s, last_k, evaluation_functions)
     return metrics/len(test_sequences)
 
 
-def set_evaluation(recommender, test_sequences, last_k, look_ahead, evaluation_functions, max_context, min_context, recommendation_length=1):
+def set_evaluation(recommender, test_sequences, last_k, look_ahead, evaluation_functions):
     if last_k <= 0:
         raise NameError('Please choose a k>0')
 
     metrics = np.zeros(len(evaluation_functions))
     for s in test_sequences:
-        metrics += evaluate_sequence(recommender, s, last_k, look_ahead, evaluation_functions, max_context, min_context, recommendation_length)
+        metrics += evaluate_sequence(recommender, s, last_k, look_ahead, evaluation_functions)
     return metrics/len(test_sequences)
 
-def evaluate_sequence(recommender, seq, last_k, look_ahead, evaluation_functions, max_context, min_context, recommendation_length=1):
+def evaluate_sequence(recommender, seq, last_k, look_ahead, evaluation_functions):
     """
     :param recommender:
     :param seq:
@@ -49,7 +49,7 @@ def evaluate_sequence(recommender, seq, last_k, look_ahead, evaluation_functions
         # all evaluation functions are 0
         return np.zeros(len(evaluation_functions))
 
-    r = recommender.recommend(user_profile, max_context=max_context, min_context=min_context, recommendation_length=recommendation_length)
+    r = recommender.recommend(user_profile)
 
     if not r:
         # no recommendation found
@@ -60,15 +60,15 @@ def evaluate_sequence(recommender, seq, last_k, look_ahead, evaluation_functions
         tmpResults.append(f(ground_truth,recommender.get_recommendation_list(r)))
     return np.array(tmpResults)
 
-def _sse(recommender, seq, last_k, evaluation_functions, max_context, min_context, recommendation_length=1):
+def _sse(recommender, seq, last_k, evaluation_functions):
 
     if last_k <= 0:
         raise NameError('Please choose a k>0')
     elif last_k == 1:
-        return evaluate_sequence(recommender, seq, last_k, 1, evaluation_functions, max_context, min_context, recommendation_length)
+        return evaluate_sequence(recommender, seq, last_k, 1, evaluation_functions)
     else:
-        return (evaluate_sequence(recommender, seq, last_k, 1, evaluation_functions, max_context, min_context, recommendation_length) + \
-                _sse(recommender, seq, last_k - 1, evaluation_functions, max_context, min_context, recommendation_length))
+        return (evaluate_sequence(recommender, seq, last_k, 1, evaluation_functions) + \
+                _sse(recommender, seq, last_k - 1, evaluation_functions))
 
-def sequence_sequential_evaluation(recommender, seq, last_k, evaluation_functions, max_context, min_context, recommendation_length=1):
-    return _sse(recommender, seq, last_k, evaluation_functions, max_context, min_context, recommendation_length) / last_k
+def sequence_sequential_evaluation(recommender, seq, last_k, evaluation_functions):
+    return _sse(recommender, seq, last_k, evaluation_functions) / last_k

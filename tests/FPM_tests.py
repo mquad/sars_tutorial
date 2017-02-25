@@ -82,90 +82,79 @@ class FPM_recommender_tests(unittest.TestCase):
 
         t = self.build_smart_tree()
 
-        rec = FreqSeqMiningRecommender(0.9,0.2,True)
-        rec._set_tree_debug_only(t)
+        rec1 = FreqSeqMiningRecommender(0.9,0.2,9,1)
+        rec2 = FreqSeqMiningRecommender(0.9,0.2,9,6)
+        rec3 = FreqSeqMiningRecommender(0.9,0.2,3,1)
+        rec4 = FreqSeqMiningRecommender(0.9,0.2,4,1)
+        rec1._set_tree_debug_only(t)
+        rec2._set_tree_debug_only(t)
+        rec3._set_tree_debug_only(t)
+        rec4._set_tree_debug_only(t)
 
         s1 = [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8]
         s2 = [1, 3, 1, 0, 6, 4]
         s3 = [8, 7, 6, 5, 4, 3, 2, 1]
 
         # if user profile empty then no recommendation
-        recommendation = rec.recommend([], 9, 1, 1)
-        assert rec.get_recommendation_list(recommendation) == []
+        recommendation = rec1.recommend([])
+        assert rec1.get_recommendation_list(recommendation) == []
 
-        recommendation = rec.recommend(s1[:9], 9, 1, 1)
-        assert rec.get_recommendation_list(recommendation) == [[2], [6]]
-        assert sorted(rec.get_confidence_list(recommendation)) == sorted([7 / 8, 1])
+        recommendation = rec1.recommend(s1[:9])
+        assert rec1.get_recommendation_list(recommendation) == [[2], [6]]
+        assert sorted(rec1.get_confidence_list(recommendation)) == sorted([7 / 8, 1])
 
-        recommendation = rec.recommend(s1[:9], 9, 6, 1)
-        assert rec.get_recommendation_list(recommendation)== []
-        assert  sorted(rec.get_confidence_list(recommendation)) == []
+        recommendation = rec2.recommend(s1[:9])
+        assert rec2.get_recommendation_list(recommendation)== []
+        assert  sorted(rec2.get_confidence_list(recommendation)) == []
 
-        recommendation = rec.recommend(s2[:3], 3, 1, 1)
-        assert rec.get_recommendation_list(recommendation) == [[0], [4]]
-        assert sorted(rec.get_confidence_list(recommendation)) == sorted([1, 6 / 8])
+        recommendation = rec3.recommend(s2[:3])
+        assert rec3.get_recommendation_list(recommendation) == [[0], [4]]
+        assert sorted(rec3.get_confidence_list(recommendation)) == sorted([1, 6 / 8])
 
-        recommendation =rec.recommend(s3[:4], 4, 1, 1)
-        assert  rec.get_recommendation_list(recommendation) == []
-        assert sorted(rec.get_confidence_list(recommendation)) == sorted([])
-
-
-        ##find recommendation length n
-        s4 = [9,0,1,3,1,6,9,5,1,2]
-        recommendation = rec.recommend(s1[:9], 9, 1, 2)
-        assert  rec.get_recommendation_list(recommendation) == [[6, 9], [6, 4]]
-        assert sorted(rec.get_confidence_list(recommendation)) == sorted([0.5,0.5])
-
-        recommendation = rec.recommend(s1[:9], 9, 1, 3)
-        assert  rec.get_recommendation_list(recommendation) == [[6, 9, 0]]
-        assert sorted(rec.get_confidence_list(recommendation)) == sorted([3/8])
-
-        recommendation = rec.recommend(s4[:5], 5, 1, 2)
-        assert  rec.get_recommendation_list(recommendation) == [[4, 9], [4, 2]]
-        assert sorted(rec.get_confidence_list(recommendation)) == sorted([3/8,3/8])
-
-        recommendation = rec.recommend(s4[:5], 5, 2, 4)
-        assert  rec.get_recommendation_list(recommendation) == []
-        assert sorted(rec.get_confidence_list(recommendation)) == sorted([])
-
-
+        recommendation =rec4.recommend(s3[:4])
+        assert  rec4.get_recommendation_list(recommendation) == []
+        assert sorted(rec4.get_confidence_list(recommendation)) == sorted([])
 
     def test_evaluation(self):
 
         t = self.build_smart_tree()
 
-        rec = FreqSeqMiningRecommender(0.9,0.2,True)
-        rec._set_tree_debug_only(t)
+        rec1 = FreqSeqMiningRecommender(0.9,0.2,10,6)
+        rec2 = FreqSeqMiningRecommender(0.9,0.2,10,1)
+        rec3 = FreqSeqMiningRecommender(0.9,0.2,10,3)
+        rec1._set_tree_debug_only(t)
+        rec2._set_tree_debug_only(t)
+        rec3._set_tree_debug_only(t)
         evaluation_functions=[metrics.precision,metrics.recall]
 
         test_seq = [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8]
 
         #look-ahead =1: seqeunce
-        assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 1, evaluation_functions, 10, 6),np.zeros(len(evaluation_functions)))
-        assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 1, evaluation_functions, 10, 1),np.array([0.5,1]))
+        assert np.array_equal(evaluation.evaluate_sequence(rec1, test_seq, 3, 1, evaluation_functions),np.zeros(len(evaluation_functions)))
+        assert np.array_equal(evaluation.evaluate_sequence(rec2, test_seq, 3, 1, evaluation_functions),np.array([0.5,1]))
 
         #look ahead = 4 = set evaluation, ground truth less than 4
-        assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 4, evaluation_functions, 10, 1),np.array([0.5,1/3]))
-        assert np.array_equal(evaluation.evaluate_sequence(rec, test_seq, 3, 'total', evaluation_functions, 10, 1),np.array([0.5,1/3]))
+        assert np.array_equal(evaluation.evaluate_sequence(rec2, test_seq, 3, 4, evaluation_functions),np.array([0.5,1/3]))
+        assert np.array_equal(evaluation.evaluate_sequence(rec2, test_seq, 3, 'total', evaluation_functions),np.array([0.5,1/3]))
 
-        assert np.array_equal(evaluation.evaluate_sequence(rec, [3,4,2,4,1,1], 3, 'total', evaluation_functions, 10, 1),np.array([0.5,0.5]))
+        assert np.array_equal(evaluation.evaluate_sequence(rec2, [3,4,2,4,1,1], 3, 'total', evaluation_functions),np.array([0.5,0.5]))
 
         db = [[7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8],
               [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 2],
               [3,4,2,4,1,1]]
 
         ##set evaluation all dataset
-        assert np.array_equal(evaluation.set_evaluation(rec, db, 3, 'total', evaluation_functions, 10, 2), np.array([2/3,1/2]))
+        assert np.array_equal(evaluation.set_evaluation(rec3, db, 3, 'total', evaluation_functions), np.array([2/3,1/2]))
 
         ##single sequential evaluation
-        assert np.array_equal(evaluation.sequence_sequential_evaluation(rec, [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8], 3, evaluation_functions, 10, 1), np.array([1 / 6, 1 / 3]))
-        assert np.array_equal(evaluation.sequence_sequential_evaluation(rec, [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 4, 8], 3, evaluation_functions, 10, 1), np.array([1 / 3, 2 / 3]))
+        assert np.array_equal(evaluation.sequence_sequential_evaluation(rec2, [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8], 3, evaluation_functions), np.array([1 / 6, 1 / 3]))
+        assert np.array_equal(evaluation.sequence_sequential_evaluation(rec2, [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 4, 8], 3, evaluation_functions), np.array([1 / 3, 2 / 3]))
 
         #sequential evaluation of db
         db=[[7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 7, 8],
             [7, 8, 9, 3, 4, 2, 1, 5, 1, 6, 4, 8]]
 
-        assert np.array_equal(evaluation.sequential_evaluation(rec, db, 3, 'total', evaluation_functions, 10, 1),np.array([3/12,0.5]))
+        assert np.array_equal(evaluation.sequential_evaluation(rec2, db, 3, 'total', evaluation_functions),np.array([3/12,0.5]))
 
     def test_n_length_paths(self):
 
