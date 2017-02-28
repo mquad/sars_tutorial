@@ -1,5 +1,4 @@
 import logging
-
 from pymining import seqmining
 from util.SPMFinterface import callSPMF
 from recommenders.ISeqRecommender import ISeqRecommender
