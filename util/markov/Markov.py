@@ -3,10 +3,6 @@ from util.tree.Tree import SmartTree
 from functools import reduce
 import logging
 
-#db=pd.read_csv('C:/Users/Umberto/Dropbox/datasets/music/sequenceDb.csv',converters={'songs':ast.literal_eval})
-#seqs = db['songs'].tolist()[:]
-#logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-
 def add_nodes_to_graph(seqs,last_k):
     t = SmartTree()
     rootNode = t.set_root()
@@ -38,9 +34,17 @@ def add_nodes_to_graph(seqs,last_k):
                 countDict[nearHistoryLong] = 1
     return (t,countDict,G)
 
-def add_edges(t,countDict,G,rootNode,last_k):
+def add_edges(t,countDict,G,last_k):
+    """
+    :param t: Tree of the sequnces available as states
+    :param countDict: dicionary counting the occurence for each sequence
+    :param G: the graph containing the states (each one is a sequence)
+    :param last_k: the number of recent item considered
+    :return: the same graph G, with edges connecting states
+    """
     #add links
     logging.info("Adding edges in the markov chain")
+    rootNode = t.get_root()
     for node in G.nodes_iter():
         # if the sequence is shorter than states's len, the next state has all the sequence as prefix
         next_state_prefix = node[1:] if len (node) == last_k else node

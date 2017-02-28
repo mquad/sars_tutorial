@@ -218,6 +218,3 @@ class FPM_recommender_tests(unittest.TestCase):
         assert sorted(t.get_paths_tag(p3_bis1)) == sorted([])
         assert sorted(t.get_paths_tag(p2_bis1)) == sorted([[2,1], [2,6],[1,6],[1,5]])
         assert sorted(t.get_paths_tag(p3_bis2)) == sorted([[2,1,5], [1,5,5],[1,5,4]])
-
-if __name__ == '__main__':
-    unittest.main()
