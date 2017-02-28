@@ -23,13 +23,7 @@ def evaluate_sequence(recommender, seq, last_k, look_ahead, evaluation_functions
     """
     :param recommender:
     :param seq:
-    :param last_k: if isLastK true the number of elements taken from the end of the list for the groud truth, is isLastK=False
-            the number of elements taken from the beginnig of the seqeunce as the user_profile
-    :param max_context:
-    :param min_context:
-    :param recommendation_length:
     :param evaluation_functions:
-    :param is_last_k: if evaluation procedure lask-k, if false evaluation procedure is first-k.
     :param look_ahead: number of elements in ground truth to consider. if look_ahead = 'all' then all the ground_truth sequence is considered
     :return:
     """

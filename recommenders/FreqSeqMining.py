@@ -69,6 +69,11 @@ class FreqSeqMiningRecommender(ISeqRecommender):
         self.logger.info('Tree completed')
 
     def recommend(self, user_profile):
+        '''
+        Given the user profile return a list of recomendation
+        :param user_profile: user profile
+        :return: list of recommendations e.g. [([2], 0.875), ([6], 1.0)]
+        '''
         n = len(user_profile)
         c = min(n, self.max_context)
         match = []
@@ -117,9 +122,6 @@ class FreqSeqMiningRecommender(ISeqRecommender):
 
     def show_tree(self):
         self.tree.show()
-
-    def get_recommendation_list(self,recommendation):
-        return list(map(lambda x:x[0],recommendation))
 
     def get_confidence_list(self,recommendation):
         return list(map(lambda x:x[1],recommendation))

@@ -23,3 +23,5 @@ len(rec1.get_freq_seqs())
 rec = FreqSeqMiningRecommender(0.003,0.1,10,2)
 a=list(map(lambda x:list(map(str,x)),seqs))
 rec.fit(a)
+
+rec1.recommend(['6385'])

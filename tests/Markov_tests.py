@@ -1,6 +1,7 @@
 from util.markov.Markov import add_nodes_to_graph,add_edges,add_fractional_count,apply_clustering
 import unittest
-
+import networkx as nx
+from recommenders.MarkovChainRecommender import MarkovChainRecommender
 class Markov_tests(unittest.TestCase):
 
         seqs = [['0','1','3','1'],
@@ -217,3 +218,33 @@ class Markov_tests(unittest.TestCase):
                 for e in true_edges_final:
                         assert e[0] in computed_edges
                         assert abs(e[1] - G_clustered[e[0][0]][e[0][1]]['count'])<0.0000001
+
+        def build_graph(self):
+            G = nx.DiGraph()
+            G.add_edge(('1',),('4',),{'count':0.3})
+            G.add_edge(('1',),('7',),{'count':0.6})
+            G.add_edge(('1',),('2','7'),{'count':0.1})
+            G.add_edge(('2',),('1',),{'count':0.2})
+            G.add_edge(('2',),('4',),{'count':0.2})
+            G.add_edge(('2',),('7',),{'count':0.6})
+            G.add_edge(('5',),('2',),{'count':1})
+            G.add_edge(('3',),('5',),{'count':1})
+            G.add_edge(('6',),('5',),{'count':0.5})
+            G.add_edge(('6',),('7',),{'count':0.5})
+            return G
+
+        def test_recommender(self):
+            rec = MarkovChainRecommender(2)
+            G = self.build_graph()
+            rec._set_graph_debug(G)
+
+            self.list_equal(rec.get_recommendation_list(rec.recommend(['1'])), [['7'],['4']])
+            assert rec.get_recommendation_list(rec.recommend(['2','7'])) == []
+            self.list_equal(rec.get_recommendation_list(rec.recommend(['2'])), [['4'],['1'],['7']])
+
+
+        def list_equal(self,a,b):
+            for i in a:
+                assert i in b
+            for i in b:
+                assert i in a
