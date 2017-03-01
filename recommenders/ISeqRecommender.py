@@ -15,3 +15,6 @@ class ISeqRecommender(object):
     def get_recommendation_list(self,recommendation):
         return list(map(lambda x:x[0],recommendation))
 
+    def get_recommendation_confidence_list(self,recommendation):
+        return list(map(lambda x:x[1],recommendation))
+

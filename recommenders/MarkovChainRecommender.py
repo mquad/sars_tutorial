@@ -23,11 +23,13 @@ class MarkovChainRecommender(ISeqRecommender):
         self.G,_,_ = apply_clustering(self.G)
 
     def recommend(self, user_profile):
+
+        #if the user profile is longer than the markov order, chop it keeping recent history
+        state = tuple(user_profile[-self.last_k:])
         #see if graph has that state
-        state = tuple(user_profile)
         recommendations = []
         if self.G.has_node(state):
-            #search for recomendations in the forward star
+            #search for recommendations in the forward star
             rec_dict = {}
             for u,v in self.G.out_edges_iter([state]):
                 lastElement =tuple(v[-1:])
@@ -42,4 +44,3 @@ class MarkovChainRecommender(ISeqRecommender):
 
     def _set_graph_debug(self,G):
         self.G = G
-

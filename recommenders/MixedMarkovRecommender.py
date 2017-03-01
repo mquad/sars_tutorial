@@ -22,6 +22,26 @@ class MixedMarkovChainRecommender(ISeqRecommender):
         for i in range(self.from_k,self.to_k+1):
             self.recommenders[i] = MarkovChainRecommender(i)
 
-    def fit(self, X):
+    def fit(self, user_profile):
         for r in self.recommenders:
-            r.fit(X)
+            r.fit(user_profile)
+
+    def recommend(self, user_profile):
+        rec_dict = {}
+        recommendations =[]
+        sum_of_weights = 0
+        for order,r in self.recommenders.items():
+            rec_list = r.recommend(user_profile)
+            sum_of_weights += 1/order
+            for i in rec_list:
+                if tuple(i[0]) in rec_dict:
+                    rec_dict[tuple(i[0])] += 1/order * i[1]
+                else:
+                    rec_dict[tuple(i[0])] = 1/order * i[1]
+        for k,v in rec_dict.items():
+                recommendations.append((list(k),v/sum_of_weights))
+
+        return recommendations
+
+    def _set_model_debug(self,recommender,order):
+        self.recommenders[order]=recommender

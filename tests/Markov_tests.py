@@ -2,6 +2,7 @@ from util.markov.Markov import add_nodes_to_graph,add_edges,add_fractional_count
 import unittest
 import networkx as nx
 from recommenders.MarkovChainRecommender import MarkovChainRecommender
+from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
 class Markov_tests(unittest.TestCase):
 
         seqs = [['0','1','3','1'],
@@ -233,6 +234,24 @@ class Markov_tests(unittest.TestCase):
             G.add_edge(('6',),('7',),{'count':0.5})
             return G
 
+        def build_order_1_graph(self):
+            G = nx.DiGraph()
+            G.add_edge(('4',),('2',),{'count':1})
+            G.add_edge(('2',),('3',),{'count':0.6})
+            G.add_edge(('2',),('1',),{'count':0.4})
+            G.add_edge(('3',),('1',),{'count':1})
+            return G
+
+        def build_order_2_graph(self):
+            G = nx.DiGraph()
+            G.add_edge(('2',),('2','2'),{'count':0.4})
+            G.add_edge(('2',),('2','3'),{'count':0.1})
+            G.add_edge(('2',),('2','4'),{'count':0.5})
+            G.add_edge(('2','2'),('2','3'),{'count':0.7})
+            G.add_edge(('2','2'),('2','4'),{'count':0.3})
+            G.add_edge(('2','4'),('4','1'),{'count':1})
+            return G
+
         def test_recommender(self):
             rec = MarkovChainRecommender(2)
             G = self.build_graph()
@@ -242,6 +261,30 @@ class Markov_tests(unittest.TestCase):
             assert rec.get_recommendation_list(rec.recommend(['2','7'])) == []
             self.list_equal(rec.get_recommendation_list(rec.recommend(['2'])), [['4'],['1'],['7']])
 
+        def test_mixed_model_rec(self):
+            rec1 = MarkovChainRecommender(1)
+            rec2 = MarkovChainRecommender(2)
+
+            G1 = self.build_order_1_graph()
+            G2=self.build_order_2_graph()
+
+            rec1._set_graph_debug(G1)
+            rec2._set_graph_debug(G2)
+
+            r = MixedMarkovChainRecommender(1,2)
+
+            r._set_model_debug(rec1,1)
+            r._set_model_debug(rec2,2)
+
+            self.list_equal(r.get_recommendation_list(r.recommend(['2','2'])), [['4'],['1'],['3']])
+            self.list_equal(r.get_recommendation_confidence_list(r.recommend(['2','2'])), [0.3*0.5/1.5,0.4/1.5,0.95/1.5])
+
+            self.list_equal(r.get_recommendation_list(r.recommend(['2','4'])), [['2'],['1']])
+            self.list_equal(r.get_recommendation_confidence_list(r.recommend(['2','4'])), [1/1.5,0.5/1.5])
+
+
+            self.list_equal(r.get_recommendation_list(r.recommend(['2'])), [['2'],['1'],['3'],['4']])
+            self.list_equal(r.get_recommendation_confidence_list(r.recommend(['2'])), [0.4/1.5,0.65/1.5,0.2/1.5,0.25/1.5])
 
         def list_equal(self,a,b):
             for i in a:

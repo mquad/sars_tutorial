@@ -9,7 +9,7 @@ def add_nodes_to_graph(seqs,last_k):
 
     countDict = {}
     G=nx.DiGraph()
-    for i, s in enumerate(seqs):
+    for s in seqs:
         nearHistory = tuple(s[-(last_k):])
         if nearHistory in countDict:
             #increment count
@@ -65,9 +65,8 @@ def add_fractional_count(G,last_k,seqs):
     # iterate over seqs to add skipping count
     window = last_k
 
-    for h,us in enumerate(seqs):
+    for us in seqs:
         s=tuple(us)
-        print(h)
         for i in range(len(s)-window):
             previous_state = s[i:i+window]
             next_state_prefix = previous_state[1:]
