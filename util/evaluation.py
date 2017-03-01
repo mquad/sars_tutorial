@@ -45,6 +45,10 @@ def evaluate_sequence(recommender, seq, last_k, look_ahead, evaluation_functions
 
     r = recommender.recommend(user_profile)
 
+    #print('user profile',user_profile)
+    #print('ground_truth',ground_truth)
+    #print('rec',recommender.get_recommendation_list(r))
+
     if not r:
         # no recommendation found
         return np.zeros(len(evaluation_functions))

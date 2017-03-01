@@ -10,7 +10,7 @@ class MixedMarkovChainRecommender(ISeqRecommender):
     recommendation of each model
     """
 
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     recommenders = {}
 
@@ -23,8 +23,8 @@ class MixedMarkovChainRecommender(ISeqRecommender):
             self.recommenders[i] = MarkovChainRecommender(i)
 
     def fit(self, user_profile):
-        for r in self.recommenders:
-            r.fit(user_profile)
+        for order in self.recommenders:
+            self.recommenders[order].fit(user_profile)
 
     def recommend(self, user_profile):
         rec_dict = {}

@@ -1,27 +1,51 @@
 from recommenders.FreqSeqMining import FreqSeqMiningRecommender
+from recommenders.PopularityRecommender import PopularityRecommender
+from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
 import pandas as pd
 from util.split import random_holdout
 from util import evaluation,metrics
-
-##laod data
+import logging
 import ast
-db=pd.read_csv('C:/Users/Umberto/Dropbox/datasets/music/sequenceDb.csv',converters={'songs':ast.literal_eval})
-seqs = db['songs'].tolist()
-
-train_seq,test_seq = random_holdout(seqs, 0.8)
-
-rec = FreqSeqMiningRecommender(0.005,0.1,10,1)
-rec.fit(train_seq)
-
-evaluation.set_evaluation(rec, test_seq, 1, 'total', [metrics.precision,metrics.recall], 10,1)
+from functools import reduce
 
 
-db="datasets/sequences.txt"
-rec1 = FreqSeqMiningRecommender(0.003,0.1,10,2,"spmf/spmf.jar",db)
-rec1.fit([])
-len(rec1.get_freq_seqs())
-rec = FreqSeqMiningRecommender(0.003,0.1,10,2)
-a=list(map(lambda x:list(map(str,x)),seqs))
-rec.fit(a)
+def eval_rec(rec,train_seq,test_seq):
+        rec.fit(train_seq)
+        ev = evaluation.set_evaluation(rec, test_seq, last_k, 'total', [metrics.precision,metrics.recall])
+        logging.info(ev)
 
-rec1.recommend(['6385'])
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+database_popular = [10,200,1000,5000,10000]
+ks = [1,3,5,10]
+
+for p in database_popular:
+    logging.info('Loading data')
+    db=pd.read_csv('datasets/sequenceDb_'+str(p)+'.csv',converters={'songs':ast.literal_eval})
+    seqs = db['songs'].tolist()
+    seqs = list(filter(lambda x: len(x)>1,seqs))
+
+    logging.info("Average sequence length:{}".format(reduce(lambda x,y:x+y,list(map(len,seqs)))/len(seqs)))
+
+    perc = 0.8
+    logging.info("Splitting train and test:" + str(perc))
+    train_seq,test_seq = random_holdout(seqs, perc)
+    logging.info("Train size:{} test size:{}".format(len(train_seq),len(test_seq)))
+
+    for last_k in ks:
+        logging.info("Database_kept:{}, last_k:{}".format(p,last_k))
+
+        popRec = PopularityRecommender(last_k)
+        recFreq = FreqSeqMiningRecommender(0.005,0.1,10,1)
+        markovRec = MixedMarkovChainRecommender(1,5)
+
+        logging.info('Eval pop')
+        eval_rec(popRec,train_seq,test_seq)
+        logging.info('------------------')
+        logging.info('Eval FPM')
+        eval_rec(recFreq,train_seq,test_seq)
+        logging.info('------------------')
+        logging.info('Eval Markov')
+        eval_rec(markovRec,train_seq,test_seq)
+        logging.info('------------------')
+
