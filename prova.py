@@ -41,9 +41,13 @@ sentences=[['1','2','3'],['4','5','6']]
 import gensim
 
 # train word2vec on the two sentences
+p=10000
 db=pd.read_csv('datasets/sequenceDb_'+str(p)+'.csv',converters={'songs':ast.literal_eval})
 seqs = db['songs'].tolist()
 seqs = list(filter(lambda x: len(x)>1,seqs))
-model = gensim.models.Word2Vec(seqs, min_count=1,sg=1)
+seqs = list(map(lambda x: list(map(lambda y:str(y),x)),seqs))
+model = gensim.models.Word2Vec(seqs, min_count=1,sg=1,workers=8)
+
+model.most_similar(positive=['3367'],topn=3)
 
 

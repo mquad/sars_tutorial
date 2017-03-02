@@ -13,5 +13,29 @@ class Prod2VecRecommender(ISeqRecommender):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-    def __init__(self):
+    def __init__(self,min_count=10,size=100,workers=4,window=5,topn=10):
+        '''
+        Define Prod2Vec recommender
+        :param min_count: if a word appears less than min_count times it is pruned
+        :param size: number of layers in NN
+        :param workers: parallelization
+        :param window  is the maximum distance between the current and predicted word within a sentence.
+        :param topn Number of recommendations
+        :return: Nothing
+        '''
         super(Prod2VecRecommender, self).__init__()
+        self.workers = workers
+        self.min_count=min_count
+        self.size =size
+        self.window = window
+        self.topn = topn
+
+    def fit(self, sequences):
+        #check sequences are strings
+        seqs = list(map(lambda x: list(map(lambda y:str(y),x)),sequences))
+        self.model = gensim.models.Word2Vec(seqs, min_count=self.min_count,window=self.window,hs=1,size=self.size,sg=1,workers=self.workers)
+
+    def recommend(self, user_profile):
+        rec = self.model.most_similar(positive=user_profile,topn=self.topn)
+        return [([x[0]],x[1]) for x in rec] #use format as other recommenders
+
