@@ -9,10 +9,11 @@ import ast
 from functools import reduce
 
 
-def eval_rec(rec,train_seq,test_seq):
-        rec.fit(train_seq)
+def eval_rec(rec,test_seq):
         ev = evaluation.set_evaluation(rec, test_seq, last_k, 'total', [metrics.precision,metrics.recall])
-        logging.info(ev)
+        logging.info("set:"+str(ev))
+        ev = evaluation.sequential_evaluation(rec, test_seq, last_k, 'total', [metrics.precision,metrics.recall])
+        logging.info("sequence:"+str(ev))
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -32,20 +33,27 @@ for p in database_popular:
     train_seq,test_seq = random_holdout(seqs, perc)
     logging.info("Train size:{} test size:{}".format(len(train_seq),len(test_seq)))
 
+    logging.info('Fit FPM')
+    recFreq = FreqSeqMiningRecommender(0.002,0.1,10,1)
+    recFreq.fit(train_seq)
+    logging.info('Fit Markov')
+    markovRec = MixedMarkovChainRecommender(1,5)
+    markovRec.fit(train_seq)
+
     for last_k in ks:
         logging.info("Database_kept:{}, last_k:{}".format(p,last_k))
 
         popRec = PopularityRecommender(last_k)
-        recFreq = FreqSeqMiningRecommender(0.005,0.1,10,1)
-        markovRec = MixedMarkovChainRecommender(1,5)
+        popRec.fit(train_seq)
 
         logging.info('Eval pop')
-        eval_rec(popRec,train_seq,test_seq)
+        eval_rec(popRec,test_seq)
         logging.info('------------------')
         logging.info('Eval FPM')
-        eval_rec(recFreq,train_seq,test_seq)
+        eval_rec(recFreq,test_seq)
         logging.info('------------------')
         logging.info('Eval Markov')
-        eval_rec(markovRec,train_seq,test_seq)
+        eval_rec(markovRec,test_seq)
         logging.info('------------------')
+
 

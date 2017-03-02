@@ -21,6 +21,9 @@ class MarkovChainRecommender(ISeqRecommender):
         self.G = add_edges(self.tree,self.count_dict,self.G,self.last_k)
         self.G = add_fractional_count(self.G,self.last_k,seqs)
         self.G,_,_ = apply_clustering(self.G)
+        #drop not useful resources
+        self.tree=None
+        self.count_dict=None
 
     def recommend(self, user_profile):
 
