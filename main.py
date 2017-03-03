@@ -1,7 +1,7 @@
 from recommenders.FreqSeqMiningRecommender import FreqSeqMiningRecommender
 from recommenders.PopularityRecommender import PopularityRecommender
 from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
-#from recommenders.Prod2VecRecommender import Prod2VecRecommender
+from recommenders.Prod2VecRecommender import Prod2VecRecommender
 from util.split import random_holdout,temporal_holdout
 from util import evaluation,metrics
 import logging
@@ -20,7 +20,7 @@ available_recommenders = OrderedDict([
     ('top_pop', PopularityRecommender),
     ('FPM', FreqSeqMiningRecommender),
     ('Markov', MixedMarkovChainRecommender),
-   # ('Prod2Vec', Prod2VecRecommender)
+    ('Prod2Vec', Prod2VecRecommender)
 ])
 
 available_holdout_methods = OrderedDict([
@@ -55,7 +55,6 @@ if args.params:
             init_args[key] = eval(value)
         except:
             init_args[key] = value
-print(init_args)
 
 logging.info('Loading data')
 seqs = list(create_seq_db_filter_top_k(args.dataset,args.only_top_k)['sequence'])

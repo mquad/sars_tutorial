@@ -31,9 +31,7 @@ class Prod2VecRecommender(ISeqRecommender):
         self.topn = topn
 
     def fit(self, sequences):
-        #check sequences are strings
-        seqs = list(map(lambda x: list(map(lambda y:str(y),x)),sequences))
-        self.model = gensim.models.Word2Vec(seqs, min_count=self.min_count,window=self.window,hs=1,size=self.size,sg=1,workers=self.workers)
+        self.model = gensim.models.Word2Vec(sequences, min_count=self.min_count,window=self.window,hs=1,size=self.size,sg=1,workers=self.workers)
 
     def recommend(self, user_profile):
         rec = self.model.most_similar(positive=user_profile,topn=self.topn)
