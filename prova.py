@@ -1,4 +1,5 @@
 from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
+from recommenders.FreqSeqMiningRecommender import FreqSeqMiningRecommender
 import pandas as pd
 from util.split import random_holdout
 from util import evaluation,metrics
@@ -51,3 +52,7 @@ model = gensim.models.Word2Vec(seqs, min_count=1,sg=1,workers=8)
 model.most_similar(positive=['3367'],topn=3)
 
 
+recFreq = FreqSeqMiningRecommender(0.002,0.1,10,1,spmf_path='spmf/spmf.jar',db_path='sequences.txt')
+recFreq.fit([])
+recFreq.get_freq_seqs()
+recFreq.recommend(['748'])

@@ -1,6 +1,6 @@
 import ast
 import pandas as pd
-from recommenders.FreqSeqMining import FreqSeqMiningRecommender
+from recommenders.FreqSeqMiningRecommender import FreqSeqMiningRecommender
 from util.tree.Tree import SmartTree
 from util import evaluation,metrics
 import numpy as np

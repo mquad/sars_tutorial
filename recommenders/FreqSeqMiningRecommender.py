@@ -9,9 +9,9 @@ class FreqSeqMiningRecommender(ISeqRecommender):
 
     outputPath = "tmp_output.txt"
 
-    def __init__(self,minsup,minconf,max_context, min_context=1,spmfPath=None,dbPath=None):
+    def __init__(self, minsup, minconf, max_context, min_context=1, spmf_path=None, db_path=None):
         """minsup is interpreted as percetage if [0-1] or as count if > 1.
-        spmfPath is the path where the spmf jar is while dbPath is the path of the sequence db
+        spmf_path is the path where the spmf jar is while db_path is the path of the sequence db
         in spmf format. Both have to be valid in order to use spfm for sequence mining"""
 
         super(FreqSeqMiningRecommender, self).__init__()
@@ -20,14 +20,14 @@ class FreqSeqMiningRecommender(ISeqRecommender):
         self.max_context = max_context
         self.min_context = min_context
         self.recommendation_length = 1
-        self.spmfPath = spmfPath
-        self.dbPath = dbPath
+        self.spmf_path = spmf_path
+        self.db_path = db_path
 
     def fit(self,seqs):
-        """Takes a list of list of seqeunces ."""
+        """Takes a list of list of sequences ."""
 
-        if self.spmfPath and self.dbPath:
-            self.logger.debug("Using SPMF")
+        if self.spmf_path and self.db_path:
+            self.logger.info("Using SPMF")
             #parse minsup
             if 0 <= self.minsup <=1:
                 percentage_min_sup = self.minsup * 100
@@ -35,8 +35,8 @@ class FreqSeqMiningRecommender(ISeqRecommender):
 
             #call spmf
             algorithm = "PrefixSpan"
-            command = ' '.join([algorithm,self.dbPath,self.outputPath,str(percentage_min_sup)+'%'])
-            callSPMF(self.spmfPath,command)
+            command = ' '.join([algorithm, self.db_path, self.outputPath, str(percentage_min_sup) + '%'])
+            callSPMF(self.spmf_path, command)
 
             #parse back output from text file
             self._parse_SPMF_output()
@@ -48,7 +48,7 @@ class FreqSeqMiningRecommender(ISeqRecommender):
         else:
             self.logger.error("No sequence dabase path nor sequence list provided.")
 
-        self.logger.debug('{} frequent sequences found'.format(len(self.freq_seqs)))
+        self.logger.info('{} frequent sequences found'.format(len(self.freq_seqs)))
         self.logger.debug('Building frequent sequence tree')
         self.tree = SmartTree()
         self.rootNode = self.tree.set_root()

@@ -1,1 +1,0 @@
-FPM-pip install pymining
