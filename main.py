@@ -8,8 +8,7 @@ import logging
 import argparse
 from collections import OrderedDict
 from util.createSeqDb import create_seq_db_filter_top_k,from_seqs_to_spmfdb
-
-
+from functools import reduce
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -65,6 +64,9 @@ seqs = list(map(lambda x: list(map(lambda y:str(y),x)),seqs)) #as strings
 logging.info("Splitting train and test:" + str(args.train_perc))
 train_seq,test_seq = holdout_method(seqs, args.train_perc)
 logging.info("Train size:{} test size:{}".format(len(train_seq),len(test_seq)))
+logging.info("Average sequence length:{}".format(reduce(lambda x,y:x+y,list(map(len,seqs)))/len(seqs)))
+
+
 
 # create db for FPM
 if args.recommender =='FPM' and 'spmf_path' in  init_args:
