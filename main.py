@@ -58,7 +58,7 @@ if args.params:
 
 logging.info('Loading data')
 seqs = list(create_seq_db_filter_top_k(args.dataset,args.only_top_k)['sequence'])
-seqs = list(filter(lambda x: len(x) > 1,seqs)) #filter too short
+seqs = list(filter(lambda x: len(x) > args.last_k,seqs)) #filter too short
 seqs = list(map(lambda x: list(map(lambda y:str(y),x)),seqs)) #as strings
 
 # split dataset

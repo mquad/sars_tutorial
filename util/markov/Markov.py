@@ -36,6 +36,7 @@ def add_nodes_to_graph(seqs,last_k):
                 countDict[nearHistoryLong] = 1
     return (t,countDict,G)
 
+
 def add_edges(t,countDict,G,last_k):
     """
     :param t: Tree of the sequnces available as states
@@ -45,7 +46,6 @@ def add_edges(t,countDict,G,last_k):
     :return: the same graph G, with edges connecting states
     """
     #add links
-    logging.debug("Adding edges in the markov chain,n:"+str(len(G.nodes())))
     rootNode = t.get_root()
     for node in G.nodes_iter():
         # if the sequence is shorter than states's len, the next state has all the sequence as prefix
@@ -61,9 +61,8 @@ def add_edges(t,countDict,G,last_k):
                         G.add_edge(node,next_state_prefix+(c,),{'count':countDict.get(node+(c,),0)})
     return G
 
-def add_fractional_count(G,last_k,seqs):
+def apply_skipping(G, last_k, seqs):
 
-    logging.debug("Adding fractional count")
     # iterate over seqs to add skipping count
     window = last_k
 
@@ -82,8 +81,6 @@ def add_fractional_count(G,last_k,seqs):
                 else:
                     G.add_edge(previous_state,next_state,{'count': fractional_count})
                 #print('updating '+str(previous_state)+'->'+str(next_state)+' from '+str(old_count)+' to '+str(old_count+fractional_count))
-
-    logging.debug("Normalizing transaction probability n:"+str(len(G.nodes())))
 
     #normalize
     for n in G.nodes_iter():
@@ -105,7 +102,6 @@ def apply_clustering(G):
 
     similarity_dict = {}
     #for each state in the graph, calculate similarity
-    logging.debug("Calculating similarity among states sequences n*n"+str(len(G.nodes())**2))
     for node in G.nodes_iter():
         for deno in G.nodes_iter():
             if node == deno or (node,deno) in similarity_dict: continue #skip if same or already done
@@ -115,8 +111,6 @@ def apply_clustering(G):
                     similarity_dict[node,deno] = similarity_dict[deno,node] = sim
 
     similarity_count_dict ={}
-
-    logging.debug("Calculating similarity count of transaction"+str(len(G.nodes())**2))
 
     for node in G.nodes_iter():
         for deno in G.nodes_iter():
@@ -135,8 +129,6 @@ def apply_clustering(G):
             #skip similarity with myself is 0 because of how similarity_dict is calculated
             normalization_sum += similarity_count_dict.get((node, other_state),0)
         return normalization_sum
-
-    logging.debug("Applying clustering n")
 
     ##update transition probability
     ### this can be made faster(?) if I store the adjancency matrix where node are connected if

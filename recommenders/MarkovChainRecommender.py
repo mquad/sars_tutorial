@@ -1,7 +1,7 @@
 import logging
 from recommenders.ISeqRecommender import ISeqRecommender
-from util.markov.Markov import add_nodes_to_graph,add_edges,add_fractional_count,apply_clustering
-
+from util.markov.Markov import add_nodes_to_graph,add_edges,apply_skipping,apply_clustering
+import gc
 """Implementation from Shani, Guy, David Heckerman, and Ronen I. Brafman. "An MDP-based recommender system."
 Journal of Machine Learning Research 6, no. Sep (2005): 1265-1295. Chapter 3-4"""
 
@@ -16,14 +16,20 @@ class MarkovChainRecommender(ISeqRecommender):
     def fit(self,seqs):
         """Takes a list of list of seqeunces ."""
 
-        logging.debug('Building Markov Chain model with k = '+str(self.last_k))
+        logging.info('Building Markov Chain model with k = '+str(self.last_k))
+        logging.info('Adding nodes')
         self.tree,self.count_dict,self.G = add_nodes_to_graph(seqs,self.last_k)
+        logging.info('Adding edges')
         self.G = add_edges(self.tree,self.count_dict,self.G,self.last_k)
-        self.G = add_fractional_count(self.G,self.last_k,seqs)
+        logging.info('Applying skipping')
+        self.G = apply_skipping(self.G, self.last_k, seqs)
+        logging.info('Applying clustering')
+        logging.info('{} states in the graph'.format(len(self.G.nodes())))
         self.G,_,_ = apply_clustering(self.G)
         #drop not useful resources
         self.tree=None
         self.count_dict=None
+        gc.collect()
 
     def recommend(self, user_profile):
 

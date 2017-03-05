@@ -1,4 +1,4 @@
-from util.markov.Markov import add_nodes_to_graph,add_edges,add_fractional_count,apply_clustering
+from util.markov.Markov import add_nodes_to_graph,add_edges,apply_skipping,apply_clustering
 import unittest
 import networkx as nx
 from recommenders.MarkovChainRecommender import MarkovChainRecommender
@@ -102,7 +102,7 @@ class Markov_tests(unittest.TestCase):
                 only_edg =[x[0] for x in true_edges]
 
                 ## check fractional count
-                G_fractional_added = add_fractional_count(G_with_edges,3,self.seqs)
+                G_fractional_added = apply_skipping(G_with_edges, 3, self.seqs)
 
                 assert set (only_edg) == set(G_fractional_added.edges())
 
@@ -120,7 +120,7 @@ class Markov_tests(unittest.TestCase):
                 ## check clustering
                 t,count_dict,G = add_nodes_to_graph(self.seqs,3)
                 G_with_edges = add_edges(t,count_dict,G,3)
-                G_fractional_added = add_fractional_count(G_with_edges,3,self.seqs)
+                G_fractional_added = apply_skipping(G_with_edges, 3, self.seqs)
                 G_clustered,similarity_dict,similarity_count_dict = apply_clustering(G_fractional_added)
 
                 true_similarity_dict = {(('3',),('3','1')):2,(('3',),('3','1','1')):2,(('3',),('3','1','4')):2,(('3',),('3','1','3')):2,(('3',),('3','3','1')):2,

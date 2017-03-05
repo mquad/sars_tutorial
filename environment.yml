@@ -6,8 +6,10 @@ dependencies:
 - bz2file=0.98=py36_0
 - decorator=4.0.11=py36_0
 - gensim=0.13.4.1=np112py36_0
+- llvmlite=0.16.0=py36_0
 - mkl=2017.0.1=0
 - networkx=1.11=py36_0
+- numba=0.31.0=np112py36_0
 - numpy=1.12.0=py36_0
 - pandas=0.19.2=np112py36_1
 - pip=9.0.1=py36_1
