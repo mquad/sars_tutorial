@@ -2,6 +2,7 @@ from recommenders.FreqSeqMiningRecommender import FreqSeqMiningRecommender
 from recommenders.PopularityRecommender import PopularityRecommender
 from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
 from recommenders.Prod2VecRecommender import Prod2VecRecommender
+from recommenders.Supervised_Recommender import SupervisedRecommender
 from util.split import random_holdout,temporal_holdout
 from util import evaluation,metrics
 import logging
@@ -19,7 +20,8 @@ available_recommenders = OrderedDict([
     ('top_pop', PopularityRecommender),
     ('FPM', FreqSeqMiningRecommender),
     ('Markov', MixedMarkovChainRecommender),
-    ('Prod2Vec', Prod2VecRecommender)
+    ('Prod2Vec', Prod2VecRecommender),
+    ('Supervised',SupervisedRecommender)
 ])
 
 available_holdout_methods = OrderedDict([
@@ -77,7 +79,7 @@ if args.recommender =='FPM' and 'spmf_path' in  init_args:
 
 # train the recommender
 recommender = RecommenderClass(**init_args)
-logger.info('Recommender: {}'.format(recommender))
+logger.info('Fitting Recommender: {}'.format(recommender))
 recommender.fit(train_seq)
 
 # evaluate the ranking quality

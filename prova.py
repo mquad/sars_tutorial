@@ -1,6 +1,8 @@
 from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
 from recommenders.FreqSeqMiningRecommender import FreqSeqMiningRecommender
 import pandas as pd
+
+from util.data_expansion import user_profile_expansion
 from util.split import random_holdout
 from util import evaluation,metrics
 import logging
@@ -56,3 +58,38 @@ recFreq = FreqSeqMiningRecommender(0.002,0.1,10,1,spmf_path='spmf/spmf.jar',db_p
 recFreq.fit([])
 recFreq.get_freq_seqs()
 recFreq.recommend(['748'])
+
+from sklearn import tree
+from recommenders.Supervised_Recommender import SupervisedRecommender
+from util.split import balance_dataset
+from util.data_expansion import data_expansion,user_profile_expansion
+clf = tree.DecisionTreeClassifier()
+r = SupervisedRecommender(1)
+sequences = [[1,2,3,4],[9,7,4],[3,2,1],[0,4,3,2]]
+s= sequences * 100
+r.fit(s)
+r.recommend([1,2,3])
+r.recommend([2,3])
+r.recommend([9,7])
+r.recommend([3,2])
+r.recommend([2])
+r.recommend([2,3,1,4,7])
+
+def _split_train_test(data,col_index,n_unique_items):
+    test = data[:,col_index]
+    train = data[:,[x for x in range(data.shape[1]) if x >= n_unique_items]]
+    return train,test
+data,mapping = data_expansion(s,1)
+train,test = _split_train_test(data,0,len(mapping))
+train,test = balance_dataset(train,test)
+tree = clf.fit(train.todense(),test.toarray().ravel())
+u=user_profile_expansion([1,2,3],1,mapping)
+tree.predict(u.toarray())
+
+tree = clf.fit([[1,2,3,4],[1,2,3,3]],[1,0])
+tree.predict([[1,2,3,3]])
+
+from tqdm import tqdm
+for i in tqdm(range(10000)):
+    for j in range(10000):
+        a=2**(i)

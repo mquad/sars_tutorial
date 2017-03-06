@@ -50,6 +50,35 @@ def data_expansion(sequences,history_length):
 
             row+=1
 
-    return csc_matrix((np.ones(len(row_indeces)),(row_indeces,col_indeces)),shape=(row,(history_length + 2)*len(items_mapping)))
+    return csc_matrix((np.ones(len(row_indeces),dtype=np.int8),(row_indeces,col_indeces)),shape=(row,(history_length + 2)*len(items_mapping))),items_mapping
 
 
+def user_profile_expansion(user_profile,history_length,items_mapping):
+
+    number_of_unique_items = len(items_mapping)
+
+    row_indeces=[]
+    col_indeces=[]
+
+    #for each item in the sequence
+    cached = [items_mapping[x]+number_of_unique_items * (history_length) for x in user_profile]
+    last = user_profile[len(user_profile)-1]
+    index = items_mapping[last]
+
+    #in each row there will be:the cache
+    row_indeces += [0]*(len(cached))
+
+    #add history
+    for l in range(1,history_length+1):
+        if len(user_profile) < l: continue #no history available that far
+        row_indeces.append(0)
+        l_th_previous_item = user_profile[len(user_profile)-l]
+        previous_el_index = items_mapping[l_th_previous_item]
+        col_indeces.append(previous_el_index + number_of_unique_items * (l-1))
+
+    #add cache
+    col_indeces += cached
+
+    assert len(row_indeces) == len(col_indeces)
+
+    return csc_matrix((np.ones(len(row_indeces)),(row_indeces,col_indeces)),shape=(1,(history_length + 1)*len(items_mapping)))

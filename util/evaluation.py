@@ -1,12 +1,15 @@
 import numpy as np
+from tqdm import tqdm
 
 def sequential_evaluation(recommender, test_sequences, last_k, look_ahead, evaluation_functions):
     if last_k <= 0:
         raise NameError('Please choose a k>0')
 
     metrics = np.zeros(len(evaluation_functions))
-    for s in test_sequences:
-        metrics += sequence_sequential_evaluation(recommender, s, last_k, evaluation_functions)
+    with tqdm(total=len(test_sequences)) as pbar:
+        for s in test_sequences:
+            metrics += sequence_sequential_evaluation(recommender, s, last_k, evaluation_functions)
+            pbar.update(1)
     return metrics/len(test_sequences)
 
 
@@ -15,8 +18,10 @@ def set_evaluation(recommender, test_sequences, last_k, look_ahead, evaluation_f
         raise NameError('Please choose a k>0')
 
     metrics = np.zeros(len(evaluation_functions))
-    for s in test_sequences:
-        metrics += evaluate_sequence(recommender, s, last_k, look_ahead, evaluation_functions)
+    with tqdm(total=len(test_sequences)) as pbar:
+        for s in test_sequences:
+            metrics += evaluate_sequence(recommender, s, last_k, look_ahead, evaluation_functions)
+            pbar.update(1)
     return metrics/len(test_sequences)
 
 def evaluate_sequence(recommender, seq, last_k, look_ahead, evaluation_functions):

@@ -4,6 +4,11 @@ python main.py --dataset datasets/sessions.csv --only_top_k 200 --recommender to
 FPM:
 python main.py --dataset datasets/sessions.csv --only_top_k 200 --recommender FPM --params minsup=0.002,minconf=0.1,max_context=10,min_context=1,spmf_path=spmf/spmf.jar --last_k 2
 
-
 Prod2Vec:
 python main.py --dataset datasets/sessions.csv --only_top_k 200 --recommender Prod2Vec --params min_count=10,size=150,workers=4,window=10,topn=2 --last_k 2
+
+Markov:
+python main.py --dataset datasets/sessions.csv --only_top_k 10 --recommender Markov --params from_k=1,to_k=3 --last_k 2
+
+Supervised:
+python main.py --dataset datasets/sessions.csv --only_top_k 10 --recommender Supervised --params history_length=1 --last_k 2

@@ -1,5 +1,6 @@
 import numpy as np
 import random
+from scipy.sparse import find
 
 def random_holdout(seqs, perc=0.8, seed=1234):
     # set the random seed
@@ -32,3 +33,16 @@ def temporal_holdout(seqs,timestamps, ts_threshold):
 
     return train_split, test_split
 
+def balance_dataset(x,y):
+
+    number_of_elements = y.shape[0]
+    nnz = set(find(y)[0])
+    zero = set(range(number_of_elements)).difference(nnz)
+
+    max_samples = min(len(zero),len(nnz))
+
+    nnz_indices = random.sample(nnz,max_samples)
+    zero_indeces = random.sample(zero,max_samples)
+    indeces = nnz_indices + zero_indeces
+
+    return x[indeces,:],y[indeces,:]
