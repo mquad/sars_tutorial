@@ -58,33 +58,35 @@ if args.params:
             init_args[key] = value
 
 logging.info('Loading data')
-seqs = list(create_seq_db_filter_top_k(args.dataset,args.only_top_k)['sequence'])
-seqs = list(filter(lambda x: len(x) > args.last_k,seqs)) #filter too short
-seqs = list(map(lambda x: list(map(lambda y:str(y),x)),seqs)) #as strings
+#seqs = list(create_seq_db_filter_top_k(args.dataset,args.only_top_k)['sequence'])
+#seqs = list(filter(lambda x: len(x) > args.last_k,seqs)) #filter too short
+#seqs = list(map(lambda x: list(map(lambda y:str(y),x)),seqs)) #as strings
+
+data = create_seq_db_filter_top_k(args.dataset,args.only_top_k)
+data = data[data['sequence'].map(len) > args.last_k]
+data['sequence'] = data['sequence'].map((lambda x: list(map(lambda y:str(y),x))))
 
 # split dataset
 logging.info("Splitting train and test:" + str(args.train_perc))
-train_seq,test_seq = holdout_method(seqs, args.train_perc)
-logging.info("Train size:{} test size:{}".format(len(train_seq),len(test_seq)))
-logging.info("Average sequence length:{}".format(reduce(lambda x,y:x+y,list(map(len,seqs)))/len(seqs)))
-
-
+train_data,test_data = holdout_method(data, args.train_perc)
+logging.info("Train size:{} test size:{}".format(len(train_data),len(test_data)))
+logging.info("Average sequence length:{}".format(reduce(lambda x,y:x+y,list(map(len,data)))/len(data)))
 
 # create db for FPM
 if args.recommender =='FPM' and 'spmf_path' in  init_args:
     logging.info('Creating db for SPMF')
-    db_fout = from_seqs_to_spmfdb(train_seq)
+    db_fout = from_seqs_to_spmfdb(list(train_data['sequence']))
     init_args['db_path']=db_fout
 
 
 # train the recommender
 recommender = RecommenderClass(**init_args)
 logger.info('Fitting Recommender: {}'.format(recommender))
-recommender.fit(train_seq)
+recommender.fit(list(train_data['sequence']))
 
 # evaluate the ranking quality
 logger.info('Ranking quality')
-p,r = evaluation.set_evaluation(recommender,test_seq,args.last_k,'total',[metrics.precision,metrics.recall])
+p,r = evaluation.set_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall])
 logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
-p,r = evaluation.sequential_evaluation(recommender,test_seq,args.last_k,'total',[metrics.precision,metrics.recall])
+p,r = evaluation.sequential_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall])
 logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))

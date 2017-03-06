@@ -27,7 +27,7 @@ def createSeqDbCommas():
 
     result.to_csv('sequenceDbComma.csv',index=False)
 
-def create_seq_db_filter_top_k(filePath, topk):
+def OLD_create_seq_db_filter_top_k(filePath, topk):
     file = pd.read_csv(filePath)
 
     col_names = ['session_id','user_id','item_id','ts']+ file.columns.values.tolist()[4:]
@@ -46,6 +46,29 @@ def create_seq_db_filter_top_k(filePath, topk):
     result = aggregated.join(initialTimestamps)
     return result
     #result.to_csv('sequenceDb_'+str(topk)+'.csv',index=False)
+
+
+def create_seq_db_filter_top_k(filePath, topk):
+    file = pd.read_csv(filePath)
+
+    col_names = ['session_id','user_id','item_id','ts']+ file.columns.values.tolist()[4:]
+    file.columns =col_names
+    c = Counter(list(file['item_id']))
+
+    keeper = set([x[0] for x in c.most_common(topk)])
+    file = file[file['item_id'].map(lambda x: x in keeper)]
+
+    #group by session id and concat song_id
+    groups = file.groupby('session_id')
+
+    aggregated = groups['item_id'].agg({'sequence':lambda x:list(x)})
+    initialTimestamps = groups['ts'].min()
+    users = groups['user_id'].min() #it's just fast, min doesn't actually make sense
+
+    result = aggregated.join(initialTimestamps).join(users)
+    return result
+    #result.to_csv('sequenceDb_'+str(topk)+'.csv',index=False)
+
 
 def from_db_to_spmfdb(filePath):
     file = pd.read_csv(filePath)

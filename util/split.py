@@ -1,12 +1,8 @@
-import numpy as np
 import random
 from scipy.sparse import find
 
-def random_holdout(seqs, perc=0.8, seed=1234):
-    # set the random seed
-    random.seed(seed)
-    #  shuffle data
-    random.shuffle(seqs)
+def random_holdout(seqs, perc=0.8):
+    seqs = seqs.sample(frac=1)
     nseqs = len(seqs)
     train_size = int(nseqs * perc)
     # split data according to the shuffled index and the holdout size
@@ -22,6 +18,7 @@ def temporal_holdout(seqs,timestamps, ts_threshold):
     :param ts_threshold: timestamp below wich a sequence is put in the train
     :return: train and test split
     """
+    raise NameError('Not implemented')
     train_split =[]
     test_split =[]
     # split data according to the shuffled index and the holdout size
