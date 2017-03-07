@@ -1,5 +1,5 @@
-from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
-from recommenders.FreqSeqMiningRecommender import FreqSeqMiningRecommender
+from recommenders.Mixed_Markov_Recommender import MixedMarkovChainRecommender
+from recommenders.Freq_Seq_Mining_Recommender import FreqSeqMiningRecommender
 import pandas as pd
 
 from util.data_expansion import user_profile_expansion

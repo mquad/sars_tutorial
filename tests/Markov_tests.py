@@ -1,8 +1,8 @@
 from util.markov.Markov import add_nodes_to_graph,add_edges,apply_skipping,apply_clustering
 import unittest
 import networkx as nx
-from recommenders.MarkovChainRecommender import MarkovChainRecommender
-from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
+from recommenders.Markov_Chain_Recommender import MarkovChainRecommender
+from recommenders.Mixed_Markov_Recommender import MixedMarkovChainRecommender
 class Markov_tests(unittest.TestCase):
 
         seqs = [['0','1','3','1'],

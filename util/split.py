@@ -1,8 +1,8 @@
 import random
 from scipy.sparse import find
 
-def random_holdout(seqs, perc=0.8):
-    seqs = seqs.sample(frac=1)
+def random_holdout(seqs, perc=0.8,seed=1234):
+    seqs = seqs.sample(frac=1,random_state=seed)
     nseqs = len(seqs)
     train_size = int(nseqs * perc)
     # split data according to the shuffled index and the holdout size

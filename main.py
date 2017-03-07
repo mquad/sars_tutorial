@@ -1,9 +1,9 @@
-from recommenders.FreqSeqMiningRecommender import FreqSeqMiningRecommender
-from recommenders.PopularityRecommender import PopularityRecommender
-from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
-from recommenders.Prod2VecRecommender import Prod2VecRecommender
+from recommenders.Freq_Seq_Mining_Recommender import FreqSeqMiningRecommender
+from recommenders.Popularity_Recommender import PopularityRecommender
+from recommenders.Mixed_Markov_Recommender import MixedMarkovChainRecommender
+from recommenders.Prod2Vec_Recommender import Prod2VecRecommender
 from recommenders.Supervised_Recommender import SupervisedRecommender
-from recommenders.FPMCRecommender import FPMCRecommender
+from recommenders.FPMC_Recommender import FPMCRecommender
 from util.split import random_holdout,temporal_holdout
 from util import evaluation,metrics
 import logging

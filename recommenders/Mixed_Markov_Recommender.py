@@ -1,6 +1,6 @@
 import logging
 from recommenders.ISeqRecommender import ISeqRecommender
-from recommenders.MarkovChainRecommender import MarkovChainRecommender
+from recommenders.Markov_Chain_Recommender import MarkovChainRecommender
 """Implementation from Shani, Guy, David Heckerman, and Ronen I. Brafman. "An MDP-based recommender system."
 Journal of Machine Learning Research 6, no. Sep (2005): 1265-1295. Chapter 3-4"""
 
