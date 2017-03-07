@@ -34,6 +34,9 @@ class Prod2VecRecommender(ISeqRecommender):
         self.model = gensim.models.Word2Vec(sequences, min_count=self.min_count,window=self.window,hs=1,size=self.size,sg=1,workers=self.workers)
 
     def recommend(self, user_profile):
-        rec = self.model.most_similar(positive=user_profile,topn=self.topn)
+        try:
+            rec = self.model.most_similar(positive=user_profile,topn=self.topn)
+        except KeyError:
+            rec=[]
         return [([x[0]],x[1]) for x in rec] #use format as other recommenders
 
