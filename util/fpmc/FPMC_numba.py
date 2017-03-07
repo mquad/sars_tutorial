@@ -3,8 +3,12 @@ import numpy as np
 from numba import jit
 from util.fpmc.utils import *
 from util.fpmc import FPMC as FPMC_basic
+import logging
 
 class FPMC(FPMC_basic.FPMC):
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    logger = logging.getLogger()
+
     def __init__(self, n_user, n_item, n_factor, learn_rate, regular):
         super(FPMC, self).__init__(n_user, n_item, n_factor, learn_rate, regular)
 
@@ -24,41 +28,29 @@ class FPMC(FPMC_basic.FPMC):
         self.VLI = VLI
         self.VIL = VIL
 
-    def learnSBPR_FPMC(self, tr_data, te_data=None, n_epoch=10, neg_batch_size=10, eval_per_epoch=False, ret_in_score=False):
+    def learnSBPR_FPMC(self, tr_data, n_epoch=10, neg_batch_size=10):
         tr_3_list = data_to_3_list(tr_data)
-        if te_data != None:
-            te_3_list = data_to_3_list(te_data)
 
         for epoch in range(n_epoch):
-
             self.learn_epoch(tr_3_list, neg_batch_size)
+            self.logger.info('epoch %d done' % epoch)
 
-            if eval_per_epoch == True:
-                acc_in, mrr_in = self.evaluation(tr_3_list)
-                if te_data != None:
-                    acc_out, mrr_out = self.evaluation(te_3_list)
-                    print ('In sample:%.4f\t%.4f \t Out sample:%.4f\t%.4f' % (acc_in, mrr_in, acc_out, mrr_out))
-                else:
-                    print ('In sample:%.4f\t%.4f' % (acc_in, mrr_in))
-            else:
-                print ('epoch %d done' % epoch)
-
-        if eval_per_epoch == False:
-            acc_in, mrr_in = self.evaluation(tr_3_list)
-            if te_data != None:
-                acc_out, mrr_out = self.evaluation(te_3_list)
-                print ('In sample:%.4f\t%.4f \t Out sample:%.4f\t%.4f' % (acc_in, mrr_in, acc_out, mrr_out))
-            else:
-                print ('In sample:%.4f\t%.4f' % (acc_in, mrr_in))
-
-
-        if te_data != None:
-            if ret_in_score:
-                return (acc_in, mrr_in, acc_out, mrr_out)
-            else:
-                return (acc_out, mrr_out)
-        else:
-            return None
+        # if eval_per_epoch == False:
+        #     acc_in, mrr_in = self.evaluation(tr_3_list)
+        #     if te_data != None:
+        #         acc_out, mrr_out = self.evaluation(te_3_list)
+        #         print ('In sample:%.4f\t%.4f \t Out sample:%.4f\t%.4f' % (acc_in, mrr_in, acc_out, mrr_out))
+        #     else:
+        #         print ('In sample:%.4f\t%.4f' % (acc_in, mrr_in))
+        #
+        #
+        # if te_data != None:
+        #     if ret_in_score:
+        #         return (acc_in, mrr_in, acc_out, mrr_out)
+        #     else:
+        #         return (acc_out, mrr_out)
+        # else:
+        #     return None
 
 
 @jit(nopython=True)
@@ -79,7 +71,6 @@ def learn_epoch_jit(u_list, i_list, b_tm1_list, neg_batch_size, item_set, VUI, V
         b_tm1 = b_tm1_list[d_idx][b_tm1_list[d_idx]!=-1]
 
         j_list = np.random.choice(item_set, size=neg_batch_size, replace=False)
-
         z1 = compute_x_jit(u, i, b_tm1, VUI, VIU, VLI, VIL)
         for j in j_list:
             z2 = compute_x_jit(u, j, b_tm1, VUI, VIU, VLI, VIL)

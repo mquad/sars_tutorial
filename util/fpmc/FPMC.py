@@ -2,8 +2,12 @@ import sys, os, pickle, time
 import math, random
 import numpy as np
 from util.fpmc.utils import *
+import logging
 
 class FPMC():
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    logger = logging.getLogger()
+
     def __init__(self, n_user, n_item, n_factor, learn_rate, regular):
         self.user_set = set()
         self.item_set = set()
@@ -95,29 +99,31 @@ class FPMC():
                 self.VIL[j] += VILj_update
                 self.VLI[b_tm1] += VLI_update
 
-    def learnSBPR_FPMC(self, tr_data, te_data=None, n_epoch=10, neg_batch_size=10, eval_per_epoch=False):
+    def learnSBPR_FPMC(self, tr_data, n_epoch=10, neg_batch_size=10):
         for epoch in range(n_epoch):
             self.learn_epoch(tr_data, neg_batch_size=neg_batch_size)
+            self.logger.info ('epoch %d done' % epoch)
+            # if eval_per_epoch == True:
+            #     acc_in, mrr_in = self.evaluation(tr_data)
+            #     if te_data != None:
+            #         acc_out, mrr_out = self.evaluation(te_data)
+            #         self.logger.info ('In sample:%.4f\t%.4f \t Out sample:%.4f\t%.4f' % (acc_in, mrr_in, acc_out, mrr_out))
+            #     else:
+            #         self.logger.info ('In sample:%.4f\t%.4f' % (acc_in, mrr_in))
+            # else:
+            #
 
-            if eval_per_epoch == True:
-                acc_in, mrr_in = self.evaluation(tr_data)
-                if te_data != None:
-                    acc_out, mrr_out = self.evaluation(te_data)
-                    print ('In sample:%.4f\t%.4f \t Out sample:%.4f\t%.4f' % (acc_in, mrr_in, acc_out, mrr_out))
-                else:
-                    print ('In sample:%.4f\t%.4f' % (acc_in, mrr_in))
-            else:
-                print ('epoch %d done' % epoch)
 
-        if eval_per_epoch == False:
-            acc_in, mrr_in = self.evaluation(tr_data)
-            if te_data != None:
-                acc_out, mrr_out = self.evaluation(te_data)
-                print ('In sample:%.4f\t%.4f \t Out sample:%.4f\t%.4f' % (acc_in, mrr_in, acc_out, mrr_out))
-            else:
-                print ('In sample:%.4f\t%.4f' % (acc_in, mrr_in))
 
-        if te_data != None:
-            return (acc_out, mrr_out)
-        else:
-            return None
+        # if eval_per_epoch == False:
+        #     acc_in, mrr_in = self.evaluation(tr_data)
+        #     if te_data != None:
+        #         acc_out, mrr_out = self.evaluation(te_data)
+        #         print ('In sample:%.4f\t%.4f \t Out sample:%.4f\t%.4f' % (acc_in, mrr_in, acc_out, mrr_out))
+        #     else:
+        #         print ('In sample:%.4f\t%.4f' % (acc_in, mrr_in))
+        #
+        # if te_data != None:
+        #     return (acc_out, mrr_out)
+        # else:
+        #     return None

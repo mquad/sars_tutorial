@@ -3,6 +3,7 @@ from recommenders.PopularityRecommender import PopularityRecommender
 from recommenders.MixedMarkovRecommender import MixedMarkovChainRecommender
 from recommenders.Prod2VecRecommender import Prod2VecRecommender
 from recommenders.Supervised_Recommender import SupervisedRecommender
+from recommenders.FPMCRecommender import FPMCRecommender
 from util.split import random_holdout,temporal_holdout
 from util import evaluation,metrics
 import logging
@@ -21,7 +22,8 @@ available_recommenders = OrderedDict([
     ('FPM', FreqSeqMiningRecommender),
     ('Markov', MixedMarkovChainRecommender),
     ('Prod2Vec', Prod2VecRecommender),
-    ('Supervised',SupervisedRecommender)
+    ('Supervised',SupervisedRecommender),
+    ('FPMC',FPMCRecommender)
 ])
 
 available_holdout_methods = OrderedDict([
@@ -70,7 +72,7 @@ data['sequence'] = data['sequence'].map((lambda x: list(map(lambda y:str(y),x)))
 logging.info("Splitting train and test:" + str(args.train_perc))
 train_data,test_data = holdout_method(data, args.train_perc)
 logging.info("Train size:{} test size:{}".format(len(train_data),len(test_data)))
-logging.info("Average sequence length:{}".format(reduce(lambda x,y:x+y,list(map(len,data)))/len(data)))
+logging.info("Average sequence length:{}".format(reduce(lambda x,y:x+y,list(map(len,list(data['sequence']))))/len(list(data['sequence']))))
 
 # create db for FPM
 if args.recommender =='FPM' and 'spmf_path' in  init_args:
@@ -82,7 +84,10 @@ if args.recommender =='FPM' and 'spmf_path' in  init_args:
 # train the recommender
 recommender = RecommenderClass(**init_args)
 logger.info('Fitting Recommender: {}'.format(recommender))
-recommender.fit(list(train_data['sequence']))
+if args.recommender == 'FPMC':
+    recommender.fit(data)
+else:
+    recommender.fit(list(train_data['sequence']))
 
 # evaluate the ranking quality
 logger.info('Ranking quality')

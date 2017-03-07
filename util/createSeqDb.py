@@ -98,4 +98,9 @@ def from_seqs_to_spmfdb(seqs):
 
     return outputFile
 
+def reformat_for_SPMC(data):
+    train_data_supervised = []
+    for i,row in data.iterrows():
+        train_data_supervised.append((int(row['user_id']),int(row['sequence'][len(row['sequence'])-1]),list(map(int,row['sequence'][:len(row['sequence'])-1]))))
+
 
