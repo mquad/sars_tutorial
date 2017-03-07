@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3074b82f-776d-4cfb-9c69-fc456a2c52fd" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/util/fpmc/run.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/recommenders/FPMCRecommender.py" afterPath="$PROJECT_DIR$/recommenders/FPMCRecommender.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/createSeqDb.py" afterPath="$PROJECT_DIR$/util/createSeqDb.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/fpmc/FPMC.py" afterPath="$PROJECT_DIR$/util/fpmc/FPMC.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/evaluation.py" afterPath="$PROJECT_DIR$/util/evaluation.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/fpmc/FPMC_numba.py" afterPath="$PROJECT_DIR$/util/fpmc/FPMC_numba.py" />
     </list>
     <ignored path="seq_rec_evaluation.iws" />
@@ -32,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="87" column="25" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.45072994">
+              <caret line="97" column="118" selection-start-line="97" selection-start-column="118" selection-end-line="97" selection-end-column="118" />
               <folding>
                 <element signature="e#0#74#0" expanded="true" />
               </folding>
@@ -68,55 +68,31 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="evaluation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/evaluation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="140" column="83" selection-start-line="140" selection-start-column="83" selection-end-line="140" selection-end-column="83" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FPMCRecommender.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/recommenders/FPMCRecommender.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+              <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="random.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Anaconda3/envs/srs/Lib/random.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="run.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util/fpmc/run.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FPMC.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FPMC.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/fpmc/FPMC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45728156">
+            <state vertical-scroll-proportion="-7.1363635">
               <caret line="104" column="54" selection-start-line="104" selection-start-column="54" selection-end-line="104" selection-end-column="54" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FPMC_numba.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../fpmc_SECOND/FPMC_numba.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -128,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/util/fpmc/FPMC_numba.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="53" />
+              <caret line="25" column="94" selection-start-line="25" selection-start-column="94" selection-end-line="25" selection-end-column="94" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -140,7 +116,7 @@
         <entry file="file://$PROJECT_DIR$/util/fpmc/utils.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+              <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -187,15 +163,15 @@
         <option value="$PROJECT_DIR$/util/data_expansion.py" />
         <option value="$PROJECT_DIR$/recommenders/Supervised_Recommender.py" />
         <option value="$PROJECT_DIR$/prova.py" />
-        <option value="$PROJECT_DIR$/util/evaluation.py" />
         <option value="$PROJECT_DIR$/util/split.py" />
         <option value="$PROJECT_DIR$/util/fpmc/utils.py" />
         <option value="$PROJECT_DIR$/../fpmc_SECOND/FPMC_numba.py" />
         <option value="$PROJECT_DIR$/util/createSeqDb.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/util/fpmc/FPMC.py" />
-        <option value="$PROJECT_DIR$/recommenders/FPMCRecommender.py" />
         <option value="$PROJECT_DIR$/util/fpmc/FPMC_numba.py" />
+        <option value="$PROJECT_DIR$/recommenders/FPMCRecommender.py" />
+        <option value="$PROJECT_DIR$/util/evaluation.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -905,16 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/evaluation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5564706">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/recommenders/Supervised_Recommender.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -979,39 +945,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/fpmc/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/fpmc/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../fpmc_SECOND/FPMC_numba.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/envs/srs/Lib/random.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="-8.923358">
           <caret line="316" column="0" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
           <folding />
         </state>
@@ -1027,12 +963,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/util/fpmc/FPMC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.1363635">
+          <caret line="104" column="54" selection-start-line="104" selection-start-column="54" selection-end-line="104" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../fpmc_SECOND/FPMC_numba.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="87" column="25" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
+          <caret line="33" column="47" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="47" />
           <folding>
-            <element signature="e#0#74#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/fpmc/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/fpmc/FPMC_numba.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="94" selection-start-line="25" selection-start-column="94" selection-end-line="25" selection-end-column="94" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1040,27 +1006,25 @@
     <entry file="file://$PROJECT_DIR$/recommenders/FPMCRecommender.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+          <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/fpmc/FPMC_numba.py">
+    <entry file="file://$PROJECT_DIR$/util/evaluation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <caret line="140" column="83" selection-start-line="140" selection-start-column="83" selection-end-line="140" selection-end-column="83" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/fpmc/FPMC.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45728156">
-          <caret line="104" column="54" selection-start-line="104" selection-start-column="54" selection-end-line="104" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.45072994">
+          <caret line="97" column="118" selection-start-line="97" selection-start-column="118" selection-end-line="97" selection-end-column="118" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#74#0" expanded="true" />
           </folding>
         </state>
       </provider>

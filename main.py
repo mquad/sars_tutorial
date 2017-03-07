@@ -85,13 +85,21 @@ if args.recommender =='FPM' and 'spmf_path' in  init_args:
 recommender = RecommenderClass(**init_args)
 logger.info('Fitting Recommender: {}'.format(recommender))
 if args.recommender == 'FPMC':
-    recommender.fit(data)
+    recommender.declare(data)
+    recommender.fit(train_data)
 else:
     recommender.fit(list(train_data['sequence']))
 
 # evaluate the ranking quality
-logger.info('Ranking quality')
-p,r = evaluation.set_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall])
-logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
-p,r = evaluation.sequential_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall])
-logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))
+if args.recommender == 'FPMC':
+    logger.info('Ranking quality')
+    p,r = evaluation.set_evaluation_use_user(recommender,list(test_data['sequence']),list(test_data['user_id']),args.last_k,'total',[metrics.precision,metrics.recall])
+    logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
+    p,r = evaluation.sequential_evaluation_use_user(recommender,list(test_data['sequence']),list(test_data['user_id']),args.last_k,'total',[metrics.precision,metrics.recall])
+    logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))
+else:
+    logger.info('Ranking quality')
+    p,r = evaluation.set_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall])
+    logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
+    p,r = evaluation.sequential_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall])
+    logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))

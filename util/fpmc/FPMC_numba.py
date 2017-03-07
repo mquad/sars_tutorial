@@ -19,6 +19,12 @@ class FPMC(FPMC_basic.FPMC):
 
         return acc, mrr
 
+    def evaluation_recommender(self, user,user_profile):
+        np.dot(self.VUI, self.VIU.T, out=self.VUI_m_VIU)
+        np.dot(self.VIL, self.VLI.T, out=self.VIL_m_VLI)
+        scores = evaluation_jit_recommender(user, user_profile, self.VUI_m_VIU, self.VIL_m_VLI)
+        return sorted(range(len(scores)), key=lambda x: -scores[x]),sorted(scores,reverse=True)
+
     def learn_epoch(self, data_3_list, neg_batch_size):
         VUI, VIU, VLI, VIL = learn_epoch_jit(data_3_list[0], data_3_list[1], data_3_list[2], neg_batch_size,
                                              np.array(list(self.item_set)), self.VUI, self.VIU, self.VLI, self.VIL,
@@ -141,3 +147,13 @@ def evaluation_jit(u_list, i_list, b_tm1_list, VUI_m_VIU, VIL_m_VLI):
     acc = correct_count / len(u_list)
     mrr = acc_rr / len(u_list)
     return (acc, mrr)
+
+@jit(nopython=True)
+def evaluation_jit_recommender(user, b_tm1_list, VUI_m_VIU, VIL_m_VLI):
+
+    u = user
+    #b_tm1 = [x for x in b_tm1_list if x!=-1]
+    b_tm1 = b_tm1_list
+    scores = compute_x_batch_jit(u, b_tm1, VUI_m_VIU, VIL_m_VLI)
+
+    return scores
