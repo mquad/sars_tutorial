@@ -7,11 +7,10 @@ from util.fpmc.FPMC_numba import FPMC
 
 class FPMCRecommender(ISeqRecommender):
 
-    def __init__(self,n_factor=32,learn_rate=0.01,regular=0.001,n_epoch=15,n_neg=10,top_n=5):
+    def __init__(self,n_factor=32,learn_rate=0.01,regular=0.001,n_epoch=15,n_neg=10):
         super(FPMCRecommender, self).__init__()
         self.n_epoch = n_epoch
         self.n_neg = n_neg
-        self.top_n=top_n
         self.n_factor=n_factor
         self.learn_rate=learn_rate
         self.regular = regular
@@ -53,7 +52,7 @@ class FPMCRecommender(ISeqRecommender):
 
         for i,it in enumerate(items):
             recommendations.append(([self.reverse_item_mapping[it]],scores[i]))
-        return recommendations[:self.top_n]
+        return recommendations
 
     def declare(self,data):
         '''

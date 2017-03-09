@@ -3,9 +3,8 @@ import operator
 
 class PopularityRecommender(ISeqRecommender):
 
-    def __init__(self,k):
+    def __init__(self):
         super(PopularityRecommender, self).__init__()
-        self.k = k
 
     def fit(self, sequences):
         count_dict={}
@@ -20,7 +19,7 @@ class PopularityRecommender(ISeqRecommender):
         self.top = [([x[0]],x[1]) for x in self.top]
 
     def recommend(self, user_profile):
-        return self.top[:self.k]
+        return self.top
 
     def get_popular_list(self):
         return self.top

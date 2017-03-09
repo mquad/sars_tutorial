@@ -40,6 +40,7 @@ parser.add_argument('--train_perc', type=int,default=0.8,help='Percentage of dat
 parser.add_argument('--recommender', type=str, default='top_pop')
 parser.add_argument('--params', type=str, default=None)
 parser.add_argument('--last_k', type=int, default=1)
+parser.add_argument('--top_n_list', type=str)
 args = parser.parse_args()
 
 # get the recommender class
@@ -58,6 +59,12 @@ if args.params:
             init_args[key] = eval(value)
         except:
             init_args[key] = value
+
+# parse top n list
+top_n_lst = []
+if args.top_n_list:
+    for p_str in args.top_n_list.split(','):
+        top_n_lst.append(int(p_str))
 
 logging.info('Loading data')
 data = create_seq_db_filter_top_k(args.dataset,args.only_top_k)
@@ -86,16 +93,17 @@ if args.recommender == 'FPMC':
 else:
     recommender.fit(list(train_data['sequence']))
 
+
 # evaluate the ranking quality
-if args.recommender == 'FPMC':
-    logger.info('Ranking quality')
-    p,r = evaluation.set_evaluation_use_user(recommender,list(test_data['sequence']),list(test_data['user_id']),args.last_k,'total',[metrics.precision,metrics.recall])
-    logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
-    p,r = evaluation.sequential_evaluation_use_user(recommender,list(test_data['sequence']),list(test_data['user_id']),args.last_k,'total',[metrics.precision,metrics.recall])
-    logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))
-else:
-    logger.info('Ranking quality')
-    p,r = evaluation.set_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall])
-    logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
-    p,r = evaluation.sequential_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall])
-    logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))
+for n in top_n_lst:
+    logger.info('Ranking quality top_n: '+str(n))
+    if args.recommender == 'FPMC':
+        p,r = evaluation.set_evaluation_use_user(recommender,list(test_data['sequence']),list(test_data['user_id']),args.last_k,'total',[metrics.precision,metrics.recall],n)
+        logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
+        p,r = evaluation.sequential_evaluation_use_user(recommender,list(test_data['sequence']),list(test_data['user_id']),args.last_k,'total',[metrics.precision,metrics.recall],n)
+        logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))
+    else:
+        p,r = evaluation.set_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall],n)
+        logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
+        p,r = evaluation.sequential_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall],n)
+        logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))

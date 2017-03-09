@@ -10,7 +10,7 @@ on Uncertainty in artificial intelligence, pp. 580-588. Morgan Kaufmann Publishe
 
 class SupervisedRecommender(ISeqRecommender):
 
-    def __init__(self,history_length, top_n,classifier=DecisionTreeClassifier(), balance=True):
+    def __init__(self,history_length,classifier=DecisionTreeClassifier(), balance=True):
         """
         :param history_length: How many recent items to consider
         :param classifier: anything from sklearn: decision tree, logistic regression
@@ -22,7 +22,6 @@ class SupervisedRecommender(ISeqRecommender):
         self.classifier = classifier
         self.history_length = history_length
         self.balance=balance
-        self.top_n=top_n
 
     def fit(self, sequences):
 
@@ -44,7 +43,7 @@ class SupervisedRecommender(ISeqRecommender):
         for item,c in self.item_classifier.items():
             if c.predict(data)==[1]:
                 recommendations.append(item)
-        return [([x],1/len(recommendations)) for x in recommendations][:self.top_n]
+        return [([x],1/len(recommendations)) for x in recommendations]
 
 
 
