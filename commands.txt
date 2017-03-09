@@ -1,3 +1,5 @@
+#NB if last_k < 0 than it is interpreted as first_k
+
 POPULARITY:
 python main.py --dataset datasets/sessions.csv --only_top_k 500 --recommender top_pop --params k=1 --last_k -1
 
