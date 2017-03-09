@@ -1,0 +1,33 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: acmsmall-sample.aux
+The style file: ACM-Reference-Format-Journals.bst
+Database file #1: bibliography.bib
+Warning--I didn't find a database entry for "markov"
+Warning--I didn't find a database entry for "prod2vec"
+Warning--I didn't find a database entry for "gensim"
+Warning--I didn't find a database entry for "supervised"
+Warning--I didn't find a database entry for "fpmc"
+Warning--empty publisher in fournier2016spmf
+Warning--empty address in fournier2016spmf
+Warning--require articleno with numpages field in grbovic15prod2vec
+Warning--empty title in fpmcLib
+Warning--empty booktitle in fpmcLib
+Warning--empty publisher in fpmcLib
+Warning--empty address in fpmcLib
+Warning--page numbers missing in both pages and numpages fields in fpmcLib
+Warning--empty publisher in mobasher02sequential
+Warning--empty address in mobasher02sequential
+Warning--empty publisher in nakagawa03impact
+Warning--empty address in nakagawa03impact
+Warning--page numbers missing in both pages and numpages fields in nakagawa03impact
+Warning--empty title in any2vec
+Warning--empty booktitle in any2vec
+Warning--empty publisher in any2vec
+Warning--empty address in any2vec
+Warning--page numbers missing in both pages and numpages fields in any2vec
+Warning--empty publisher in rehurek2010software
+Warning--empty address in rehurek2010software
+Warning--page numbers missing in both pages and numpages fields in rehurek2010software
+Warning--require articleno with numpages field in rendle10FPMC
+Warning--require articleno with numpages field in shani05mdp
+Warning--require articleno with numpages field in zidmars01temporal
+(There were 29 warnings)

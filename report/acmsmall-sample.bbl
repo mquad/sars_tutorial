@@ -1,0 +1,148 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{00}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{{\tt DOI:}\penalty0{#1}\ }
+  \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       #1{#1}          \fi
+
+\bibitem[\protect\citeauthoryear{Fournier-Viger, Lin, Gomariz, Gueniche,
+  Soltani, Deng, and Lam}{Fournier-Viger et~al\mbox{.}}{2016}]%
+        {fournier2016spmf}
+{Philippe Fournier-Viger}, {Jerry Chun-Wei Lin}, {Antonio Gomariz}, {Ted
+  Gueniche}, {Azadeh Soltani}, {Zhihong Deng}, {and} {Hoang~Thanh Lam}. 2016.
+\newblock \showarticletitle{The SPMF Open-Source Data Mining Library Version
+  2}. In {\em Joint European Conference on Machine Learning and Knowledge
+  Discovery in Databases}. Springer, 36--40.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Grbovic, Radosavljevic, Djuric, Bhamidipati,
+  Savla, Bhagwan, and Sharp}{Grbovic et~al\mbox{.}}{2015}]%
+        {grbovic15prod2vec}
+{Mihajlo Grbovic}, {Vladan Radosavljevic}, {Nemanja Djuric}, {Narayan
+  Bhamidipati}, {Jaikit Savla}, {Varun Bhagwan}, {and} {Doug Sharp}. 2015.
+\newblock \showarticletitle{E-commerce in Your Inbox: Product Recommendations
+  at Scale}. In {\em Proceedings of the 21th ACM SIGKDD International
+  Conference on Knowledge Discovery and Data Mining} {\em (KDD '15)}. ACM, New
+  York, NY, USA, 1809--1818.
+\newblock
+\showISBNx{978-1-4503-3664-2}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/2783258.2788627}}
+
+
+\bibitem[\protect\citeauthoryear{Khesui}{Khesui}{2017}]%
+        {fpmcLib}
+{Khesui}. last access March 2017.
+\newblock
+\showURL{%
+\url{https://github.com/khesui/FPMC}}
+
+
+\bibitem[\protect\citeauthoryear{Mobasher, Dai, Luo, and Nakagawa}{Mobasher
+  et~al\mbox{.}}{2002}]%
+        {mobasher02sequential}
+{B. Mobasher}, {Honghua Dai}, {Tao Luo}, {and} {M. Nakagawa}. 2002.
+\newblock \showarticletitle{Using sequential and non-sequential patterns in
+  predictive Web usage mining tasks}. In {\em Data Mining, 2002. ICDM 2003.
+  Proceedings. 2002 IEEE International Conference on}. 669--672.
+\newblock
+\showDOI{%
+\url{http://dx.doi.org/10.1109/ICDM.2002.1184025}}
+
+
+\bibitem[\protect\citeauthoryear{Nakagawa and Mobasher}{Nakagawa and
+  Mobasher}{2003}]%
+        {nakagawa03impact}
+{Miki Nakagawa} {and} {Bamshad Mobasher}. 2003.
+\newblock \showarticletitle{Impact of site characteristics on recommendation
+  models based on association rules and sequential patterns}. In {\em
+  Proceedings of the IJCAI}, Vol.~3.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Nzw0301}{Nzw0301}{2017}]%
+        {any2vec}
+{Nzw0301}. last access March 2017.
+\newblock
+\showURL{%
+\url{https://gist.github.com/nzw0301/333afc00bd508501268fa7bf40cafe4e}}
+
+
+\bibitem[\protect\citeauthoryear{Rehurek and Sojka}{Rehurek and Sojka}{2010}]%
+        {rehurek2010software}
+{Radim Rehurek} {and} {Petr Sojka}. 2010.
+\newblock \showarticletitle{Software framework for topic modelling with large
+  corpora}. In {\em In Proceedings of the LREC 2010 Workshop on New Challenges
+  for NLP Frameworks}. Citeseer.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Rendle, Freudenthaler, and
+  Schmidt-Thieme}{Rendle et~al\mbox{.}}{2010}]%
+        {rendle10FPMC}
+{Steffen Rendle}, {Christoph Freudenthaler}, {and} {Lars Schmidt-Thieme}. 2010.
+\newblock \showarticletitle{Factorizing Personalized Markov Chains for
+  Next-basket Recommendation}. In {\em Proceedings of the 19th International
+  Conference on World Wide Web} {\em (WWW '10)}. ACM, New York, NY, USA,
+  811--820.
+\newblock
+\showISBNx{978-1-60558-799-8}
+\showDOI{%
+\url{http://dx.doi.org/10.1145/1772690.1772773}}
+
+
+\bibitem[\protect\citeauthoryear{Shani, Heckerman, and Brafman}{Shani
+  et~al\mbox{.}}{2005}]%
+        {shani05mdp}
+{Guy Shani}, {David Heckerman}, {and} {Ronen~I. Brafman}. 2005.
+\newblock \showarticletitle{An MDP-Based Recommender System}.
+\newblock {\em J. Mach. Learn. Res.\/}  {6} (Dec. 2005), 1265--1295.
+\newblock
+\showISSN{1532-4435}
+\showURL{%
+\url{http://dl.acm.org/citation.cfm?id=1046920.1088715}}
+
+
+\bibitem[\protect\citeauthoryear{Zimdars, Chickering, and Meek}{Zimdars
+  et~al\mbox{.}}{2001}]%
+        {zidmars01temporal}
+{Andrew Zimdars}, {David~Maxwell Chickering}, {and} {Christopher Meek}. 2001.
+\newblock \showarticletitle{Using Temporal Data for Making Recommendations}. In
+  {\em Proceedings of the 17th Conference in Uncertainty in Artificial
+  Intelligence} {\em (UAI '01)}. Morgan Kaufmann Publishers Inc., San
+  Francisco, CA, USA, 580--588.
+\newblock
+\showISBNx{1-55860-800-1}
+\showURL{%
+\url{http://dl.acm.org/citation.cfm?id=647235.720264}}
+
+
+\end{thebibliography}

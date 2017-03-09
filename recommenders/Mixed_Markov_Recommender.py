@@ -14,10 +14,11 @@ class MixedMarkovChainRecommender(ISeqRecommender):
 
     recommenders = {}
 
-    def __init__(self,from_k,to_k):
+    def __init__(self,from_k,to_k,top_n):
         super(MixedMarkovChainRecommender, self).__init__()
         self.from_k = from_k
         self.to_k = to_k
+        self.top_n=top_n
         #define the models
         for i in range(self.from_k,self.to_k+1):
             self.recommenders[i] = MarkovChainRecommender(i)
@@ -41,7 +42,7 @@ class MixedMarkovChainRecommender(ISeqRecommender):
         for k,v in rec_dict.items():
                 recommendations.append((list(k),v/sum_of_weights))
 
-        return recommendations
+        return recommendations[:self.top_n]
 
     def _set_model_debug(self,recommender,order):
         self.recommenders[order]=recommender

@@ -6,7 +6,7 @@ def precision(ground_truth, prediction):
     :return:
     """
     ground_truth = remove_duplicates(ground_truth)
-    precision_score = remove_duplicates(prediction)
+    prediction = remove_duplicates(prediction)
     precision_score = count_a_in_b_unique(prediction, ground_truth) / float(len(prediction))
     assert 0 <= precision_score <= 1
     return precision_score
@@ -14,7 +14,7 @@ def precision(ground_truth, prediction):
 
 def recall(ground_truth, prediction):
     ground_truth = remove_duplicates(ground_truth)
-    precision_score = remove_duplicates(prediction)
+    prediction = remove_duplicates(prediction)
     recall_score = 0 if len(prediction)==0 else count_a_in_b_unique(prediction, ground_truth) / float(len(ground_truth))
     assert 0 <= recall_score <= 1
     return recall_score
