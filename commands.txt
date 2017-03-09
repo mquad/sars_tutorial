@@ -1,17 +1,17 @@
 POPULARITY:
-python main.py --dataset datasets/sessions.csv --only_top_k 500 --recommender top_pop --params k=1 --last_k -1
+python main.py --dataset datasets/sessions.csv --only_top_k 5000 --recommender top_pop --top_n_list 5,10,100 --last_k -1
 
 FPM:
-python main.py --dataset datasets/sessions.csv --only_top_k 200 --recommender FPM --params minsup=0.002,minconf=0.1,max_context=10,min_context=1,spmf_path=spmf/spmf.jar --last_k 2
+python main.py --dataset datasets/sessions.csv --only_top_k 5000 --recommender FPM --params minsup=0.002,minconf=0.1,max_context=10,min_context=1,spmf_path=spmf/spmf.jar --last_k -1 --top_n_list 5,10,100
 
 Prod2Vec:
-python main.py --dataset datasets/sessions.csv --only_top_k 200 --recommender Prod2Vec --params min_count=10,size=150,workers=4,window=10,topn=2 --last_k 2
+python main.py --dataset datasets/sessions.csv --only_top_k 5000 --recommender Prod2Vec --params min_count=10,size=150,workers=4,window=10 --last_k -1 --top_n_list 5,10,100
 
 Markov:
-python main.py --dataset datasets/sessions.csv --only_top_k 500 --recommender Markov --params from_k=1,to_k=1,top_n=5 --last_k -5
+python main.py --dataset datasets/sessions.csv --only_top_k 5000 --recommender Markov --params from_k=1,to_k=1 --last_k -1 --top_n_list 5,10,100
 
 Supervised:
-python main.py --dataset datasets/sessions.csv --only_top_k 500 --recommender Supervised --params history_length=1,top_n=5 --last_k -1
+python main.py --dataset datasets/sessions.csv --only_top_k 5000 --recommender Supervised --params history_length=1 --last_k -1 --top_n_list 5,10,100
 
 FPMC:
-python main.py --dataset datasets/sessions.csv --only_top_k 200 --recommender FPMC --params n_factor=32,learn_rate=0.01,regular=0.001,n_epoch=15,n_neg=5,top_n=2 --last_k 3
+python main.py --dataset datasets/sessions.csv --only_top_k 5000 --recommender FPMC --params n_factor=92,learn_rate=0.01,regular=0.001,n_epoch=40,n_neg=10 --last_k -1 --top_n_list 5,10,100

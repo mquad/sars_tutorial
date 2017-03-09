@@ -1,11 +1,6 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: acmsmall-sample.aux
 The style file: ACM-Reference-Format-Journals.bst
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "markov"
-Warning--I didn't find a database entry for "prod2vec"
-Warning--I didn't find a database entry for "gensim"
-Warning--I didn't find a database entry for "supervised"
-Warning--I didn't find a database entry for "fpmc"
 Warning--empty publisher in fournier2016spmf
 Warning--empty address in fournier2016spmf
 Warning--require articleno with numpages field in grbovic15prod2vec
@@ -30,4 +25,4 @@ Warning--page numbers missing in both pages and numpages fields in rehurek2010so
 Warning--require articleno with numpages field in rendle10FPMC
 Warning--require articleno with numpages field in shani05mdp
 Warning--require articleno with numpages field in zidmars01temporal
-(There were 29 warnings)
+(There were 24 warnings)

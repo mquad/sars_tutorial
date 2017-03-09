@@ -41,6 +41,7 @@ parser.add_argument('--recommender', type=str, default='top_pop')
 parser.add_argument('--params', type=str, default=None)
 parser.add_argument('--last_k', type=int, default=1)
 parser.add_argument('--top_n_list', type=str)
+parser.add_argument('--last_months', type=int,default=12)
 args = parser.parse_args()
 
 # get the recommender class
@@ -67,7 +68,7 @@ if args.top_n_list:
         top_n_lst.append(int(p_str))
 
 logging.info('Loading data')
-data = create_seq_db_filter_top_k(args.dataset,args.only_top_k)
+data = create_seq_db_filter_top_k(args.dataset,args.only_top_k,args.last_months)
 data = data[data['sequence'].map(len) > abs(args.last_k)]
 data['sequence'] = data['sequence'].map((lambda x: list(map(lambda y:str(y),x))))
 

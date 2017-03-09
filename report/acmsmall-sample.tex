@@ -66,7 +66,7 @@
 \author{
 MS. UMBERTO DI FABRIZIO
 \affil{Politecnico di Milano}
-Tutor: PhD MASSIMO QUADRANA
+Tutor: Ph.D MASSIMO QUADRANA
 \affil{Politecnico di Milano}
 Prof. PAOLO CREMONESI
 \affil{Politecnico di Milano}
@@ -180,11 +180,29 @@ Notice that the sensitivity value does not say anything about the ranking among 
 
 The sensitivity for the precision score for each $k$ is $(0.9534,  0.9856,  0.618)$ meaning that the set evaluation usually gives much more difference in the evaluation of the recommenders than the sequential one. With respect to the recall instead the sensitivity for each $k$ is $(-0.1463, -0.1227, -0.0994)$ meaning that the magnitude of the scores is almost the same yet slightingly stronger for the sequential evaluation.
 
+\section{SCALING UP}
+The analysis done for 500 unique items in the dataset has been extended to 5000 unique items, in so doing the validity of the work is extended to real-world scenarios. The main issue with such a large dataset (statistics provided in Table~\ref{data5000}) is that not all the models presented scale to such a large dataset (with the available CPU and memory).
+
+\begin{table}[H]
+	\centering
+	\caption{Dataset statistics for 5000 unique items}
+	\label{data5000}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{k} & \textbf{Train Size} & \textbf{Test Size} & \textbf{Average sequence length} \\ \hline
+		1          & 272292              & 68074              & 7.28                             \\ \hline
+		5          & 127816               & 31955               & 11.73                            \\ \hline
+		10         & 49537                & 12385               & 18.30                            \\ \hline
+	\end{tabular}
+\end{table}
+
 \section{CONCLUSION}
 In this work two evaluation protocols (i.e. set and sequential) for SRS are compared with respect to the ranking produced among the recommenders using both precision and recall. Six classes of state-of-the-art SRS are implemented in order to perform such evaluation. The analysis takes into account several values of $k$ (i.e. length of user profile) and assesses the difference among the two evaluation protocols in terms of $r$ value and sensitivity. By analyzing the $r$ value it is possible to conclude that the rankings produced by the two protocols are the same except for one case where the $r$ value is a little lower than 1. The analysis using the sensitivity value highlights the fact that the precision metric calculated using the set protocol usually gives much bigger gaps between the SRS whilst for the recall is close to 0. The conclusion that can be drawn from this work is that when one has to choose between the two protocols, and the use of the recommender (i.e. application scope) does not enforce one choice over the other, the set evaluation is advised because it gives a clearer picture of the difference among recommenders performance, moreover it is much faster to evaluate than the sequential one.
 
 \newpage
 \section{APPENDIX}
+\subsection{}
+The code repo is available at :\href{https://umbertoDifa@bitbucket.org/umbertoDifa/seq_rec_evaluation.git}{https://umbertoDifa@bitbucket.org/umbertoDifa/seq\_rec\_evaluation.git}
 \subsection{}
 \begin{itemize}
 	\item \textbf{Popularity}

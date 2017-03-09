@@ -1,5 +1,8 @@
 import pandas as pd
 from collections import Counter
+import datetime
+import calendar
+import time
 
 def createSeqDbList():
     filePath = 'C:/Users/Umberto/Dropbox/datasets/music/sessions.csv'
@@ -27,32 +30,9 @@ def createSeqDbCommas():
 
     result.to_csv('sequenceDbComma.csv',index=False)
 
-def OLD_create_seq_db_filter_top_k(filePath, topk):
-    file = pd.read_csv(filePath)
+def create_seq_db_filter_top_k(filePath, topk, last_months):
+    file = load_and_adapt(filePath,last_months)
 
-    col_names = ['session_id','user_id','item_id','ts']+ file.columns.values.tolist()[4:]
-    file.columns =col_names
-    c = Counter(list(file['item_id']))
-
-    keeper = set([x[0] for x in c.most_common(topk)])
-    file = file[file['item_id'].map(lambda x: x in keeper)]
-
-    #group by session id and concat song_id
-    groups = file.groupby('session_id')
-
-    aggregated = groups['item_id'].agg({'sequence':lambda x:list(x)})
-    initialTimestamps = groups['ts'].min()
-
-    result = aggregated.join(initialTimestamps)
-    return result
-    #result.to_csv('sequenceDb_'+str(topk)+'.csv',index=False)
-
-
-def create_seq_db_filter_top_k(filePath, topk):
-    file = pd.read_csv(filePath)
-
-    col_names = ['session_id','user_id','item_id','ts']+ file.columns.values.tolist()[4:]
-    file.columns =col_names
     c = Counter(list(file['item_id']))
 
     keeper = set([x[0] for x in c.most_common(topk)])
@@ -70,10 +50,8 @@ def create_seq_db_filter_top_k(filePath, topk):
     #result.to_csv('sequenceDb_'+str(topk)+'.csv',index=False)
 
 
-def from_db_to_spmfdb(filePath):
-    file = pd.read_csv(filePath)
-    col_names = ['session_id','user_id','item_id','ts']+ file.columns.values.tolist()[4:]
-    file.columns =col_names
+def from_db_to_spmfdb(filePath,last_months):
+    file = load_and_adapt(filePath,last_months)
 
     groups = file.groupby('session_id')
     #songs as strings
@@ -104,3 +82,25 @@ def reformat_for_SPMC(data):
         train_data_supervised.append((int(row['user_id']),int(row['sequence'][len(row['sequence'])-1]),list(map(int,row['sequence'][:len(row['sequence'])-1]))))
 
 
+def load_and_adapt(filePath,last_months):
+    file = pd.read_csv(filePath)
+
+    col_names = ['session_id','user_id','item_id','ts']+ file.columns.values.tolist()[4:]
+    file.columns =col_names
+
+    #sottocampiona
+    def add_months(sourcedate,months):
+        month = sourcedate.month - 1 + months
+        year = int(sourcedate.year + month / 12 )
+        month = month % 12 + 1
+        day = min(sourcedate.day,calendar.monthrange(year,month)[1])
+        return datetime.date(year,month,day)
+
+    lastdate = datetime.datetime.fromtimestamp(int("1421745663"))
+    firstdate = add_months(lastdate,-last_months)
+    initial_unix = time.mktime(firstdate.timetuple())
+
+    #filter out older items
+    file = file[file['ts'] >= initial_unix]
+
+    return file
