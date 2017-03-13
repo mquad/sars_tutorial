@@ -3,6 +3,7 @@ from recommenders.ISeqRecommender import ISeqRecommender
 from util.split import balance_dataset
 from sklearn.base import clone
 from sklearn.tree import DecisionTreeClassifier
+from tqdm import tqdm
 
 """Adapted from Zimdars, Andrew, David Maxwell Chickering, and Christopher Meek.
 "Using temporal data for making recommendations." In Proceedings of the Seventeenth conference
@@ -28,13 +29,15 @@ class SupervisedRecommender(ISeqRecommender):
         data,self.mapping = data_expansion(sequences,self.history_length)
         self.item_classifier={}
         #for each column i.e. item, build a classifier
-        for key,value in self.mapping.items():
-            train,test =self._split_train_test(data,value,len(self.mapping))
-            if self.balance:
-                train,test = balance_dataset(train,test)
-            self.item_classifier[key] = self.classifier.fit(train,test.toarray().ravel())
-            #reset classifier
-            self.classifier=clone(self.classifier)
+        with tqdm(total=len(self.mapping)) as pbar:
+            for key,value in self.mapping.items():
+                train,test =self._split_train_test(data,value,len(self.mapping))
+                if self.balance:
+                    train,test = balance_dataset(train,test)
+                self.item_classifier[key] = self.classifier.fit(train,test.toarray().ravel())
+                #reset classifier
+                self.classifier=clone(self.classifier)
+                pbar.update(1)
 
     def recommend(self, user_profile):
         #print('recommending')

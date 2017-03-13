@@ -24,5 +24,10 @@ Warning--empty address in rehurek2010software
 Warning--page numbers missing in both pages and numpages fields in rehurek2010software
 Warning--require articleno with numpages field in rendle10FPMC
 Warning--require articleno with numpages field in shani05mdp
+Warning--empty title in srsLib
+Warning--empty booktitle in srsLib
+Warning--empty publisher in srsLib
+Warning--empty address in srsLib
+Warning--page numbers missing in both pages and numpages fields in srsLib
 Warning--require articleno with numpages field in zidmars01temporal
-(There were 24 warnings)
+(There were 29 warnings)
