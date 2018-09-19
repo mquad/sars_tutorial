@@ -1,6 +1,9 @@
 import logging
-from recommenders.ISeqRecommender import ISeqRecommender
+
 import gensim
+
+from recommenders.ISeqRecommender import ISeqRecommender
+
 
 class Prod2VecRecommender(ISeqRecommender):
     """
@@ -12,8 +15,7 @@ class Prod2VecRecommender(ISeqRecommender):
 
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-
-    def __init__(self,min_count=10,size=100,workers=4,window=5):
+    def __init__(self, min_count=10, size=100, workers=4, window=5):
         '''
         Define Prod2Vec recommender
         :param min_count: if a word appears less than min_count times it is pruned
@@ -25,17 +27,17 @@ class Prod2VecRecommender(ISeqRecommender):
         '''
         super(Prod2VecRecommender, self).__init__()
         self.workers = workers
-        self.min_count=min_count
-        self.size =size
+        self.min_count = min_count
+        self.size = size
         self.window = window
 
     def fit(self, sequences):
-        self.model = gensim.models.Word2Vec(sequences, min_count=self.min_count,window=self.window,hs=1,size=self.size,sg=1,workers=self.workers)
+        self.model = gensim.models.Word2Vec(sequences, min_count=self.min_count, window=self.window, hs=1,
+                                            size=self.size, sg=1, workers=self.workers)
 
     def recommend(self, user_profile):
         try:
             rec = self.model.most_similar(positive=user_profile)
         except KeyError:
-            rec=[]
-        return [([x[0]],x[1]) for x in rec] #use format as other recommenders
-
+            rec = []
+        return [([x[0]], x[1]) for x in rec]  # use format as other recommenders

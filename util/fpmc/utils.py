@@ -1,11 +1,15 @@
-import csv, math
+import csv
+import math
+
 import numpy as np
+
 
 def sigmoid(x):
     if x >= 0:
         return math.exp(-np.logaddexp(0, -x))
     else:
         return math.exp(x - np.logaddexp(x, 0))
+
 
 def load_data_from_dir(dirname):
     fname_user_idxseq = dirname + '/' + 'idxseq.txt'
@@ -15,7 +19,7 @@ def load_data_from_dir(dirname):
     item_set = load_idx_list_file(fname_item_list)
 
     data_list = []
-    with open(fname_user_idxseq ,'r') as f:
+    with open(fname_user_idxseq, 'r') as f:
         for l in f:
             l = [int(s) for s in l.strip().split()]
             user = l[0]
@@ -23,8 +27,8 @@ def load_data_from_dir(dirname):
             label = l[-1]
 
             data_list.append((user, label, b_tm1))
-    
-    return data_list, user_set, item_set    
+
+    return data_list, user_set, item_set
 
 
 def load_idx_list_file(fname, delimiter=','):
@@ -53,5 +57,5 @@ def data_to_3_list(data_list):
     for b_tm1 in b_tm1_list:
         b_tm1.extend([-1 for i in range(max_l - len(b_tm1))])
     b_tm1_list = np.array(b_tm1_list)
-    
+
     return (u_list, i_list, b_tm1_list)

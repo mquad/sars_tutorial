@@ -1,16 +1,17 @@
+import argparse
+import logging
+from collections import OrderedDict
+from functools import reduce
+
+from recommenders.FPMC_Recommender import FPMCRecommender
 from recommenders.Freq_Seq_Mining_Recommender import FreqSeqMiningRecommender
-from recommenders.Popularity_Recommender import PopularityRecommender
 from recommenders.Mixed_Markov_Recommender import MixedMarkovChainRecommender
+from recommenders.Popularity_Recommender import PopularityRecommender
 from recommenders.Prod2Vec_Recommender import Prod2VecRecommender
 from recommenders.Supervised_Recommender import SupervisedRecommender
-from recommenders.FPMC_Recommender import FPMCRecommender
-from util.split import random_holdout,temporal_holdout
-from util import evaluation,metrics
-import logging
-import argparse
-from collections import OrderedDict
-from util.createSeqDb import create_seq_db_filter_top_k,from_seqs_to_spmfdb
-from functools import reduce
+from util import evaluation, metrics
+from util.createSeqDb import create_seq_db_filter_top_k, from_seqs_to_spmfdb
+from util.split import random_holdout, temporal_holdout
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -22,8 +23,8 @@ available_recommenders = OrderedDict([
     ('FPM', FreqSeqMiningRecommender),
     ('Markov', MixedMarkovChainRecommender),
     ('Prod2Vec', Prod2VecRecommender),
-    ('Supervised',SupervisedRecommender),
-    ('FPMC',FPMCRecommender)
+    ('Supervised', SupervisedRecommender),
+    ('FPMC', FPMCRecommender)
 ])
 
 available_holdout_methods = OrderedDict([
@@ -33,15 +34,15 @@ available_holdout_methods = OrderedDict([
 
 # let's use an ArgumentParser to read input arguments
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataset', type=str,help='Dataset path, format: session_id,user_id(discarded),item_id,timestamp')
-parser.add_argument('--only_top_k', type=int,default=10000,help='Number of unique items in the db to consider')
-parser.add_argument('--holdout_method', type=str,default='random_holdout',help='random_holdout')
-parser.add_argument('--train_perc', type=int,default=0.8,help='Percentage of dataset for training')
+parser.add_argument('--dataset', type=str, help='Dataset path, format: session_id,user_id(discarded),item_id,timestamp')
+parser.add_argument('--only_top_k', type=int, default=10000, help='Number of unique items in the db to consider')
+parser.add_argument('--holdout_method', type=str, default='random_holdout', help='random_holdout')
+parser.add_argument('--train_perc', type=int, default=0.8, help='Percentage of dataset for training')
 parser.add_argument('--recommender', type=str, default='top_pop')
 parser.add_argument('--params', type=str, default=None)
 parser.add_argument('--last_k', type=int, default=1)
 parser.add_argument('--top_n_list', type=str)
-parser.add_argument('--last_months', type=int,default=12)
+parser.add_argument('--last_months', type=int, default=12)
 args = parser.parse_args()
 
 # get the recommender class
@@ -68,22 +69,22 @@ if args.top_n_list:
         top_n_lst.append(int(p_str))
 
 logging.info('Loading data')
-data = create_seq_db_filter_top_k(args.dataset,args.only_top_k,args.last_months)
+data = create_seq_db_filter_top_k(args.dataset, args.only_top_k, args.last_months)
 data = data[data['sequence'].map(len) > abs(args.last_k)]
-data['sequence'] = data['sequence'].map((lambda x: list(map(lambda y:str(y),x))))
+data['sequence'] = data['sequence'].map((lambda x: list(map(lambda y: str(y), x))))
 
 # split dataset
 logging.info("Splitting train and test:" + str(args.train_perc))
-train_data,test_data = holdout_method(data, args.train_perc)
-logging.info("Train size:{} test size:{}".format(len(train_data),len(test_data)))
-logging.info("Average sequence length:{}".format(reduce(lambda x,y:x+y,list(map(len,list(data['sequence']))))/len(list(data['sequence']))))
+train_data, test_data = holdout_method(data, args.train_perc)
+logging.info("Train size:{} test size:{}".format(len(train_data), len(test_data)))
+logging.info("Average sequence length:{}".format(
+    reduce(lambda x, y: x + y, list(map(len, list(data['sequence'])))) / len(list(data['sequence']))))
 
 # create db for FPM
-if args.recommender =='FPM' and 'spmf_path' in  init_args:
+if args.recommender == 'FPM' and 'spmf_path' in init_args:
     logging.info('Creating db for SPMF')
     db_fout = from_seqs_to_spmfdb(list(train_data['sequence']))
-    init_args['db_path']=db_fout
-
+    init_args['db_path'] = db_fout
 
 # train the recommender
 recommender = RecommenderClass(**init_args)
@@ -94,17 +95,21 @@ if args.recommender == 'FPMC':
 else:
     recommender.fit(list(train_data['sequence']))
 
-
 # evaluate the ranking quality
 for n in top_n_lst:
-    logger.info('Ranking quality top_n: '+str(n))
+    logger.info('Ranking quality top_n: ' + str(n))
     if args.recommender == 'FPMC':
-        p,r = evaluation.set_evaluation_use_user(recommender,list(test_data['sequence']),list(test_data['user_id']),args.last_k,'total',[metrics.precision,metrics.recall],n)
-        logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
-        p,r = evaluation.sequential_evaluation_use_user(recommender,list(test_data['sequence']),list(test_data['user_id']),args.last_k,'total',[metrics.precision,metrics.recall],n)
-        logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))
+        p, r = evaluation.set_evaluation_use_user(recommender, list(test_data['sequence']), list(test_data['user_id']),
+                                                  args.last_k, 'total', [metrics.precision, metrics.recall], n)
+        logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p, r))
+        p, r = evaluation.sequential_evaluation_use_user(recommender, list(test_data['sequence']),
+                                                         list(test_data['user_id']), args.last_k, 'total',
+                                                         [metrics.precision, metrics.recall], n)
+        logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p, r))
     else:
-        p,r = evaluation.set_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall],n)
-        logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p,r))
-        p,r = evaluation.sequential_evaluation(recommender,list(test_data['sequence']),args.last_k,'total',[metrics.precision,metrics.recall],n)
-        logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p,r))
+        p, r = evaluation.set_evaluation(recommender, list(test_data['sequence']), args.last_k, 'total',
+                                         [metrics.precision, metrics.recall], n)
+        logger.info('Set evaluation - Precision:{}, Recall:{}'.format(p, r))
+        p, r = evaluation.sequential_evaluation(recommender, list(test_data['sequence']), args.last_k, 'total',
+                                                [metrics.precision, metrics.recall], n)
+        logger.info('Sequential evaluation - Precision:{}, Recall:{}'.format(p, r))

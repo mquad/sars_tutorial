@@ -1,4 +1,6 @@
 import logging
+
+
 class ISeqRecommender(object):
     """Abstract Recommender"""
 
@@ -14,16 +16,14 @@ class ISeqRecommender(object):
     def recommend(self, user_profile):
         pass
 
+    def get_recommendation_list(self, recommendation):
+        return list(map(lambda x: x[0], recommendation))
 
-    def get_recommendation_list(self,recommendation):
-        return list(map(lambda x:x[0],recommendation))
-
-    def get_recommendation_confidence_list(self,recommendation):
-        return list(map(lambda x:x[1],recommendation))
+    def get_recommendation_confidence_list(self, recommendation):
+        return list(map(lambda x: x[1], recommendation))
 
     def activate_debug_print(self):
         self.logger.setLevel(logging.DEBUG)
 
     def deactivate_debug_print(self):
         self.logger.setLevel(logging.INFO)
-
