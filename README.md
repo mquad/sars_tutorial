@@ -31,16 +31,21 @@ and open it your browser at the address `localhost:8888`.
 ## Running the notebooks
 
 The notebooks used in this hands-on are listed in the main directory of this project, as shown below:
+
+
 ![](images/running_notebooks_1.png)
 
 Click on the name of the notebook to open it in a new window. The name of each running notebook is highlighted in green 
 (in the screen above, the notebook `00_TopPopular` is the only one running).
 
 Before starting to execute the notebook cells, you have to ensure that the kernel is properly set to `srs`, like in the screen below:
+
 ![](images/running_notebooks_2.png)
 
 If it's not your case, change the kernel to `srs` by clicking on `Kernel > Change kernel > srs` in the menu bar, as shown below:
+
 ![](images/running_notebooks_3.png)
+
 NOTE: this requires the installation of the `srs` kernel, as explained in the [Setup instructions](#setup-instructions).
 
 You can now start running the cells in the notebook! Yay!
