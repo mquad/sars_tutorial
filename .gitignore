@@ -92,7 +92,5 @@ ENV/
 recpy/.idea/
 .DS_Store
 
-#miei
+# custom
 datasets/
-MDP/*
-saveEnvironment.bat
