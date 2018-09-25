@@ -7,6 +7,7 @@ from util.fpmc.utils import *
 
 
 class FPMC(FPMC_basic.FPMC):
+
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     logger = logging.getLogger()
 

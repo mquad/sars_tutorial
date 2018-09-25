@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from recommenders.Freq_Seq_Mining_Recommender import FreqSeqMiningRecommender
+from recommenders.FSMRecommender import FSMRecommender
 from util import evaluation, metrics
 from util.tree.Tree import SmartTree
 
@@ -48,7 +48,7 @@ class FPM_recommender_tests(unittest.TestCase):
         db = pd.read_csv('datasets/test_data/simple.txt', converters={'songs': ast.literal_eval})
         seqs = db['songs'].tolist()
 
-        rec = FreqSeqMiningRecommender(0.9, 0.1, True)
+        rec = FSMRecommender(0.9, 0.1, True)
         rec.fit(seqs)
 
         ## test that the right frequences are found
@@ -83,10 +83,10 @@ class FPM_recommender_tests(unittest.TestCase):
     def test_recommendation(self):
         t = self.build_smart_tree()
 
-        rec1 = FreqSeqMiningRecommender(0.9, 0.2, 9, 1)
-        rec2 = FreqSeqMiningRecommender(0.9, 0.2, 9, 6)
-        rec3 = FreqSeqMiningRecommender(0.9, 0.2, 3, 1)
-        rec4 = FreqSeqMiningRecommender(0.9, 0.2, 4, 1)
+        rec1 = FSMRecommender(0.9, 0.2, 9, 1)
+        rec2 = FSMRecommender(0.9, 0.2, 9, 6)
+        rec3 = FSMRecommender(0.9, 0.2, 3, 1)
+        rec4 = FSMRecommender(0.9, 0.2, 4, 1)
         rec1._set_tree_debug_only(t)
         rec2._set_tree_debug_only(t)
         rec3._set_tree_debug_only(t)
@@ -119,9 +119,9 @@ class FPM_recommender_tests(unittest.TestCase):
     def test_evaluation(self):
         t = self.build_smart_tree()
 
-        rec1 = FreqSeqMiningRecommender(0.9, 0.2, 10, 6)
-        rec2 = FreqSeqMiningRecommender(0.9, 0.2, 10, 1)
-        rec3 = FreqSeqMiningRecommender(0.9, 0.2, 10, 3)
+        rec1 = FSMRecommender(0.9, 0.2, 10, 6)
+        rec2 = FSMRecommender(0.9, 0.2, 10, 1)
+        rec3 = FSMRecommender(0.9, 0.2, 10, 3)
         rec1._set_tree_debug_only(t)
         rec2._set_tree_debug_only(t)
         rec3._set_tree_debug_only(t)
@@ -169,10 +169,10 @@ class FPM_recommender_tests(unittest.TestCase):
         t = self.build_smart_tree()
         ###test find_n_length_path
         excludeOrigin = False
-        p0 = t.find_n_legth_paths(t.get_root(), 0, excludeOrigin)
-        p1 = t.find_n_legth_paths(t.get_root(), 1, excludeOrigin)
-        p2 = t.find_n_legth_paths(t.get_root(), 2, excludeOrigin)
-        p3 = t.find_n_legth_paths(t.get_root(), 3, excludeOrigin)
+        p0 = t.find_n_length_paths(t.get_root(), 0, excludeOrigin)
+        p1 = t.find_n_length_paths(t.get_root(), 1, excludeOrigin)
+        p2 = t.find_n_length_paths(t.get_root(), 2, excludeOrigin)
+        p3 = t.find_n_length_paths(t.get_root(), 3, excludeOrigin)
 
         assert sorted(t.get_paths_tag(p0)) == sorted([['root']])
         assert sorted(t.get_paths_tag(p1)) == sorted([['root', 1], ['root', 2], ['root', 3], ['root', 4], ['root', 9]])
@@ -187,12 +187,12 @@ class FPM_recommender_tests(unittest.TestCase):
         node3 = t.find_path(t.get_root(), [2, 3])
         node4 = t.find_path(t.get_root(), [3, 4])
 
-        p0_bis1 = t.find_n_legth_paths(node4, 0, excludeOrigin)
-        p1_bis1 = t.find_n_legth_paths(node1, 1, excludeOrigin)
-        p1_bis2 = t.find_n_legth_paths(node3, 1, excludeOrigin)
-        p2_bis1 = t.find_n_legth_paths(node4, 2, excludeOrigin)
-        p3_bis1 = t.find_n_legth_paths(node3, 3, excludeOrigin)
-        p3_bis2 = t.find_n_legth_paths(node4, 3, excludeOrigin)
+        p0_bis1 = t.find_n_length_paths(node4, 0, excludeOrigin)
+        p1_bis1 = t.find_n_length_paths(node1, 1, excludeOrigin)
+        p1_bis2 = t.find_n_length_paths(node3, 1, excludeOrigin)
+        p2_bis1 = t.find_n_length_paths(node4, 2, excludeOrigin)
+        p3_bis1 = t.find_n_length_paths(node3, 3, excludeOrigin)
+        p3_bis2 = t.find_n_length_paths(node4, 3, excludeOrigin)
 
         assert sorted(t.get_paths_tag(p0_bis1)) == sorted([[4]])
         assert sorted(t.get_paths_tag(p1_bis1)) == sorted([[1, 2], [1, 3]])
@@ -203,10 +203,10 @@ class FPM_recommender_tests(unittest.TestCase):
 
         ########################################################################################
         excludeOrigin = True
-        p0 = t.find_n_legth_paths(t.get_root(), 0, excludeOrigin)
-        p1 = t.find_n_legth_paths(t.get_root(), 1, excludeOrigin)
-        p2 = t.find_n_legth_paths(t.get_root(), 2, excludeOrigin)
-        p3 = t.find_n_legth_paths(t.get_root(), 3, excludeOrigin)
+        p0 = t.find_n_length_paths(t.get_root(), 0, excludeOrigin)
+        p1 = t.find_n_length_paths(t.get_root(), 1, excludeOrigin)
+        p2 = t.find_n_length_paths(t.get_root(), 2, excludeOrigin)
+        p3 = t.find_n_length_paths(t.get_root(), 3, excludeOrigin)
 
         assert sorted(t.get_paths_tag(p0)) == sorted([[]])
         assert sorted(t.get_paths_tag(p1)) == sorted([[1], [2], [3], [4], [9]])
@@ -217,12 +217,12 @@ class FPM_recommender_tests(unittest.TestCase):
         node3 = t.find_path(t.get_root(), [2, 3])
         node4 = t.find_path(t.get_root(), [3, 4])
 
-        p0_bis1 = t.find_n_legth_paths(node4, 0, excludeOrigin)
-        p1_bis1 = t.find_n_legth_paths(node1, 1, excludeOrigin)
-        p1_bis2 = t.find_n_legth_paths(node3, 1, excludeOrigin)
-        p2_bis1 = t.find_n_legth_paths(node4, 2, excludeOrigin)
-        p3_bis1 = t.find_n_legth_paths(node3, 3, excludeOrigin)
-        p3_bis2 = t.find_n_legth_paths(node4, 3, excludeOrigin)
+        p0_bis1 = t.find_n_length_paths(node4, 0, excludeOrigin)
+        p1_bis1 = t.find_n_length_paths(node1, 1, excludeOrigin)
+        p1_bis2 = t.find_n_length_paths(node3, 1, excludeOrigin)
+        p2_bis1 = t.find_n_length_paths(node4, 2, excludeOrigin)
+        p3_bis1 = t.find_n_length_paths(node3, 3, excludeOrigin)
+        p3_bis2 = t.find_n_length_paths(node4, 3, excludeOrigin)
 
         assert sorted(t.get_paths_tag(p0_bis1)) == sorted([[]])
         assert sorted(t.get_paths_tag(p1_bis1)) == sorted([[2], [3]])

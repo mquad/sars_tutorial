@@ -6,17 +6,18 @@ from recommenders.ISeqRecommender import ISeqRecommender
 from util.data_expansion import data_expansion, user_profile_expansion
 from util.split import balance_dataset
 
-"""Adapted from Zimdars, Andrew, David Maxwell Chickering, and Christopher Meek.
-"Using temporal data for making recommendations." In Proceedings of the Seventeenth conference
-on Uncertainty in artificial intelligence, pp. 580-588. Morgan Kaufmann Publishers Inc., 2001."""
-
 
 class SupervisedRecommender(ISeqRecommender):
+    """
+    Adapted from Zimdars, Andrew, David Maxwell Chickering, and Christopher Meek.
+    "Using temporal data for making recommendations." In Proceedings of the Seventeenth conference
+    on Uncertainty in artificial intelligence, pp. 580-588. Morgan Kaufmann Publishers Inc., 2001.
+    """
 
     def __init__(self, history_length, classifier=DecisionTreeClassifier(), balance=True):
         """
-        :param history_length: How many recent items to consider
-        :param classifier: anything from sklearn: decision tree, logistic regression
+        :param history_length: how many recent items to consider
+        :param classifier: an instance of sklearn classifier (e.g. DecisionTreeClassifier, LogisticRegression)
         :param balance : whether to balance or not the training data for each item
         :return:
         """
@@ -26,7 +27,8 @@ class SupervisedRecommender(ISeqRecommender):
         self.history_length = history_length
         self.balance = balance
 
-    def fit(self, sequences):
+    def fit(self, train_data):
+        sequences = train_data['sequence'].values
 
         data, self.mapping = data_expansion(sequences, self.history_length)
         self.item_classifier = {}
@@ -41,7 +43,7 @@ class SupervisedRecommender(ISeqRecommender):
                 self.classifier = clone(self.classifier)
                 pbar.update(1)
 
-    def recommend(self, user_profile):
+    def recommend(self, user_profile, user_id=None):
         # print('recommending')
         data = user_profile_expansion(user_profile, self.history_length, self.mapping)
         recommendations = []

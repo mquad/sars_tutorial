@@ -3,33 +3,33 @@ import random
 from scipy.sparse import find
 
 
-def random_holdout(seqs, perc=0.8, seed=1234):
-    seqs = seqs.sample(frac=1, random_state=seed)
-    nseqs = len(seqs)
+def random_holdout(dataset, perc=0.8, seed=1234):
+    """
+    Split sequence dataset randomly
+    :param dataset: the sequence dataset
+    :param perc: the training percentange
+    :param seed: the random seed
+    :return: the training and test splits
+    """
+    dataset = dataset.sample(frac=1, random_state=seed)
+    nseqs = len(dataset)
     train_size = int(nseqs * perc)
     # split data according to the shuffled index and the holdout size
-    train_split = seqs[:train_size]
-    test_split = seqs[train_size:]
+    train_split = dataset[:train_size]
+    test_split = dataset[train_size:]
 
     return train_split, test_split
 
 
-def temporal_holdout(seqs, timestamps, ts_threshold):
+def temporal_holdout(dataset, ts_threshold):
     """
-    :param seqs:  list of sequences
-    :param timestamps: ordered list of initial timestamps with respect to sequences
-    :param ts_threshold: timestamp below wich a sequence is put in the train
-    :return: train and test split
+    Split sequence dataset using timestamps
+    :param dataset: the sequence dataset
+    :param ts_threshold: the timestamp from which test sequences will start
+    :return: the training and test splits
     """
-    raise NameError('Not implemented')
-    train_split = []
-    test_split = []
-    # split data according to the shuffled index and the holdout size
-    for i, x in enumerate(seqs):
-        if timestamps[i] < ts_threshold:
-            train_split.append(x)
-        else:
-            test_split.append(x)
+    train_split = dataset.loc[dataset['ts'] < ts_threshold]
+    test_split = dataset.loc[dataset['ts'] >= ts_threshold]
 
     return train_split, test_split
 

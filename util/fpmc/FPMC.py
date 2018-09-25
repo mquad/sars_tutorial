@@ -5,7 +5,7 @@ import random
 from util.fpmc.utils import *
 
 
-class FPMC():
+class FPMC:
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     logger = logging.getLogger()
 
@@ -94,7 +94,7 @@ class FPMC():
                 VILi_update = self.learn_rate * (delta * eta - self.regular * self.VIL[i])
                 VILj_update = self.learn_rate * (-delta * eta - self.regular * self.VIL[j])
                 VLI_update = self.learn_rate * (
-                            (delta * (self.VIL[i] - self.VIL[j]) / len(b_tm1)) - self.regular * self.VLI[b_tm1])
+                        (delta * (self.VIL[i] - self.VIL[j]) / len(b_tm1)) - self.regular * self.VLI[b_tm1])
 
                 self.VIL[i] += VILi_update
                 self.VIL[j] += VILj_update

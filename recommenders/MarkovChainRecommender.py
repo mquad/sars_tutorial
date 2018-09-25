@@ -4,27 +4,31 @@ import logging
 from recommenders.ISeqRecommender import ISeqRecommender
 from util.markov.Markov import add_nodes_to_graph, add_edges, apply_skipping, apply_clustering
 
-"""Implementation from Shani, Guy, David Heckerman, and Ronen I. Brafman. "An MDP-based recommender system."
-Journal of Machine Learning Research 6, no. Sep (2005): 1265-1295. Chapter 3-4"""
-
 
 class MarkovChainRecommender(ISeqRecommender):
+    """
+    Implementation from Shani, Guy, David Heckerman, and Ronen I. Brafman. "An MDP-based recommender system."
+    Journal of Machine Learning Research 6, no. Sep (2005): 1265-1295. Chapter 3-4
+    """
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-    def __init__(self, last_k):
+    def __init__(self, order):
+        """
+        :param order: the order of the Markov Chain
+        """
         super(MarkovChainRecommender, self).__init__()
-        self.last_k = last_k
+        self.order = order
 
-    def fit(self, seqs):
-        """Takes a list of list of seqeunces ."""
+    def fit(self, train_data):
+        sequences = train_data['sequence'].values
 
-        logging.info('Building Markov Chain model with k = ' + str(self.last_k))
+        logging.info('Building Markov Chain model with k = ' + str(self.order))
         logging.info('Adding nodes')
-        self.tree, self.count_dict, self.G = add_nodes_to_graph(seqs, self.last_k)
+        self.tree, self.count_dict, self.G = add_nodes_to_graph(sequences, self.order)
         logging.info('Adding edges')
-        self.G = add_edges(self.tree, self.count_dict, self.G, self.last_k)
+        self.G = add_edges(self.tree, self.count_dict, self.G, self.order)
         logging.info('Applying skipping')
-        self.G = apply_skipping(self.G, self.last_k, seqs)
+        self.G = apply_skipping(self.G, self.order, sequences)
         logging.info('Applying clustering')
         logging.info('{} states in the graph'.format(len(self.G.nodes())))
         self.G, _, _ = apply_clustering(self.G)
@@ -33,10 +37,10 @@ class MarkovChainRecommender(ISeqRecommender):
         self.count_dict = None
         gc.collect()
 
-    def recommend(self, user_profile):
+    def recommend(self, user_profile, user_id=None):
 
         # if the user profile is longer than the markov order, chop it keeping recent history
-        state = tuple(user_profile[-self.last_k:])
+        state = tuple(user_profile[-self.order:])
         # see if graph has that state
         recommendations = []
         if self.G.has_node(state):
