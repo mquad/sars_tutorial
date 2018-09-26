@@ -34,6 +34,20 @@ def temporal_holdout(dataset, ts_threshold):
     return train_split, test_split
 
 
+def last_session_out_split(data,
+                           user_key='user_id',
+                           session_key='session_id',
+                           time_key='ts'):
+    """
+    Assign the last session of every user to the test set and the remaining ones to the training set
+    """
+    sessions = data.sort_values(by=[user_key, time_key]).groupby(user_key)[session_key]
+    last_session = sessions.last()
+    train = data[~data.session_id.isin(last_session.values)].copy()
+    test = data[data.session_id.isin(last_session.values)].copy()
+    return train, test
+
+
 def balance_dataset(x, y):
     number_of_elements = y.shape[0]
     nnz = set(find(y)[0])
