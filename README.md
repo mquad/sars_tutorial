@@ -3,6 +3,12 @@
 
 This is the repository for the hands-on session of the Tutorial on Sequence-Aware Recommenders to be held at ACM RecSys 2018 in Vancouver.
 
+## Additional material about the tutorial
+
+All the additional material about the tutorial is hosted at [this page](https://sites.google.com/view/seq-recsys-tutorial/home).
+
+## Running the code
+
 You have two options to run the code contained in this repository:
 1. Setup a new environment on your local machine and run the code locally (_highly recommended_).
 2. Launch a new Binder instance by clicking on this badge [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/mquad/sars_tutorial/master). 
@@ -11,7 +17,7 @@ While we all know that setting up a new local environment is a slightly tedious 
 Also beware that Binder sessions automatically expire after 10 minutes of inactivity!  
 So we *highly recommend* to set up a new local environment in advance by following the [Setup instructions](#setup-instructions).
 
-## Setup instructions
+### Setup instructions
 
 First of all, clone this project to your local machine.
 
@@ -37,7 +43,7 @@ jupyter notebook --port=8888
 and open it your browser at the address `localhost:8888`. 
 (Beware, if port `8888` is already taken by another service, jupyter notebook will automatically open on a different one. Check out the startup log!).
 
-## Running the notebooks
+### Running the notebooks
 
 The notebooks used in this hands-on are listed in the main directory of this project, as shown below:
 
