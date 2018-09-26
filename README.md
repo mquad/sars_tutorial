@@ -32,7 +32,7 @@ and open it your browser at the address `localhost:8888`.
 
 The notebooks used in this hands-on are listed in the main directory of this project, as shown below:
 
-<img src="images/running_notebooks_1.png" align="left" width="100" >
+<img src="images/running_notebooks_1.png" width="300" >
 
 Click on the name of the notebook to open it in a new window. The name of each running notebook is highlighted in green 
 (in the screen above, the notebook `00_TopPopular` is the only one running).
