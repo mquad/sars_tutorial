@@ -26,6 +26,7 @@ def create_seq_db_filter_top_k(path, topk=0, last_months=0):
     users = groups['user_id'].min()  # it's just fast, min doesn't actually make sense
 
     result = aggregated.join(init_ts).join(users)
+    result.reset_index(inplace=True)
     return result
 
 
