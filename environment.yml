@@ -2,7 +2,6 @@ name: srs
 channels:
   - defaults
 dependencies:
-  - appnope=0.1.0
   - asn1crypto=0.24.0
   - backcall=0.1.0
   - blas=1.0
@@ -30,11 +29,8 @@ dependencies:
   - jupyter_client=5.2.3
   - jupyter_core=4.4.0
   - kiwisolver=1.0.1
-  - libcxx=4.0.1
-  - libcxxabi=4.0.1
   - libedit=3.1.20170329
   - libffi=3.2.1
-  - libgfortran=3.0.1
   - libpng=1.6.34
   - libsodium=1.0.16
   - llvmlite=0.24.0
@@ -84,4 +80,3 @@ dependencies:
   - xz=5.2.4
   - zeromq=4.2.5
   - zlib=1.2.11
-prefix: /Users/mquadrana/miniconda3/envs/srs
