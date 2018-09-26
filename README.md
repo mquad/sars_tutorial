@@ -61,4 +61,4 @@ You can now start running the cells in the notebook! Yay!
 
 # Acknowledgments
 
-We want to sincerely thank [Umberto Di Fabrizio](https://www.linkedin.com/in/umbertodifabrizio) for developing large sections of this repository back when he was a MSc student at Politecnico di Milano. Good luck Umberto!
+We want to sincerely thank [Umberto Di Fabrizio](https://www.linkedin.com/in/umbertodifabrizio) for developing large sections of this repository back when he was a MSc student at Politecnico di Milano. Great job Umberto!
