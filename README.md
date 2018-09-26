@@ -26,14 +26,14 @@ jupyter notebook --port=8888
 ```
 
 and open it your browser at the address `localhost:8888`. 
-(Beware, if `8888` is already taken by another service, jupyter notebook will automatically look for a different one).
+(Beware, if port `8888` is already taken by another service, jupyter notebook will automatically open on a different one. Check out the startup log!).
 
 ## Running the notebooks
 
 The notebooks used in this hands-on are listed in the main directory of this project, as shown below:
 
 
-![](images/running_notebooks_1.png)
+![](images/running_notebooks_1.png | width=100)
 
 Click on the name of the notebook to open it in a new window. The name of each running notebook is highlighted in green 
 (in the screen above, the notebook `00_TopPopular` is the only one running).
