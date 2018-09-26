@@ -56,3 +56,8 @@ If it's not your case, change the kernel to `srs` by clicking on `Kernel > Chang
 NOTE: this requires the installation of the `srs` kernel, as explained in the [Setup instructions](#setup-instructions).
 
 You can now start running the cells in the notebook! Yay!
+
+
+# Acknowledgments
+
+We want to sincerely thank [Umberto Di Fabrizio](https://www.linkedin.com/in/umbertodifabrizio) for developing large sections of this repository back when he was a MSc student at Politecnico di Milano. Good luck Umberto!
