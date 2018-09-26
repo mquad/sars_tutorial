@@ -5,7 +5,7 @@ This is the repository for the hands-on session of the Tutorial on Sequence-Awar
 
 You have two options to run the code contained in this repository:
 1. Setup a new environment on your local machine and run the code locally (_highly recommended_).
-2. Launch a new Binder instance by clicking on this badge [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/mquad/sars_tutorial/master). 
+2. Launch a new Binder instance by clicking on this badge [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/mquad/sars_tutorial/master) (beware, Binder sessions automatically expire after 10 minutes of inactivity!). 
 
 While we all know that setting up a new local environment is a slightly tedious process, Binder instances have strict resource limits (1-2GB of memory, max 100 concurrent users per repository).
 So we *highly recommend* to set up a new local environment in advance by following the [Setup instructions](#setup-instructions).
