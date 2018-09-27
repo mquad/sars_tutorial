@@ -1,7 +1,7 @@
 
 # RecSys 18 Tutorial on Sequence-Aware Recommenders
 
-This is the repository for the hands-on session of the Tutorial on Sequence-Aware Recommenders to be held at ACM RecSys 2018 in Vancouver.
+This is the repository for the hands-on session of the Tutorial on Sequence-Aware Recommenders at ACM RecSys 2018 in Vancouver.
 
 ## Additional material about the tutorial
 
@@ -19,29 +19,37 @@ So we *highly recommend* to set up a new local environment in advance by followi
 
 ### Setup instructions
 
-First of all, clone this project to your local machine.
+1. First of all, clone this project to your local machine:
+    ```bash
+    git clone https://github.com/mquad/sars_tutorial.git
+    ```
 
-Now you need to set up a new python3 environment. We will use Anaconda/Miniconda for doing so.
-If you don't have Anaconda/Minicoda already installed on your machine, download it [here](https://conda.io/miniconda.html) (**Python 3 version**).
+2. Now you need to set up a new python3 environment. We will use Anaconda/Miniconda for doing so.
+If you don't have Anaconda/Minicoda already installed on your machine, click here to download [Miniconda](https://conda.io/miniconda.html) or [Anaconda](https://www.anaconda.com/download/) (**Python 3 version**).
 
-After that, install the environment for this hands-on by running:
-```bash
-conda env create --file environment.yml
-```
+3. After that, install the environment for this hands-on by running:
+    ```bash
+    cd sars_tutorial/
+    conda env create --file environment.yml
+    ```
 
-Then activate the environment with `source activate srs` or `conda activate srs`, and install a new `iptyhon` kernel by running:
+4. (_Miniconda users only_) If you choose to install Miniconda before, you will now have to install Jupyter Notebook on your machine, just by running `conda install jupyter`. 
+You can do it in your main python environment (necessarily in the `srs` env),  as long as you setup the kernel as explained after.
+Anaconda users should already have Jupyter Notebook installed, so they can skip this step.
 
-```bash
-python -m ipykernel install --name srs
-``` 
+5. Then activate the environment with `source activate srs` or `conda activate srs`, and install a new `iptyhon` kernel by running:
 
-Finally, launch the Jupyter Notebook with
-```bash
-jupyter notebook --port=8888
-```
+    ```bash
+    python -m ipykernel install --name srs
+    ``` 
 
+6. Finally, launch the Jupyter Notebook with
+    ```bash
+    jupyter notebook --port=8888
+    ```
 and open it your browser at the address `localhost:8888`. 
 (Beware, if port `8888` is already taken by another service, jupyter notebook will automatically open on a different one. Check out the startup log!).
+
 
 ### Running the notebooks
 
