@@ -38,9 +38,12 @@ You can do it in your main python environment (necessarily in the `srs` env),  a
 Anaconda users should already have Jupyter Notebook installed, so they can skip this step.
 
 5. Then activate the environment with `source activate srs` or `conda activate srs`, and install a new `iptyhon` kernel by running:
-
     ```bash
     python -m ipykernel install --name srs
+    ``` 
+    If you get "Permission denied" error with the above command, try with
+    ```bash
+    python -m ipykernel install --name srs --user
     ``` 
 
 6. Finally, launch the Jupyter Notebook with
