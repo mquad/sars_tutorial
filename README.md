@@ -51,7 +51,7 @@ Anaconda users should already have Jupyter Notebook installed, so they can skip 
     jupyter notebook --port=8888
     ```
 and open it your browser at the address `localhost:8888`. 
-(Beware, if port `8888` is already taken by another service, jupyter notebook will automatically open on a different one. Check out the startup log!).
+(Beware, if port `8888` is already taken by another service, Jupyter Notebook will automatically open on a different one. Check out the startup log!).
 
 
 ### Running the notebooks
