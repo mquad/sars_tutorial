@@ -766,6 +766,10 @@ class GRU4Rec:
                 self.H[i].set_value(tmp, borrow=True)
             self.current_session = session_ids.copy()
         in_idxs = self.itemidmap[input_item_ids]
+        if np.any(np.isnan(in_idxs)):
+            preds = np.random.randn(len(self.itemidmap), len(in_idxs))
+            return pd.DataFrame(data=preds, index=self.itemidmap.index)
+
         if predict_for_item_ids is not None:
             iIdxs = self.itemidmap[predict_for_item_ids]
             if self.constrained_embedding:
