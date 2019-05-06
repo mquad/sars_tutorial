@@ -1,11 +1,12 @@
 
-# RecSys 18 Tutorial on Sequence-Aware Recommenders
+# Tutorial on Sequence-Aware Recommender Systems
 
-This is the repository for the hands-on session of the Tutorial on Sequence-Aware Recommenders at ACM RecSys 2018 in Vancouver.
+This repository contains the material used in the hands-on session of the tutorials on Sequence-Aware Recommenders we gave
+at [TheWebConf 2019](https://www2019.thewebconf.org/tutorials) and [ACM RecSys 2018](https://recsys.acm.org/recsys18/tutorials/#content-tab-1-4-tab).
 
-## Additional material about the tutorial
+## Additional material
 
-All the additional material about the tutorial is hosted at [this page](https://sites.google.com/view/seq-recsys-tutorial/home).
+Some additional material about the tutorial is hosted at [this page](https://sites.google.com/view/seq-recsys-tutorial/home).
 
 ## Running the code
 
@@ -78,4 +79,4 @@ You can now start running the cells in the notebook! Yay!
 
 # Acknowledgments
 
-We want to sincerely thank [Umberto Di Fabrizio](https://www.linkedin.com/in/umbertodifabrizio) for developing large sections of this repository back when he was a MSc student at Politecnico di Milano. Great job Umberto!
+We want to sincerely thank [Umberto Di Fabrizio](https://www.linkedin.com/in/umbertodifabrizio) for the help in the development of this repository back when he was a MSc student at Politecnico di Milano. Great job Umberto!
