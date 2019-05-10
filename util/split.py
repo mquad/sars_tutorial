@@ -28,10 +28,11 @@ def temporal_holdout(dataset, ts_threshold):
     :param ts_threshold: the timestamp from which test sequences will start
     :return: the training and test splits
     """
-    train_split = dataset.loc[dataset['ts'] < ts_threshold]
-    test_split = dataset.loc[dataset['ts'] >= ts_threshold]
+    train = dataset.loc[dataset['ts'] < ts_threshold]
+    test = dataset.loc[dataset['ts'] >= ts_threshold]
+    train, test = clean_split(train, test)
 
-    return train_split, test_split
+    return train, test
 
 
 def last_session_out_split(data,
@@ -45,6 +46,20 @@ def last_session_out_split(data,
     last_session = sessions.last()
     train = data[~data.session_id.isin(last_session.values)].copy()
     test = data[data.session_id.isin(last_session.values)].copy()
+    train, test = clean_split(train, test)
+    return train, test
+
+
+def clean_split(train, test):
+    """
+    Remove new items from the test set.
+    :param train: The training set.
+    :param test: The test set.
+    :return: The cleaned training and test sets.
+    """
+    train_items = set()
+    train['sequence'].apply(lambda seq: train_items.update(set(seq)))
+    test['sequence'] = test['sequence'].apply(lambda seq: [it for it in seq if it in train_items])
     return train, test
 
 
