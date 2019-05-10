@@ -8,7 +8,7 @@ at [TheWebConf 2019](https://www2019.thewebconf.org/tutorials) and [ACM RecSys 2
 
 ### ACM Computing Surveys (CSUR) Paper
 <!-- ACM DL Article: Sequence-Aware Recommender Systems -->
-<img src="//dl.acm.org/images/oa.gif" width="25" height="25" border="0" alt="ACM DL Author-ize service" style="vertical-align:middle"/><a href="https://dl.acm.org/authorize?N671306" title="Sequence-Aware Recommender Systems">Sequence-Aware Recommender Systems</a><a href="http://dl.acm.org/author_page.cfm?id=83358752257" >Massimo Quadrana</a>, <a href="http://dl.acm.org/author_page.cfm?id=81548025673" >Paolo Cremonesi</a>, <a href="http://dl.acm.org/author_page.cfm?id=81100081930" >Dietmar Jannach</a><br />ACM Computing Surveys (CSUR), 2018
+<img src="http://dl.acm.org/images/oa.gif" width="25" height="25" border="0" alt="ACM DL Author-ize service" style="vertical-align:middle"/><a href="https://dl.acm.org/authorize?N671306" title="Sequence-Aware Recommender Systems">Sequence-Aware Recommender Systems</a><a href="http://dl.acm.org/author_page.cfm?id=83358752257" >Massimo Quadrana</a>, <a href="http://dl.acm.org/author_page.cfm?id=81548025673" >Paolo Cremonesi</a>, <a href="http://dl.acm.org/author_page.cfm?id=81100081930" >Dietmar Jannach</a><br />ACM Computing Surveys (CSUR), 2018
 
 ### TheWebConf 2019 Slides
 1. [Introduction](slides/TheWebConf2019_01_Introduction.pdf)
