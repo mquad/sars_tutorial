@@ -34,8 +34,6 @@ def mrr(ground_truth, prediction):
     :param prediction: the predicted set or sequence
     :return: the value of the metric
     """
-    ground_truth = remove_duplicates(ground_truth)
-    prediction = remove_duplicates(prediction)
     rr = 0.
     for rank, p in enumerate(prediction):
         if p in ground_truth:
