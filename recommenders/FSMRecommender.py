@@ -116,7 +116,7 @@ class FSMRecommender(ISeqRecommender):
 
             # find all path of length recommendation_length from match
             paths = self.tree.find_n_length_paths(lastNode, recommendation_length)
-            return self._filter_confidence(context_support, paths)
+            return sorted(self._filter_confidence(context_support, paths), key=lambda x: x[1], reverse=True)
 
     def _filter_confidence(self, context_support, path_list):
         goodPaths = []
