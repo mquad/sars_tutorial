@@ -100,12 +100,9 @@ def sequence_sequential_evaluation(recommender, seq, evaluation_functions, user,
     if given_k < 0:
         given_k = len(seq) + given_k
 
-    eval_res = None
+    eval_res = 0.0
     eval_cnt = 0
     for gk in range(given_k, len(seq), step):
-        if eval_res is None:
-            eval_res = evaluate_sequence(recommender, seq, evaluation_functions, user, given_k, look_ahead, top_n)
-        else:
-            eval_res += evaluate_sequence(recommender, seq, evaluation_functions, user, given_k, look_ahead, top_n)
+        eval_res += evaluate_sequence(recommender, seq, evaluation_functions, user, gk, look_ahead, top_n)
         eval_cnt += 1
     return eval_res / eval_cnt
