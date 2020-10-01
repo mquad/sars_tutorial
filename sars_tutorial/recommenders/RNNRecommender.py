@@ -1,9 +1,9 @@
 import numpy as np
 
-from recommenders.ISeqRecommender import ISeqRecommender
-from util.data_utils import dataset_to_gru4rec_format
-from util.rnn.gru4rec import GRU4Rec
-from util.rnn.hgru4rec import HGRU4Rec
+from sars_tutorial.recommenders.ISeqRecommender import ISeqRecommender
+from sars_tutorial.util.data_utils import dataset_to_gru4rec_format
+from sars_tutorial.util.rnn.gru4rec import GRU4Rec
+from sars_tutorial.util.rnn.hgru4rec import HGRU4Rec
 
 
 class RNNRecommender(ISeqRecommender):

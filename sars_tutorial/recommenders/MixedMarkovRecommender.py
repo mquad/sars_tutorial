@@ -1,7 +1,7 @@
 import logging
 
-from recommenders.ISeqRecommender import ISeqRecommender
-from recommenders.MarkovChainRecommender import MarkovChainRecommender
+from sars_tutorial.recommenders.ISeqRecommender import ISeqRecommender
+from sars_tutorial.recommenders.MarkovChainRecommender import MarkovChainRecommender
 
 
 class MixedMarkovChainRecommender(ISeqRecommender):

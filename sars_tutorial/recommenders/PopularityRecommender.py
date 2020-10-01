@@ -1,6 +1,6 @@
 import operator
 
-from recommenders.ISeqRecommender import ISeqRecommender
+from sars_tutorial.recommenders.ISeqRecommender import ISeqRecommender
 
 
 class PopularityRecommender(ISeqRecommender):

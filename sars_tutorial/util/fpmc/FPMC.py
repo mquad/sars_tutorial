@@ -2,7 +2,7 @@ import logging
 import pickle
 import random
 
-from util.fpmc.utils import *
+from sars_tutorial.util.fpmc.utils import *
 
 
 class FPMC:

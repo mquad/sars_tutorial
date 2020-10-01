@@ -1,8 +1,8 @@
 import gc
 import logging
 
-from recommenders.ISeqRecommender import ISeqRecommender
-from util.markov.Markov import add_nodes_to_graph, add_edges, apply_skipping, apply_clustering
+from sars_tutorial.recommenders.ISeqRecommender import ISeqRecommender
+from sars_tutorial.util.markov.Markov import add_nodes_to_graph, add_edges, apply_skipping, apply_clustering
 
 
 class MarkovChainRecommender(ISeqRecommender):
