@@ -137,3 +137,18 @@ def print_metrics(metrics, eval_results, rec_name, given_k, look_ahead, step, to
     print('Sequential evaluation for {} (GIVEN_K={}, LOOK_AHEAD={}, STEP={}, TOPN={})'.format(rec_name, given_k, look_ahead, step, topn))
     for mname, mvalue in zip(metrics.keys(), eval_results):
         print('\t{}@{}: {:.4f}'.format(mname, topn, mvalue))
+
+
+class WithMetadata:
+
+    def load_metadata(self, path):
+        """
+        loads a jsonl file. the structure of the file has to be as follows:
+        - {'itemid': xxx, 'properties': [ {'property': 'xx', 'value':'xx', 'ts': xxx} ] }
+        """
+        metadata = {}
+        with open(path, 'r') as f:
+            for line in f:
+                data = json.loads(line)
+                metadata[data['itemid']] = data
+        return metadata
