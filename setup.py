@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="sars_tutorial", # Replace with your own username
+    name="sars_tutorial",
     version="0.0.1",
     author="Massimo Quadrana",
     author_email="max.square@gmail.com",
@@ -20,6 +20,14 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=[
+        "scipy==1.1.0",
+        "theano==1.0.3",
+        "tqdm==4.25.0",
+        "pandas==0.23.4",
+        "gensim==3.4.0",
+        "matplotlib",
+        "numba==0.39.0",
+        "numpy==1.15.1",
         "treelib<=1.5.5",
         "pymining"
     ]

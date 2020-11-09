@@ -59,7 +59,6 @@ def dataset_to_gru4rec_format(dataset):
     """
     Convert a list of sequences to GRU4Rec format.
     Based on this StackOverflow answer: https://stackoverflow.com/a/48532692
-
     :param dataset: the dataset to be transformed
     """
 
