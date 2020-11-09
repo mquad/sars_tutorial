@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="sars_tutorial", # Replace with your own username
+    name="sars_tutorial",
     version="0.0.1",
     author="Massimo Quadrana",
     author_email="max.square@gmail.com",
