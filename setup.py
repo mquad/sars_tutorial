@@ -26,7 +26,6 @@ setuptools.setup(
         "pandas==0.23.4",
         "gensim==3.4.0",
         "matplotlib",
-        "mkl-service",
         "numba==0.39.0",
         "numpy==1.15.1",
         "treelib<=1.5.5",
