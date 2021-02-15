@@ -1,8 +1,8 @@
 from pymining import seqmining
 
-from recommenders.ISeqRecommender import ISeqRecommender
-from util.SPMFinterface import callSPMF
-from util.tree.Tree import SmartTree
+from sars_tutorial.recommenders.ISeqRecommender import ISeqRecommender
+from sars_tutorial.util.SPMFinterface import callSPMF
+from sars_tutorial.util.tree.Tree import SmartTree
 
 
 class FSMRecommender(ISeqRecommender):

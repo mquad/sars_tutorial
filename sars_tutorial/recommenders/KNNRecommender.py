@@ -1,10 +1,10 @@
-from recommenders.ISeqRecommender import ISeqRecommender
-from util.data_utils import dataset_to_gru4rec_format
-from util.knn.iknn import ItemKNN
-from util.knn.sknn import SessionKNN
-from util.knn.vmsknn import VMSessionKNN
-from util.knn.ssknn import SeqSessionKNN
-from util.knn.sfsknn import SeqFilterSessionKNN
+from sars_tutorial.recommenders.ISeqRecommender import ISeqRecommender
+from sars_tutorial.util.data_utils import dataset_to_gru4rec_format
+from sars_tutorial.util.knn.iknn import ItemKNN
+from sars_tutorial.util.knn.sknn import SessionKNN
+from sars_tutorial.util.knn.vmsknn import VMSessionKNN
+from sars_tutorial.util.knn.ssknn import SeqSessionKNN
+from sars_tutorial.util.knn.sfsknn import SeqFilterSessionKNN
 
 
 class KNNRecommender(ISeqRecommender):

@@ -1,5 +1,5 @@
-from recommenders.ISeqRecommender import ISeqRecommender
-from util.fpmc.FPMC_numba import FPMC
+from sars_tutorial.recommenders.ISeqRecommender import ISeqRecommender
+from sars_tutorial.util.fpmc.FPMC_numba import FPMC
 
 
 class FPMCRecommender(ISeqRecommender):

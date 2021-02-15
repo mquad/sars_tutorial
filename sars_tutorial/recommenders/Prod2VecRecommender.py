@@ -2,7 +2,7 @@ import logging
 
 import gensim
 
-from recommenders.ISeqRecommender import ISeqRecommender
+from sars_tutorial.recommenders.ISeqRecommender import ISeqRecommender
 
 
 class Prod2VecRecommender(ISeqRecommender):

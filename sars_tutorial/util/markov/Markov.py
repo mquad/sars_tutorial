@@ -3,7 +3,7 @@ from functools import reduce
 
 import networkx as nx
 
-from util.tree.Tree import SmartTree
+from sars_tutorial.util.tree.Tree import SmartTree
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 

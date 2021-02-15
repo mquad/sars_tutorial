@@ -2,9 +2,9 @@ from sklearn.base import clone
 from sklearn.tree import DecisionTreeClassifier
 from tqdm import tqdm
 
-from recommenders.ISeqRecommender import ISeqRecommender
-from util.data_expansion import data_expansion, user_profile_expansion
-from util.split import balance_dataset
+from sars_tutorial.recommenders.ISeqRecommender import ISeqRecommender
+from sars_tutorial.util.data_expansion import data_expansion, user_profile_expansion
+from sars_tutorial.util.split import balance_dataset
 
 
 class SupervisedRecommender(ISeqRecommender):

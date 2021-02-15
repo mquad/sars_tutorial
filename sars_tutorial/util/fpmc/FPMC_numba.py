@@ -2,8 +2,8 @@ import logging
 
 from numba import jit
 
-from util.fpmc import FPMC as FPMC_basic
-from util.fpmc.utils import *
+from sars_tutorial.util.fpmc import FPMC as FPMC_basic
+from sars_tutorial.util.fpmc.utils import *
 
 
 class FPMC(FPMC_basic.FPMC):
