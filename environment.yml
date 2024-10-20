@@ -1,6 +1,5 @@
 name: srs
 channels:
-  - defaults
   - conda-forge
   - anaconda
 dependencies:

@@ -33,14 +33,25 @@ So we *highly recommend* to set up a new local environment in advance by followi
     git clone https://github.com/mquad/sars_tutorial.git
     ```
 
-2. Now you need to set up a new python3 environment. We will use Anaconda/Miniconda for doing so.
-If you don't have Anaconda/Minicoda already installed on your machine, click here to download [Miniconda](https://conda.io/miniconda.html) or [Anaconda](https://www.anaconda.com/download/) (**Python 3 version**).
+2. To utilize conda-forge as your primary channel, it's recommended to install Miniforge instead of Anaconda or Miniconda. Miniforge is a community-driven minimal installer for Conda that defaults to the conda-forge channel, ensuring better compatibility and access to a broader range of packages. Visit the [Miniforge GitHub Releases](https://github.com/conda-forge/miniforge/releases/tag/24.7.1-2) page and download the appropriate installer for your operating system and architecture (e.g., macOS ARM64 for Apple Silicon, Linux x86_64, etc.).  Open your terminal and run the following commands, replacing the installer name with the one you downloaded: 
+
+    ```bash
+    # Example for Linux x86_64
+    wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O miniforge.sh
+    bash miniforge.sh -b -p $HOME/miniforge
+    ```
+    Add Miniforge to your PATH and initialize Conda:
+    ```bash 
+    export PATH="$HOME/miniforge/bin:$PATH"
+    source $HOME/miniforge/bin/activate
+    ```
 
 3. After that, install the environment for this hands-on by running:
     ```bash
     cd sars_tutorial/
     conda env create --file environment.yml
     ```
+    The packages in the `environment.yml` are not tested with conda-forge. You may need to upgrade the package versions. 
 
 4. (_Miniconda users only_) If you choose to install Miniconda before, you will now have to install Jupyter Notebook on your machine, just by running `conda install jupyter`. 
 You can do it in your main python environment (necessarily in the `srs` env),  as long as you setup the kernel as explained after.
